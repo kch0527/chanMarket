@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>내 정보</h2>
+    </div>
+    <form action="myInfo.html" th:action method="post">
+        <div>
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" class="form-control" value="사람"
+                   th:value="${myInfo.getName()}" readonly>
+        </div>
+        <div>
+            <label for="email">이메일</label>
+            <input type="text" id="email" name="email" class="form-control"
+                   value="aa@naver.com" th:value="${myInfo.getEmail()}" readonly>
+        </div>
+        <div>
+            <label for="tel">전화번호</label>
+            <input type="text" id="tel" name="tel" class="form-control"
+                   th:value="${myInfo.getTel()}" readonly>
+        </div>
+        <div>
+            <label for="grade">내 등급</label>
+            <input type="text" id="grade" name="grade" class="form-control" value="ddd"
+                   th:value="${myInfo.getGrade()}" readonly>
+        </div>
+
+        <br>
+
+        <table class ="tb_col">
+            내 물품
+            <thead>
+            <tr>
+                <th>itemName</th>
+                <th>price</th>
+                <th>itemInformation</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${myItems}">
+                    <td><a th:href="@{|/chanMarket/itemList/${item.id}|}" th:text="${item.itemName}"></td>
+                    <td th:text="${item.price}"></td>
+                    <td th:text="${item.itemInformation}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <hr class="my-4">
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg"
+                        onclick="location.href='editForm.html'"
+                        th:onclick="|location.href='@{/chanMarket/itemList/myInfo/edit}'|" type="button">수정</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        onclick="location.href='itemList.html'"
+                        th:onclick="|location.href='@{/chanMarket/itemList}'|"
+                        type="button">뒤로가기</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

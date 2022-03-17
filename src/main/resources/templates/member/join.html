@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Join</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script
+            type="text/javascript"
+            src="/js/lib/dummy.js"
+
+    ></script>
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style id="compiled-css" type="text/css">
+        body {
+            background: #007bff;
+            background: linear-gradient(to right, #0062E6, #33AEFF);
+        }
+
+        .card-img-left {
+            width: 45%;
+            /* Link to your background image using in the property below! */
+            background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');
+            background-size: cover;
+        }
+
+        .btn-login {
+            font-size: 0.9rem;
+            letter-spacing: 0.05rem;
+            padding: 0.75rem 1rem;
+        }
+
+        .btn-google {
+            color: white !important;
+            background-color: #ea4335;
+        }
+
+        .btn-facebook {
+            color: white !important;
+            background-color: #3b5998;
+        }
+
+
+        /* EOS */
+    </style>
+    <script id="insert"></script>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card flex-row my-5 border-0 shadow rounded-3 overflow-hidden">
+                <div class="card-img-left d-none d-md-flex">
+                    <!-- Background image for card set in CSS! -->
+                </div>
+                <div class="card-body p-4 p-sm-5">
+                    <h5 class="card-title text-center mb-5 fw-light fs-5">회원가입</h5>
+                    <form action="/join" th:action method="post">
+                        <form>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" name="name" class="form-control" id="floatingInputUsername" placeholder="Name" required autofocus>
+                                <label for="floatingInputUsername">Name</label>
+                            </div>
+
+
+                            <div class="form-floating mb-3">
+                                <input type="email" name="email" class="form-control" id="floatingInputEmail" placeholder="Email" required autofocus>
+                                <label for="floatingInputEmail">Email</label>
+                            </div>
+
+
+                            <div class="form-floating mb-3">
+                                <input type="password" name="pw" class="form-control" id="floatingPassword" placeholder="Password" required autofocus>
+                                <label for="floatingPassword">Password</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="tel" name="tel" class="form-control" id="floatingTel" placeholder="Tel" required autofocus>
+                                <label for="floatingTel">Tel</label>
+                            </div>
+
+
+                            <!--
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingPasswordConfirm" placeholder="Confirm Password" required autofocus>
+                                <label for="floatingPasswordConfirm">Confirm Password</label>
+                            </div>
+                            -->
+                            <div class="d-grid mb-2">
+                                <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" onclick="location.href=''" type="submit">Register</button>
+                            </div>
+
+                            <a class="d-block text-center mt-2 small" href="#">Have an account? Sign In</a>
+
+                            <hr class="my-4">
+
+                            <div class="d-grid mb-2">
+                                <button class="btn btn-lg btn-google btn-login fw-bold text-uppercase" type="submit">
+                                    <i class="fab fa-google me-2"></i> Sign up with Google
+                                </button>
+                            </div>
+
+                            <div class="d-grid">
+                                <button class="btn btn-lg btn-facebook btn-login fw-bold text-uppercase" type="submit">
+                                    <i class="fab fa-facebook-f me-2"></i> Sign up with Facebook
+                                </button>
+                            </div>
+
+                        </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
