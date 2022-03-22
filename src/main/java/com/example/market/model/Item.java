@@ -26,6 +26,9 @@ public class Item extends BaseEntity {
     @Size(max = 255)
     private String itemInformation;
 
+    @Embedded
+    private Image image;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
     private Member member;

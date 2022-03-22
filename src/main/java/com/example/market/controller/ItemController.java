@@ -1,5 +1,6 @@
 package com.example.market.controller;
 
+import com.example.market.model.Image;
 import com.example.market.model.Item;
 import com.example.market.model.Member;
 import com.example.market.service.ItemService;
@@ -10,6 +11,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
