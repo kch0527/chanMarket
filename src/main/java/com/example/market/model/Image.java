@@ -3,7 +3,7 @@ package com.example.market.model;
 import javax.persistence.Embeddable;
 import java.util.Objects;
 
-@Embeddable
+
 public class Image {
     private String uuid;
     private String imageName;
