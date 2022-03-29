@@ -56,7 +56,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public String loginId(String email, String pw, Model model, HttpServletRequest request) throws Exception{
+    public String loginId(String email, String pw, HttpServletRequest request) throws Exception{
         Member member = memberService.login(email, pw);
         if (member == null){
             return "member/login";
@@ -67,5 +67,39 @@ public class MemberController {
         return "redirect:/chanMarket/itemList";
     }
 
+    @GetMapping("/myInfo")
+    public String myInfo(Member member, HttpServletRequest request, Model model){
+        HttpSession session = request.getSession();
+        String sessionMember = (String)session.getAttribute("loginMember");
+        Member findByMember = memberService.findByEmail(sessionMember);
+        member.setName(findByMember.getName());
+        member.setEmail(findByMember.getEmail());
+        member.setTel(findByMember.getTel());
+        member.setGrade(findByMember.getGrade());
+
+        List<Item> items = findByMember.getItems();
+
+        model.addAttribute("myInfo",member);
+        model.addAttribute("myItems",items);
+        return "member/myInfo";
+    }
+
+    @GetMapping("/myInfo/edit")
+    public String memberEditForm(Member member, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String sessionMember = (String)session.getAttribute("loginMember");
+        Member findByMember = memberService.findByEmail(sessionMember);
+        member.setName(findByMember.getName());
+        member.setEmail(findByMember.getEmail());
+        member.setTel(findByMember.getTel());
+        member.setGrade(findByMember.getGrade());
+
+        return "member/editForm";
+    }
+    @PostMapping("/myInfo/edit")
+    public String editItem(Member member){
+        memberService.editMember(member);
+        return "redirect:/chanMarket/myInfo";
+    }
 
 }
