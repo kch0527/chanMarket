@@ -55,6 +55,24 @@ public class ItemController {
         return "member/no";
     }
 
+    @GetMapping("/{itemId}/itemBasket")
+    public String itemBasket(@PathVariable Long itemId, Model model){
+        Item item = itemService.readItem(itemId);
+        model.addAttribute("item", item);
+        return "item/itemBasket";
+    }
+/*
+    @PostMapping("/{itemId}/itemBasket")
+    public String itemPutBasket(@PathVariable Long itemId, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String loginMember = (String) session.getAttribute("loginMember");
+        Member member = memberService.findByEmail(loginMember);
+
+        Item item = itemService.readItem(itemId);
+        member.setBasket(item);
+        return "";
+    }
+*/
     @GetMapping("/add")
     public String addForm(HttpServletRequest request) throws Exception{
         HttpSession session = request.getSession();

@@ -13,7 +13,7 @@ public class Server {
 
     public void server() {
         try {
-            serverSocket = new ServerSocket(8080);
+            serverSocket = new ServerSocket(9001);
 
         } catch (IOException e) {
             System.out.println("포트사용가능");

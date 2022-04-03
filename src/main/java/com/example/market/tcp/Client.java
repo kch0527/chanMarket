@@ -13,8 +13,8 @@ public class Client {
 
     public void client(){
         try{
-            ia = InetAddress.getByName("서버 주소 입력");    //서버로 접속
-            socket = new Socket(ia,8080);
+            ia = InetAddress.getByName("localhost");    //서버로 접속
+            socket = new Socket(ia,9001);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             in2 = new BufferedReader(new InputStreamReader(System.in));
 

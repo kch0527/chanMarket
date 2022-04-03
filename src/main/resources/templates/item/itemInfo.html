@@ -51,6 +51,13 @@
 
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='itemBasket.html'"
+                    th:onclick="|location.href='@{/chanMarket/itemList/{itemId}/itemBasket(itemId=${item.id})}'|"
+                    type="button">찜하기</button>
+        </div>
+
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
                     onclick="location.href='itemList.html'"
                     th:onclick="|location.href='@{/chanMarket/itemList}'|"
                     type="button">목록으로</button>
