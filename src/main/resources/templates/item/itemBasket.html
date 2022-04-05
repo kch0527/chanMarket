@@ -16,7 +16,7 @@
         <h2>상품 상세</h2>
     </div>
     <!-- 추가 -->
-    <form action="itemInfo.html" th:action method="post">
+    <form action="itemInfo.html" th:action method="get">
         <div>
             <label for="email">판매자</label>
             <input type="text" id="email" name="email" class="form-control"
@@ -38,32 +38,26 @@
                    value="10" th:value="${item.itemInformation}" readonly>
             <hr class="my-4">
             <div class="row">
-                <div class="col">
-                    <button class="w-100 btn btn-primary btn-lg"
-                            onclick="location.href='editForm.html'"
-                            th:onclick="|location.href='@{/chanMarket/itemList/{itemId}/edit(itemId=${item.id})}'|" type="button">상품 수정</button>
-                </div>
 
-                <div class="col">
-                    <button class="w-100 btn btn-primary btn-lg" type="submit">상품 삭제
-                    </button>
-                </div>
+                <b>찜목록에 넣을까요?</b>
 
                 <div class="col">
                     <button class="w-100 btn btn-secondary btn-lg"
                             onclick="location.href='itemBasket.html'"
-                            th:onclick="|location.href='@{/chanMarket/itemList/{itemId}/itemBasket(itemId=${item.id})}'|"
-                            type="button">찜하기</button>  찜을원해?
+                            th:onclick="|location.href='@{/chanMarket/itemList/{itemId}(itemId=${item.id})}'|"
+                            type="button">찜하기</button>
                 </div>
 
                 <div class="col">
                     <button class="w-100 btn btn-secondary btn-lg"
                             onclick="location.href='itemList.html'"
-                            th:onclick="|location.href='@{/chanMarket/itemList}'|"
-                            type="button">목록으로</button>
+                            th:onclick="|location.href='@{/chanMarket/itemList/{itemId}(itemId=${item.id})}'|"
+                            type="button">취소</button>
                 </div>
+
             </div>
         </div> <!-- /container -->
+    </form>
 </div>
 </body>
 </html>

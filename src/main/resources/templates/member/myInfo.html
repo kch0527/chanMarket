@@ -51,6 +51,24 @@
             </tbody>
         </table>
 
+<!--
+        <table class ="tb_col">
+            찜 목록
+            <thead>
+            <tr>
+                <th>itemName</th>
+                <th>price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="basket: ${basket}">
+                <td><a th:href="@{|/chanMarket/itemList/${basket.id}|}" th:text="${basket.itemName}"></td>
+                <td th:text="${basket.price}"></td>
+            </tr>
+            </tbody>
+        </table>
+-->
+
         <hr class="my-4">
         <div class="row">
             <div class="col">

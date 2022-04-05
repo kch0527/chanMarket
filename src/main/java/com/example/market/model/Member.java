@@ -42,8 +42,5 @@ public class Member extends BaseEntity{
     @OneToMany(mappedBy = "member")
     private List<Item> items = new ArrayList<>();
 
-    @OneToMany
-    private List<Item> basket = new ArrayList<>();
-
 
 }

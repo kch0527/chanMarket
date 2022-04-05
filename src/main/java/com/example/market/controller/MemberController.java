@@ -91,7 +91,6 @@ public class MemberController {
         member.setEmail(findByMember.getEmail());
         member.setTel(findByMember.getTel());
         member.setGrade(findByMember.getGrade());
-
         return "member/editForm";
     }
     @PostMapping("/myInfo/edit")
