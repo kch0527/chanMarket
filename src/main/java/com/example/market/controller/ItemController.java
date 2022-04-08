@@ -43,6 +43,21 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}")
+    public String comment(@PathVariable Long itemId, HttpServletRequest request, Model model){
+        Item item = itemService.readItem(itemId);
+        HttpSession session = request.getSession();
+        String loginMember = (String) session.getAttribute("loginMember");
+        return "item/itemInfo";
+    }
+
+    @GetMapping("/{itemId}/delete")
+    public String itemDelete(@PathVariable Long itemId, Model model){
+        Item findItem = itemService.readItem(itemId);
+        model.addAttribute("item",findItem);
+        return "item/deleteForm";
+    }
+
+    @PostMapping("/{itemId}/delete")
     public String itemDelete(@PathVariable Long itemId, HttpServletRequest request){
         HttpSession session = request.getSession();
         String member = (String) session.getAttribute("loginMember");
@@ -54,7 +69,20 @@ public class ItemController {
         }
         return "member/no";
     }
+/*
+    @DeleteMapping("/{itemId}")
+    public String itemDelete2(@PathVariable Long itemId, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String member = (String) session.getAttribute("loginMember");
+        Item item = itemService.readItem(itemId);
 
+        if (item.getMember().getEmail().equals(member)) {
+            itemService.deleteItem(itemId);
+            return "redirect:/chanMarket/itemList";
+        }
+        return "member/no";
+    }
+*/
     @GetMapping("/{itemId}/itemBasket")
     public String itemBasket(@PathVariable Long itemId, Model model){
         Item item = itemService.readItem(itemId);
@@ -68,7 +96,7 @@ public class ItemController {
         String loginMember = (String) session.getAttribute("loginMember");
         Member member = memberService.findByEmail(loginMember);
 
-      //~2022.04.05
+      //~2022.04.08
         return "member/myInfo";
     }
 
