@@ -1,8 +1,10 @@
 package com.example.market.controller;
 
+import com.example.market.model.Comment;
 import com.example.market.model.Image;
 import com.example.market.model.Item;
 import com.example.market.model.Member;
+import com.example.market.service.CommentService;
 import com.example.market.service.ItemService;
 import com.example.market.service.MemberService;
 import com.example.market.session.SessionConst;
@@ -26,6 +28,7 @@ public class ItemController {
 
     private final ItemService itemService;
     private final MemberService memberService;
+    private final CommentService commentService;
 
 
     @GetMapping
@@ -43,11 +46,21 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}")
-    public String comment(@PathVariable Long itemId, HttpServletRequest request, Model model){
+    public String comment(@PathVariable Long itemId, HttpServletRequest request, Comment comment, RedirectAttributes redirectAttributes){
         Item item = itemService.readItem(itemId);
         HttpSession session = request.getSession();
         String loginMember = (String) session.getAttribute("loginMember");
-        return "item/itemInfo";
+
+        Member member = memberService.findByEmail(loginMember);
+        comment.setMember(member);
+        comment.setItem(item);
+        comment.setNowTime(commentService.nowTime());
+        Comment saveComment = commentService.addComment(comment);
+
+        redirectAttributes.addAttribute("comment",saveComment.getId());
+        redirectAttributes.addAttribute("status", true);
+
+        return "redirect:/chanMarket/itemList/" + item.getId();
     }
 
     @GetMapping("/{itemId}/delete")
