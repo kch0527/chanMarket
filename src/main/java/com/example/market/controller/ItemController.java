@@ -41,12 +41,19 @@ public class ItemController {
     @GetMapping("/{itemId}")
     public String item(@PathVariable Long itemId, Model model){
         Item item = itemService.readItem(itemId);
+        List<Comment> comments = item.getComments();
         model.addAttribute("item", item);
+        model.addAttribute("comment", comments);
         return "item/itemInfo";
     }
 
-    @PostMapping("/{itemId}")
-    public String comment(@PathVariable Long itemId, HttpServletRequest request, Comment comment, RedirectAttributes redirectAttributes){
+    @GetMapping("/{itemId}/comment")
+    public String itemComment(){
+        return "item/commentForm";
+    }
+
+    @PostMapping("/{itemId}/comment")
+    public String comment(@PathVariable Long itemId, HttpServletRequest request, @ModelAttribute Comment comment, RedirectAttributes redirectAttributes){
         Item item = itemService.readItem(itemId);
         HttpSession session = request.getSession();
         String loginMember = (String) session.getAttribute("loginMember");
@@ -57,7 +64,7 @@ public class ItemController {
         comment.setNowTime(commentService.nowTime());
         Comment saveComment = commentService.addComment(comment);
 
-        redirectAttributes.addAttribute("comment",saveComment.getId());
+        redirectAttributes.addAttribute("comments",saveComment.getId());
         redirectAttributes.addAttribute("status", true);
 
         return "redirect:/chanMarket/itemList/" + item.getId();

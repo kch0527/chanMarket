@@ -59,6 +59,13 @@
 
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='commentForm.html'"
+                    th:onclick="|location.href='@{/chanMarket/itemList/{itemId}/comment(itemId=${item.id})}'|"
+                    type="button">댓글작성</button>
+        </div>
+
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
                     onclick="location.href='itemList.html'"
                     th:onclick="|location.href='@{/chanMarket/itemList}'|"
                     type="button">목록으로</button>
@@ -71,16 +78,25 @@
 <br>
 <br>
 <br>
-<form action="itemInfo.html" th:action method="post">
-    <div>
-        <label for="text">댓글</label>
-        <input type="text" id="text" name="text" class="form-control"
-               placeholder="댓글을 입력하세요">
-            <button class="w-100 btn btn-primary btn-lg" type="submit">
-                등록</button>
-    </div>
-</form>
-<br>
+<hr class="my-4">
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>등록이메일</th>
+            <th>등록시간</th>
+            <th>내용</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="comments : ${comment}">
+            <td th:text="${comments.member.email}"></td>
+            <td th:text="${comments.nowTime}"></td>
+            <td th:text="${comments.text}"></td>
+        </tbody>
+    </table>
+</div>
+</div>
 
 
 
