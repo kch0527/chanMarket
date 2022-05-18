@@ -45,4 +45,5 @@ public class Member extends BaseEntity{
 
     @OneToMany(mappedBy = "member")
     private List<Comment> comments = new ArrayList<>();
+
 }

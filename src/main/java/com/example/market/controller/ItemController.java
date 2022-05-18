@@ -4,6 +4,7 @@ import com.example.market.model.Comment;
 import com.example.market.model.Image;
 import com.example.market.model.Item;
 import com.example.market.model.Member;
+import com.example.market.service.BasketServiceImpl;
 import com.example.market.service.CommentService;
 import com.example.market.service.ItemService;
 import com.example.market.service.MemberService;
@@ -29,6 +30,7 @@ public class ItemController {
     private final ItemService itemService;
     private final MemberService memberService;
     private final CommentService commentService;
+    private final BasketServiceImpl basketService;
 
 
     @GetMapping
@@ -111,12 +113,14 @@ public class ItemController {
     }
 
     @PostMapping("/{itemId}/itemBasket")
-    public String itemPutBasket(@PathVariable Long itemId, HttpServletRequest request, Model model){
+    public String itemPutBasket(@PathVariable("id") Long itemId, HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
         String loginMember = (String) session.getAttribute("loginMember");
         Member member = memberService.findByEmail(loginMember);
+        Item item = itemService.readItem(itemId);
 
-      //~2022.04.08
+        basketService.addBasket(member, item);
+        model.addAttribute("basketItem", item);
         return "member/myInfo";
     }
 

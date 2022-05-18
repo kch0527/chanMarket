@@ -22,5 +22,11 @@ public class BasketItem {
     @JoinColumn(name = "ITEM_ID")
     private Item item;
 
+    public static BasketItem addBasketItem(Basket basket, Item item){
+        BasketItem basketItem = new BasketItem();
+        basketItem.setBasket(basket);
+        basketItem.setItem(item);
+        return basketItem;
+    }
 
 }

@@ -16,7 +16,7 @@
         <h2>상품 상세</h2>
     </div>
     <!-- 추가 -->
-    <form action="itemInfo.html" th:action method="get">
+    <form action="myInfo.html" th:action method="get">
         <div>
             <label for="email">판매자</label>
             <input type="text" id="email" name="email" class="form-control"
@@ -44,7 +44,7 @@
                 <div class="col">
                     <button class="w-100 btn btn-secondary btn-lg"
                             onclick="location.href='itemBasket.html'"
-                            th:onclick="|location.href='@{/chanMarket/itemList/{itemId}(itemId=${item.id})}'|"
+                            th:onclick="|location.href='@{/chanMarket/myInfo}'|"
                             type="button">찜하기</button>
                 </div>
 
