@@ -1,25 +1,17 @@
 package com.example.market.controller;
 
-import com.example.market.model.Item;
-import com.example.market.model.Member;
-import com.example.market.repository.JpaMemberRepository;
-import com.example.market.service.ItemService;
+import com.example.market.entity.Item;
+import com.example.market.entity.Member;
 import com.example.market.service.MemberService;
-import com.example.market.session.SessionConst;
-import com.example.market.session.SessionManager;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor

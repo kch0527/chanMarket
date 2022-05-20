@@ -1,8 +1,7 @@
 package com.example.market;
 
-import com.example.market.model.Grade;
-import com.example.market.model.Item;
-import com.example.market.model.Member;
+import com.example.market.entity.Grade;
+import com.example.market.entity.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

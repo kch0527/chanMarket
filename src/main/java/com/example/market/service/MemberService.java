@@ -1,23 +1,12 @@
 package com.example.market.service;
 
-import com.example.market.model.Grade;
-import com.example.market.model.Item;
-import com.example.market.model.Member;
+import com.example.market.entity.Grade;
+import com.example.market.entity.Member;
 import com.example.market.repository.JpaMemberRepository;
-import com.example.market.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

@@ -1,12 +1,11 @@
 package com.example.market.service;
 
-import com.example.market.model.Comment;
+import com.example.market.entity.Comment;
 import com.example.market.repository.JpaCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 

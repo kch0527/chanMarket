@@ -1,6 +1,5 @@
-package com.example.market.model;
+package com.example.market.entity;
 
-import javax.persistence.Embeddable;
 import java.util.Objects;
 
 

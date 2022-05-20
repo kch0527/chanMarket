@@ -1,16 +1,12 @@
 package com.example.market.service;
 
-import com.example.market.model.Item;
-import com.example.market.model.Member;
+import com.example.market.entity.Item;
 import com.example.market.repository.JpaItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

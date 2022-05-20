@@ -1,9 +1,8 @@
 package com.example.market.repository;
 
-import com.example.market.model.Grade;
-import com.example.market.model.Member;
+import com.example.market.entity.Grade;
+import com.example.market.entity.Member;
 import com.example.market.service.MemberService;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.transaction.Transaction;
 
 @RunWith(SpringRunner.class) //스프링과 관련된 테스트를 하기위한
 @SpringBootTest

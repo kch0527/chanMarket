@@ -1,7 +1,5 @@
 package com.example.market.repository;
 
-import com.example.market.model.Item;
-import com.example.market.model.Member;
 import com.example.market.service.ItemService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

@@ -1,10 +1,8 @@
-package com.example.market.model;
+package com.example.market.entity;
 
 import lombok.Getter;
 
 import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
 
 @Getter

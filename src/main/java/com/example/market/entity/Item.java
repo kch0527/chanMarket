@@ -1,4 +1,4 @@
-package com.example.market.model;
+package com.example.market.entity;
 
 import lombok.Getter;
 import lombok.Setter;

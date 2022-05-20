@@ -1,30 +1,25 @@
 package com.example.market.controller;
 
-import com.example.market.model.Comment;
-import com.example.market.model.Image;
-import com.example.market.model.Item;
-import com.example.market.model.Member;
+import com.example.market.entity.Comment;
+import com.example.market.entity.Item;
+import com.example.market.entity.Member;
 import com.example.market.service.BasketServiceImpl;
 import com.example.market.service.CommentService;
 import com.example.market.service.ItemService;
 import com.example.market.service.MemberService;
-import com.example.market.session.SessionConst;
 import lombok.Data;
-import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @Data
-@RequestMapping("/chanMarket/itemList")
+@RequestMapping( "/chanMarket/itemList")
 public class ItemController {
 
     private final ItemService itemService;
@@ -79,7 +74,7 @@ public class ItemController {
         return "item/deleteForm";
     }
 
-    @PostMapping("/{itemId}/delete")
+    @DeleteMapping("/{itemId}")
     public String itemDelete(@PathVariable Long itemId, HttpServletRequest request){
         HttpSession session = request.getSession();
         String member = (String) session.getAttribute("loginMember");
@@ -91,20 +86,7 @@ public class ItemController {
         }
         return "member/no";
     }
-/*
-    @DeleteMapping("/{itemId}")
-    public String itemDelete2(@PathVariable Long itemId, HttpServletRequest request){
-        HttpSession session = request.getSession();
-        String member = (String) session.getAttribute("loginMember");
-        Item item = itemService.readItem(itemId);
 
-        if (item.getMember().getEmail().equals(member)) {
-            itemService.deleteItem(itemId);
-            return "redirect:/chanMarket/itemList";
-        }
-        return "member/no";
-    }
-*/
     @GetMapping("/{itemId}/itemBasket")
     public String itemBasket(@PathVariable Long itemId, Model model){
         Item item = itemService.readItem(itemId);
@@ -163,10 +145,10 @@ public class ItemController {
         return "member/no";
     }
 
-    @PostMapping("/{itemId}/edit")
+    @PutMapping("/{itemId}")
     public String editItem(@PathVariable Long itemId, Item item){
         itemService.editItem(itemId, item);
-        return "redirect:/chanMarket/itemList/{itemId}";
+        return "redirect:/chanMarket/itemList/" + itemId;
     }
 
 }

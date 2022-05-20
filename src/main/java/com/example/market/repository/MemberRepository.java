@@ -1,17 +1,12 @@
 package com.example.market.repository;
 
-import com.example.market.model.Grade;
-import com.example.market.model.Member;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Component;
+import com.example.market.entity.Grade;
+import com.example.market.entity.Member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public class MemberRepository{

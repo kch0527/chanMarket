@@ -1,9 +1,9 @@
 package com.example.market.service;
 
-import com.example.market.model.Basket;
-import com.example.market.model.BasketItem;
-import com.example.market.model.Item;
-import com.example.market.model.Member;
+import com.example.market.entity.Basket;
+import com.example.market.entity.BasketItem;
+import com.example.market.entity.Item;
+import com.example.market.entity.Member;
 import com.example.market.repository.JpaBasketItemRepository;
 import com.example.market.repository.JpaBasketRepository;
 import com.example.market.repository.JpaItemRepository;
@@ -24,7 +24,7 @@ public class BasketServiceImpl implements BasketService{
     @Override
     @Transactional
     public void addBasket(Member member, Item addItem) {
-        Basket basket = basketRepository.findByMember(member.getId()); //2022.05.18 멤버아이디로 바스킷 찾기
+        Basket basket = basketRepository.findByMember(member.getId());
 
         if (basket == null){
             basket = Basket.addBasket(member);

@@ -1,13 +1,10 @@
-package com.example.market.model;
+package com.example.market.entity;
 
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Builder
 @NoArgsConstructor
