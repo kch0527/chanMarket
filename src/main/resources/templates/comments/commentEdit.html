@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>수정 폼</h2>
+    </div>
+    <form th:action="@{'/chanMarket/itemList/' + ${comment.id} + '/commentEdit'}" th:method="put">
+        <div>
+            <label for="text">댓글</label>
+            <input type="text" id="text" name="text" class="form-control" value=""
+                   th:value="${comment.text}">
+        </div>
+
+        <hr class="my-4">
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg" type="submit" value="Update">저장
+                </button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        onclick="location.href='itemList.html'"
+                        th:onclick="|location.href='@{/chanMarket/itemList/{itemId}(itemId=${item.id})}'|"
+                        type="button">취소</button>
+            </div>
+        </div>
+    </form>
+</div> <!-- /container -->
+</body>
+</html>

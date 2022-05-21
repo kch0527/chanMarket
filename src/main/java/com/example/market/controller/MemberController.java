@@ -20,12 +20,12 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/join")
+    @GetMapping("join")
     public String join(){
         return "member/join";
     }
 
-    @PostMapping("/join")
+    @PostMapping("join")
     public String joinId(@Valid Member member){
        try{
            memberService.join(member);
@@ -35,17 +35,17 @@ public class MemberController {
        }
     }
 
-    @GetMapping("/joinSucceed")
+    @GetMapping("joinSucceed")
     public String joinSucceed(){
         return "member/joinSucceed";
     }
 
-    @GetMapping("/login")
+    @GetMapping("login")
     public String login(){
         return "member/login";
     }
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public String loginId(String email, String pw, HttpServletRequest request) throws Exception{
         Member member = memberService.login(email, pw);
         if (member == null){
@@ -57,7 +57,7 @@ public class MemberController {
         return "redirect:/chanMarket/itemList";
     }
 
-    @GetMapping("/myInfo")
+    @GetMapping("myInfo")
     public String myInfo(Member member, HttpServletRequest request, Model model){
         HttpSession session = request.getSession();
         String sessionMember = (String)session.getAttribute("loginMember");
@@ -74,7 +74,7 @@ public class MemberController {
         return "member/myInfo";
     }
 
-    @GetMapping("/myInfo/edit")
+    @GetMapping("myInfo/edit")
     public String memberEditForm(Member member, HttpServletRequest request){
         HttpSession session = request.getSession();
         String sessionMember = (String)session.getAttribute("loginMember");
@@ -85,7 +85,7 @@ public class MemberController {
         member.setGrade(findByMember.getGrade());
         return "member/editForm";
     }
-    @PostMapping("/myInfo/edit")
+    @PostMapping("myInfo/edit")
     public String editItem(Member member){
         memberService.editMember(member);
         return "redirect:/chanMarket/myInfo";

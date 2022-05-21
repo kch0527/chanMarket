@@ -35,7 +35,7 @@ public class ItemController {
         return "item/itemList";
     }
 
-    @GetMapping("/{itemId}")
+    @GetMapping("{itemId}")
     public String item(@PathVariable Long itemId, Model model){
         Item item = itemService.readItem(itemId);
         List<Comment> comments = item.getComments();
@@ -44,69 +44,30 @@ public class ItemController {
         return "item/itemInfo";
     }
 
-    @GetMapping("/{itemId}/comment")
-    public String itemComment(){
-        return "item/commentForm";
-    }
 
-    @PostMapping("/{itemId}/comment")
-    public String comment(@PathVariable Long itemId, HttpServletRequest request, @ModelAttribute Comment comment, RedirectAttributes redirectAttributes){
-        Item item = itemService.readItem(itemId);
-        HttpSession session = request.getSession();
-        String loginMember = (String) session.getAttribute("loginMember");
 
-        Member member = memberService.findByEmail(loginMember);
-        comment.setMember(member);
-        comment.setItem(item);
-        comment.setNowTime(commentService.nowTime());
-        Comment saveComment = commentService.addComment(comment);
-
-        redirectAttributes.addAttribute("comments",saveComment.getId());
-        redirectAttributes.addAttribute("status", true);
-
-        return "redirect:/chanMarket/itemList/" + item.getId();
-    }
-
-    @GetMapping("/{itemId}/delete")
+    @GetMapping("{itemId}/delete")
     public String itemDelete(@PathVariable Long itemId, Model model){
         Item findItem = itemService.readItem(itemId);
         model.addAttribute("item",findItem);
         return "item/deleteForm";
     }
 
-    @DeleteMapping("/{itemId}")
+    @DeleteMapping("{itemId}")
     public String itemDelete(@PathVariable Long itemId, HttpServletRequest request){
         HttpSession session = request.getSession();
         String member = (String) session.getAttribute("loginMember");
         Item item = itemService.readItem(itemId);
 
         if (item.getMember().getEmail().equals(member)) {
+            commentService.itemDeleteByComment(item);
             itemService.deleteItem(itemId);
             return "redirect:/chanMarket/itemList";
         }
         return "member/no";
     }
 
-    @GetMapping("/{itemId}/itemBasket")
-    public String itemBasket(@PathVariable Long itemId, Model model){
-        Item item = itemService.readItem(itemId);
-        model.addAttribute("item", item);
-        return "item/itemBasket";
-    }
-
-    @PostMapping("/{itemId}/itemBasket")
-    public String itemPutBasket(@PathVariable("id") Long itemId, HttpServletRequest request, Model model){
-        HttpSession session = request.getSession();
-        String loginMember = (String) session.getAttribute("loginMember");
-        Member member = memberService.findByEmail(loginMember);
-        Item item = itemService.readItem(itemId);
-
-        basketService.addBasket(member, item);
-        model.addAttribute("basketItem", item);
-        return "member/myInfo";
-    }
-
-    @GetMapping("/add")
+    @GetMapping("add")
     public String addForm(HttpServletRequest request) throws Exception{
         HttpSession session = request.getSession();
         String member = (String)session.getAttribute("loginMember");
@@ -115,7 +76,7 @@ public class ItemController {
         return "item/addForm";
     }
 
-    @PostMapping("/add")
+    @PostMapping("")
     public String addItem(Item item, RedirectAttributes redirectAttributes, HttpServletRequest request){
         try {
             HttpSession session = request.getSession();
@@ -131,7 +92,7 @@ public class ItemController {
         }
     }
 
-    @GetMapping("/{itemId}/edit")
+    @GetMapping("{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model, HttpServletRequest request){
         HttpSession session = request.getSession();
         String sessionMember = (String)session.getAttribute("loginMember");
@@ -145,7 +106,7 @@ public class ItemController {
         return "member/no";
     }
 
-    @PutMapping("/{itemId}")
+    @PutMapping("{itemId}")
     public String editItem(@PathVariable Long itemId, Item item){
         itemService.editItem(itemId, item);
         return "redirect:/chanMarket/itemList/" + itemId;

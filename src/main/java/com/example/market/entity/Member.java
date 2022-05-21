@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
-public class Member extends BaseEntity{
+public class Member{
 
     @Id @GeneratedValue
     @Column(name = "MEMBER_ID")

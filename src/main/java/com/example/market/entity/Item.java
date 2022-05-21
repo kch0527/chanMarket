@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @DiscriminatorColumn
-public class Item extends BaseEntity {
+public class Item{
     @Id @GeneratedValue
     @Column(name = "ITEM_ID")
     private Long id;

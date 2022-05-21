@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <link href="../css/bootstrap.min.css"
-          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="../../static/market/css/bootstrap.min.css"
+          th:href="@{/market/css/bootstrap.min.css}" rel="stylesheet">
     <style>
         .container {
             max-width: 560px;
@@ -16,7 +16,7 @@
         <h2>상품 등록 폼</h2>
     </div>
     <h4 class="mb-3">상품 입력</h4>
-    <form action="itemInfo.html" th:action method="post">
+    <form th:action="@{'/chanMarket/itemList'}" th:method="post">
         <div>
             <label>등록한 이메일</label>
             <input type="text" id="email" name="email" th:value="${email}" class="form-control"

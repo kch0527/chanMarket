@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
-    <link href="../css/bootstrap.min.css"
-          th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
     <style>
         .container {
             max-width: 560px;
         }
     </style>
+
 </head>
 <body>
 <div class="container">
@@ -57,12 +57,7 @@
                     type="button">찜하기</button>
         </div>
 
-        <div class="col">
-            <button class="w-100 btn btn-secondary btn-lg"
-                    onclick="location.href='commentForm.html'"
-                    th:onclick="|location.href='@{/chanMarket/itemList/{itemId}/comment(itemId=${item.id})}'|"
-                    type="button">댓글작성</button>
-        </div>
+
 
         <div class="col">
             <button class="w-100 btn btn-secondary btn-lg"
@@ -76,29 +71,35 @@
 </div>
 <br>
 <br>
-<br>
-<br>
+
+
+<h1>댓글</h1>
+
+<form th:action="@{'/chanMarket/itemList/' + ${item.id}}" th:method="post">
+    <textarea id="text" name="text" cols="40" rows="5"></textarea>
+    <br>
+    <input type="submit" value="작성">
+    <input type="reset" value="취소">
+</form>
+
+
 <hr class="my-4">
+<form>
 <div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>등록이메일</th>
-            <th>등록시간</th>
-            <th>내용</th>
-        </tr>
-        </thead>
-        <tbody>
         <tr th:each="comments : ${comment}">
-            <td th:text="${comments.member.email}"></td>
-            <td th:text="${comments.nowTime}"></td>
+
+                <td th:text="${comments.member.email}"></td>
+                <td th:text="${comments.nowTime}"></td>
+
+
             <td th:text="${comments.text}"></td>
-        </tbody>
-    </table>
-</div>
-</div>
 
+            <button class="w-100 btn btn-secondary btn-lg"
+                    th:onclick="|location.href='@{/chanMarket/itemList/{commentId}/commentEdit(commentId=${comment.id})}'|"
+                    type="button">수정</button>
 
+</div>
+</form>
 
 
 </body>
