@@ -30,7 +30,7 @@
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"
                         onclick="location.href='itemList.html'"
-                        th:onclick="|location.href='@{/chanMarket/itemList/{itemId}(itemId=${item.id})}'|"
+                        th:onclick="|location.href='@{/chanMarket/itemList/{itemId}(itemId=${comment.getItem.getId})}'|"
                         type="button">취소</button>
             </div>
         </div>

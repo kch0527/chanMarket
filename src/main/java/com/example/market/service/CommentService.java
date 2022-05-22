@@ -54,10 +54,12 @@ public class CommentService {
     public void editComment(Long commentId, Comment updateParam){
         Comment findComment = jpaCommentRepository.getById(commentId);
         findComment.setText(updateParam.getText());
-        findComment.setMember(updateParam.getMember());
-        findComment.setItem(updateParam.getItem());
-        findComment.setNowTime(updateParam.getNowTime());
         jpaCommentRepository.save(findComment);
+    }
+
+    @Transactional
+    public void deleteComment(Long commentId){
+     jpaCommentRepository.deleteById(commentId);
     }
 
 }

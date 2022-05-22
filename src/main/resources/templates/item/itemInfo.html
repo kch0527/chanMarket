@@ -1,8 +1,9 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-
+    <link href="../../static/market/css/bootstrap.min.css"
+          th:href="@{/market/css/bootstrap.min.css}" rel="stylesheet">
     <style>
         .container {
             max-width: 560px;
@@ -85,22 +86,30 @@
 
 <hr class="my-4">
 <form>
-<div>
+<div class="card">
         <tr th:each="comments : ${comment}">
-
+            <div class="card-header">
                 <td th:text="${comments.member.email}"></td>
                 <td th:text="${comments.nowTime}"></td>
-
-
+            </div>
+            <div class="card-body">
             <td th:text="${comments.text}"></td>
-
+            </div>
             <button class="w-100 btn btn-secondary btn-lg"
-                    th:onclick="|location.href='@{/chanMarket/itemList/{commentId}/commentEdit(commentId=${comment.id})}'|"
+                    th:onclick="|location.href='@{/chanMarket/itemList/{commentId}/commentEdit(commentId=${comments.id})}'|"
                     type="button">수정</button>
-
+            <button id="btn-remove" class="btn btn-danger">삭제</button>
 </div>
 </form>
 
-
+<script>
+    $(function(){
+        $('#remove').click(function(){
+            if(confirm("삭제하시겠어요?")){
+                self.location.href = "/chanMarket/itemList/remove?commentId=${comments.id}";
+            }
+        });
+    });
+</script>
 </body>
 </html>
