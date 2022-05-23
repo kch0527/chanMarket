@@ -14,11 +14,11 @@ public class BasketItem {
     @Id @GeneratedValue
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "BASKET_ID")
     private Basket basket;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "ITEM_ID")
     private Item item;
 

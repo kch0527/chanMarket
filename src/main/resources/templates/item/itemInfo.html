@@ -2,13 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <link href="../../static/market/css/bootstrap.min.css"
-          th:href="@{/market/css/bootstrap.min.css}" rel="stylesheet">
     <style>
         .container {
             max-width: 560px;
         }
     </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var msg = "${msg}";
+            if(msg != ""){
+                alert(msg);
+            }
+        });
+        function deleteConfirm(){
+            if(!confirm("삭제 하시겠습니까?")){
+                return false;
+            }else{
+                location.href="/chanMarket/itemList/delete/{id}(id=${comment.id})";
+            }
+        }
+    </script>
 
 </head>
 <body>
@@ -98,18 +113,10 @@
             <button class="w-100 btn btn-secondary btn-lg"
                     th:onclick="|location.href='@{/chanMarket/itemList/{commentId}/commentEdit(commentId=${comments.id})}'|"
                     type="button">수정</button>
-            <button id="btn-remove" class="btn btn-danger">삭제</button>
+            <button><a href="javascript:void(0);" class="btn btn-danger" onclick="deleteConfirm();">삭제</a></button>
 </div>
 </form>
 
-<script>
-    $(function(){
-        $('#remove').click(function(){
-            if(confirm("삭제하시겠어요?")){
-                self.location.href = "/chanMarket/itemList/remove?commentId=${comments.id}";
-            }
-        });
-    });
-</script>
+
 </body>
 </html>

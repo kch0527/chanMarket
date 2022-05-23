@@ -26,6 +26,11 @@ public class BasketController {
     private final MemberService memberService;
     private final BasketServiceImpl basketService;
 
+    @GetMapping("itemBasket")
+    public String basketList(){
+        return "basket/myBasket";
+    }
+
     @GetMapping("{itemId}/itemBasket")
     public String itemBasket(@PathVariable Long itemId, Model model){
         Item item = itemService.readItem(itemId);
@@ -42,6 +47,6 @@ public class BasketController {
 
         basketService.addBasket(member, item);
         model.addAttribute("basketItem", item);
-        return "member/myInfo";
+        return "basket/myBasket";
     }
 }

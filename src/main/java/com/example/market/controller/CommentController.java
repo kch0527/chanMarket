@@ -64,10 +64,16 @@ public class CommentController {
 
     }
 
-    @RequestMapping(value = "/remove" , method = RequestMethod.GET)
-    public String remove(@RequestParam("commentId") Long commentId, RedirectAttributes redirectAttributes){
-        commentService.deleteComment(commentId);
-        redirectAttributes.addAttribute("result","remove");
+    @RequestMapping( value = "delete/{commentId}", method = RequestMethod.GET)
+    public String commentDelete(@ModelAttribute Comment comment, @PathVariable Long commentId, RedirectAttributes redirectAttributes, Model model){
+       try {
+           commentService.deleteComment(commentId);
+           redirectAttributes.addFlashAttribute("msg", "삭제 완료");
+       }catch (Exception e){
+           e.printStackTrace();
+           redirectAttributes.addFlashAttribute("msg","오류 발생");
+       }
         return "redirect:/chanMarket/itemList";
     }
+
 }

@@ -2,8 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <link href="../../static/market/css/bootstrap.min.css"
-          th:href="@{/market/css/bootstrap.min.css}" rel="stylesheet">
     <style>
         .container {
             max-width: 560px;
@@ -16,7 +14,7 @@
         <h2>상품 상세</h2>
     </div>
     <!-- 추가 -->
-    <form action="myInfo.html" th:action method="get">
+    <form th:action="@{'/chanMarket/itemList/' + ${item.id} + '/itemBasket'}" th:method="post">
         <div>
             <label for="email">판매자</label>
             <input type="text" id="email" name="email" class="form-control"
@@ -42,10 +40,8 @@
                 <b>찜목록에 넣을까요?</b>
 
                 <div class="col">
-                    <button class="w-100 btn btn-secondary btn-lg"
-                            onclick="location.href='itemBasket.html'"
-                            th:onclick="|location.href='@{/chanMarket/myInfo}'|"
-                            type="button">찜하기</button>
+                    <button class="w-100 btn btn-primary btn-lg" type="submit" value="Update">찜하기
+                    </button>
                 </div>
 
                 <div class="col">

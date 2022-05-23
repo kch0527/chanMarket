@@ -9,7 +9,7 @@
     <div class="py-5 text-center">
         <h2>내 정보</h2>
     </div>
-    <form action="myInfo.html" th:action method="get">
+    <form>
         <div>
             <label for="name">이름</label>
             <input type="text" id="name" name="name" class="form-control" value="사람"
@@ -44,7 +44,7 @@
             </thead>
             <tbody>
                 <tr th:each="item : ${myItems}">
-                    <td><a th:href="@{|/chanMarket/itemList/${item.id}|}" th:text="${item.itemName}"></td>
+                    <td><a th:href="@{|/chanMarket/itemList/${item.id}|}" th:text="${item.itemName}"></a></td>
                     <td th:text="${item.price}"></td>
                     <td th:text="${item.itemInformation}"></td>
             </tr>
@@ -53,29 +53,17 @@
 
         <br>
 
-        <table class ="tb_col">
-            찜 목록
-            <thead>
-            <tr>
-                <th>itemName</th>
-                <th>price</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="basket: ${basketItem}">
-                <td><a th:href="@{|/chanMarket/itemList/${basket.id}|}" th:text="${basket.itemName}"></td>
-                <td th:text="${basket.price}"></td>
-            </tr>
-            </tbody>
-        </table>
-
-
         <hr class="my-4">
         <div class="row">
             <div class="col">
                 <button class="w-100 btn btn-primary btn-lg"
                         onclick="location.href='editForm.html'"
-                        th:onclick="|location.href='@{/chanMarket/myInfo/edit}'|" type="button">수정</button>
+                        th:onclick="|location.href='@{/chanMarket/myInfo/edit}'|" type="button">내정보 수정</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg"
+                        onclick="location.href='../basket/myBasket.html'"
+                        th:onclick="|location.href='@{/chanMarket/itemList/itemBasket}'|" type="button">찜목록 보기</button>
             </div>
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"
