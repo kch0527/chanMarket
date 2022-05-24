@@ -8,26 +8,10 @@
         }
     </style>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            var msg = "${msg}";
-            if(msg != ""){
-                alert(msg);
-            }
-        });
-        function deleteConfirm(){
-            if(!confirm("삭제 하시겠습니까?")){
-                return false;
-            }else{
-                location.href="/chanMarket/itemList/delete/{id}(id=${comment.id})";
-            }
-        }
-    </script>
-
 </head>
 <body>
 <div class="container">
+    <div id="hello"></div>
     <div class="py-5 text-center">
         <h2>상품 상세</h2>
     </div>
@@ -113,10 +97,12 @@
             <button class="w-100 btn btn-secondary btn-lg"
                     th:onclick="|location.href='@{/chanMarket/itemList/{commentId}/commentEdit(commentId=${comments.id})}'|"
                     type="button">수정</button>
-            <button><a href="javascript:void(0);" class="btn btn-danger" onclick="deleteConfirm();">삭제</a></button>
+            <button><a href="javascript:void(0);" class="btn btn-danger" th:onclick="'deleteConfirm(' + ${comments.getItem().id} +','+ ${comments.id} + ')'">삭제</a></button>
+        </tr>
 </div>
 </form>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../market/js/comment.js"> </script>
 </body>
 </html>
