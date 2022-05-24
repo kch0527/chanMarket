@@ -40,8 +40,7 @@ public class ItemService {
     }
 
     public List<Item> itemList(){
-        List<Item> itemList = jpaItemRepository.findAll();
-        return itemList;
+        return jpaItemRepository.findAll();
     }
 
 

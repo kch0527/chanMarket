@@ -24,6 +24,7 @@ public class CommentController {
     private final MemberService memberService;
     private final CommentService commentService;
 
+
     @PostMapping("{itemId}")
     public String itemComment(@PathVariable Long itemId, HttpServletRequest request, @ModelAttribute Comment comment, RedirectAttributes redirectAttributes) {
         try {
@@ -73,5 +74,4 @@ public class CommentController {
         }
         return "item/itemList";
     }
-
 }

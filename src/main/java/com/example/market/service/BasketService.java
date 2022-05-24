@@ -4,5 +4,5 @@ import com.example.market.entity.Item;
 import com.example.market.entity.Member;
 
 public interface BasketService {
-    public void addBasket(Member member, Item item);
+    public boolean addBasketItem(Member member, Item item);
 }

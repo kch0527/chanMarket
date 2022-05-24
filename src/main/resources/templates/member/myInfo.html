@@ -43,7 +43,7 @@
             </tr>
             </thead>
             <tbody>
-                <tr th:each="item : ${myItems}">
+                <tr th:each="item : ${myInfo.getItems()}">
                     <td><a th:href="@{|/chanMarket/itemList/${item.id}|}" th:text="${item.itemName}"></a></td>
                     <td th:text="${item.price}"></td>
                     <td th:text="${item.itemInformation}"></td>

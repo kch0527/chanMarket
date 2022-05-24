@@ -19,22 +19,22 @@
         <div>
             <label for="name">이름</label>
             <input type="text" id="name" name="name" class="form-control" value=""
-                   th:value="${member.name}">
+                   th:value="${myInfo.name}">
         </div>
         <div>
             <label for="email">이메일</label>
             <input type="text" id="email" name="email" class="form-control"
-                   value="" th:value="${member.email}" readonly>
+                   value="" th:value="${myInfo.email}" readonly>
         </div>
         <div>
             <label for="tel">전화번호</label>
             <input type="text" id="tel" name="tel" class="form-control"
-                   th:value="${member.tel}">
+                   th:value="${myInfo.tel}">
         </div>
         <div>
             <label for="grade">내 등급</label>
             <input type="text" id="grade" name="grade" class="form-control"
-                   th:value="${member.grade}" readonly>
+                   th:value="${myInfo.grade}" readonly>
         </div>
         <hr class="my-4">
         <div class="row">

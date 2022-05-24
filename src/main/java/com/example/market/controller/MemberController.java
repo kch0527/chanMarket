@@ -1,17 +1,17 @@
 package com.example.market.controller;
 
-import com.example.market.entity.Item;
 import com.example.market.entity.Member;
 import com.example.market.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,74 +21,61 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("join")
-    public String join(){
+    public String join() {
         return "member/join";
     }
 
     @PostMapping("join")
-    public String joinId(@Valid Member member){
-       try{
-           memberService.join(member);
-           return "redirect:/chanMarket/joinSucceed";
-       }catch (Exception e){
-           return "member/join";
-       }
+    public String joinId(@Valid Member member) {
+        try {
+            memberService.join(member);
+            return "redirect:/chanMarket/joinSucceed";
+        } catch (Exception e) {
+            return "member/join";
+        }
     }
 
     @GetMapping("joinSucceed")
-    public String joinSucceed(){
+    public String joinSucceed() {
         return "member/joinSucceed";
     }
 
     @GetMapping("login")
-    public String login(){
+    public String login() {
         return "member/login";
     }
 
     @PostMapping("login")
-    public String loginId(String email, String pw, HttpServletRequest request) throws Exception{
-        Member member = memberService.login(email, pw);
-        if (member == null){
+    public String loginId(String email, String pw, HttpServletRequest request) throws Exception {
+
+        if (!isValidAccount(email, pw)) {
             return "member/login";
         }
-        HttpSession session = request.getSession();
-        session.setAttribute("loginMember", email);
+
+        request.getSession().setAttribute("loginMember", email);
 
         return "redirect:/chanMarket/itemList";
     }
 
     @GetMapping("myInfo")
-    public String myInfo(Member member, HttpServletRequest request, Model model){
-        HttpSession session = request.getSession();
-        String sessionMember = (String)session.getAttribute("loginMember");
-        Member findByMember = memberService.findByEmail(sessionMember);
-        member.setName(findByMember.getName());
-        member.setEmail(findByMember.getEmail());
-        member.setTel(findByMember.getTel());
-        member.setGrade(findByMember.getGrade());
-
-        List<Item> items = findByMember.getItems();
-
-        model.addAttribute("myInfo",member);
-        model.addAttribute("myItems",items);
+    public String myInfo(HttpServletRequest request, Model model) {
+        model.addAttribute("myInfo", memberService.findByEmail((String) request.getSession().getAttribute("loginMember")));
         return "member/myInfo";
     }
 
     @GetMapping("myInfo/edit")
-    public String memberEditForm(Member member, HttpServletRequest request){
-        HttpSession session = request.getSession();
-        String sessionMember = (String)session.getAttribute("loginMember");
-        Member findByMember = memberService.findByEmail(sessionMember);
-        member.setName(findByMember.getName());
-        member.setEmail(findByMember.getEmail());
-        member.setTel(findByMember.getTel());
-        member.setGrade(findByMember.getGrade());
+    public String memberEditForm(Model model, HttpServletRequest request) {
+        model.addAttribute("myInfo", memberService.findByEmail((String) request.getSession().getAttribute("loginMember")));
         return "member/editForm";
     }
+
     @PostMapping("myInfo/edit")
-    public String editItem(Member member){
+    public String editItem(Member member) {
         memberService.editMember(member);
         return "redirect:/chanMarket/myInfo";
     }
 
+    boolean isValidAccount(String email, String pw) {
+        return memberService.login(email, pw) != null;
+    }
 }

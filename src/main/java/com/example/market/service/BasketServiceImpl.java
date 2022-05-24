@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class BasketServiceImpl implements BasketService{
+public class BasketServiceImpl implements BasketService {
 
     private final JpaBasketRepository basketRepository;
     private final JpaItemRepository itemRepository;
@@ -23,30 +23,32 @@ public class BasketServiceImpl implements BasketService{
 
     @Override
     @Transactional
-    public void addBasket(Member member, Item addItem) {
-        Member findMember = memberRepository.getById(member.getId());
-        Basket basket = new Basket();
-        basket.setMember(findMember);
-        //Basket basket = basketRepository.findByMember(member.getId());
+    public boolean addBasketItem(Member member, Item addItem) {
+        Basket basket = memberRepository.getBasket(member.getId());
 
-        if (basket == null){
-            basket = Basket.addBasket(member);
+        if (!isExistBasket(basket)) {
+            basket = Basket.createBasket(member);
             basketRepository.save(basket);
         }
 
         Item item = itemRepository.getById(addItem.getId());
         BasketItem basketItem = repository.findByItemAndBasket(item.getId(), basket.getId());
 
-        if (basketItem == null){
+        if (!isExistBasketItem(basketItem)) {
             basketItem = BasketItem.addBasketItem(basket, item);
             basketItemRepository.save(basketItem);
-        }
-        else {
-            BasketItem update = basketItem;
-            update.setBasket(basketItem.getBasket());
-            update.setItem(basketItem.getItem());
-            basketItemRepository.save(update);
+            return true;
         }
 
+        return false;
+
+    }
+
+    boolean isExistBasket(Basket basket) {
+        return basket != null;
+    }
+
+    boolean isExistBasketItem(BasketItem basketItem) {
+        return basketItem != null;
     }
 }
