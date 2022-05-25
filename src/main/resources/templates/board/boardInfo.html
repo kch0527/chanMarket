@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="container">
+    <div id="hello"></div>
+    <div class="py-5 text-center">
+        <h2>상품 상세</h2>
+    </div>
+    <!-- 추가 -->
+    <form>
+        <div>
+            <label for="email">판매자</label>
+            <input type="text" id="email" name="email" class="form-control"
+                   value="1" th:value="${board.getMember().getEmail()}" readonly>
+        </div>
+        <div>
+            <label for="itemName">상품명</label>
+            <input type="text" id="itemName" name="itemName" class="form-control"
+                   value="상품A" th:value="${board.getItem().getItemName()}" readonly>
+        </div>
+        <div>
+            <label for="price">가격</label>
+            <input type="text" id="price" name="price" class="form-control"
+                   value="10000" th:value="${board.getItem().getPrice()}" readonly>
+        </div>
+        <div>
+            <label for="itemInformation">제품 설명</label>
+            <input type="text" id="itemInformation" name="itemInformation" class="form-control"
+                   value="10" th:value="${board.getItem().getItemInformation()}" readonly>
+            <hr class="my-4">
+
+            <div class="row">
+                <button><a href="javascript:void(0);" class="btn btn-danger" th:onclick="'deleteConfirm(' + ${board.id} + ')'">삭제</a></button>
+            </div>
+
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        onclick="location.href='boardList.html'"
+                        th:onclick="|location.href='@{/chanMarket/board}'|"
+                        type="button">목록으로</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../market/js/boardDel.js"> </script>
+</body>
+</html>

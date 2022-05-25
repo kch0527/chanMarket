@@ -5,14 +5,15 @@ import com.example.market.repository.JpaItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ItemServiceImpl {
+public class ItemServiceImpl implements ItemService{
 
     private final JpaItemRepository jpaItemRepository;
-/*
+
     @Transactional
     public Item addItem(Item item){
         jpaItemRepository.save(item);
@@ -37,7 +38,7 @@ public class ItemServiceImpl {
     public Item readItem(Long itemId){
         return jpaItemRepository.getById(itemId);
     }
-*/
+
     public List<Item> itemList(){
         return jpaItemRepository.findAll();
     }

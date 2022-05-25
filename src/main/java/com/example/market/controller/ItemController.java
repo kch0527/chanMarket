@@ -1,5 +1,6 @@
 package com.example.market.controller;
 
+import com.example.market.entity.Board;
 import com.example.market.entity.Item;
 import com.example.market.entity.Member;
 import com.example.market.service.*;
@@ -19,39 +20,44 @@ import java.util.List;
 @RequestMapping( "/chanMarket/itemList")
 public class ItemController {
 
-    private final ItemServiceImpl itemService;
+    private final ItemService itemService;
+    private final BoardService boardService;
     private final MemberService memberService;
     private final CommentService commentService;
     private final BasketServiceImpl basketService;
 
-
-    @GetMapping("")
-    public String itemList(Model model){
-        model.addAttribute("items", itemService.itemList());
-        return "item/itemList";
-    }
 
     @GetMapping("add")
     public String addForm(HttpServletRequest request, Model model){
         model.addAttribute("email", (String) request.getSession().getAttribute("loginMember"));
         return "item/addForm";
     }
-/*
+
     @PostMapping("")
-    public String addItem(Item item, RedirectAttributes redirectAttributes, HttpServletRequest request){
+    public String addItem(Item item, Board board, HttpServletRequest request){
         try {
-            HttpSession session = request.getSession();
-            String member = (String)session.getAttribute("loginMember");
-            Member findByMember = memberService.findByEmail(member);
-            item.setMember(findByMember);
-            Item saveItem = itemService.addItem(item);
-            redirectAttributes.addAttribute("itemId", saveItem.getId());
-            redirectAttributes.addAttribute("status", true);
-            return "redirect:/chanMarket/itemList/" + item.getId();
+            item.setBoard(boardService.createBoard(board, memberService.findByEmail((String) request.getSession().getAttribute("loginMember"))));
+            itemService.addItem(item);
+            return "redirect:/chanMarket/board/" + board.getId();
         }catch (Exception e){
-            return "item/addForm";
+            return "error/error";
         }
     }
+/*
+    @DeleteMapping("{itemId}")
+    public String itemDelete(@PathVariable Long itemId, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String member = (String) session.getAttribute("loginMember");
+        Item item = itemService.readItem(itemId);
+
+        if (item.getMember().getEmail().equals(member)) {
+            commentService.itemDeleteByComment(item);
+            itemService.deleteItem(itemId);
+            return "redirect:/chanMarket/itemList";
+        }
+        return "member/no";
+    }
+
 
     @GetMapping("{itemId}")
     public String item(@PathVariable Long itemId, Model model){
@@ -70,21 +76,6 @@ public class ItemController {
         model.addAttribute("item",findItem);
         return "item/deleteForm";
     }
-
-    @DeleteMapping("{itemId}")
-    public String itemDelete(@PathVariable Long itemId, HttpServletRequest request){
-        HttpSession session = request.getSession();
-        String member = (String) session.getAttribute("loginMember");
-        Item item = itemService.readItem(itemId);
-
-        if (item.getMember().getEmail().equals(member)) {
-            commentService.itemDeleteByComment(item);
-            itemService.deleteItem(itemId);
-            return "redirect:/chanMarket/itemList";
-        }
-        return "member/no";
-    }
-
 
 
     @GetMapping("{itemId}/edit")

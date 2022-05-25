@@ -30,6 +30,6 @@ public class LoginController {
 
         request.getSession().setAttribute("loginMember", email);
 
-        return "redirect:/chanMarket/itemList";
+        return "redirect:/chanMarket/board";
     }
 }

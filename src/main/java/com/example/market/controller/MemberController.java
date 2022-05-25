@@ -41,24 +41,24 @@ public class MemberController {
     }
 
 
-/*
+
     @GetMapping("myInfo")
     public String myInfo(HttpServletRequest request, Model model) {
-        model.addAttribute("myInfo", memberServiceImpl.findByEmail((String) request.getSession().getAttribute("loginMember")));
+        model.addAttribute("myInfo", memberService.findByEmail((String) request.getSession().getAttribute("loginMember")));
         return "member/myInfo";
     }
 
     @GetMapping("myInfo/edit")
     public String memberEditForm(Model model, HttpServletRequest request) {
-        model.addAttribute("myInfo", memberServiceImpl.findByEmail((String) request.getSession().getAttribute("loginMember")));
+        model.addAttribute("myInfo", memberService.findByEmail((String) request.getSession().getAttribute("loginMember")));
         return "member/editForm";
     }
 
     @PostMapping("myInfo/edit")
     public String editItem(Member member) {
-        memberServiceImpl.editMember(member);
+        memberService.editMember(member);
         return "redirect:/chanMarket/myInfo";
     }
-*/
+
 
 }
