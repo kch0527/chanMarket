@@ -10,24 +10,27 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Setter
-@Getter
+@Data
 public class Comment {
     @Id @GeneratedValue
+    @Column(name = "comment_id")
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_id", insertable = false, updatable = false)
+    private Comment comment;
+
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @ManyToOne
+    @JoinColumn(name = "board_id")
+    private Board board;
 
     @Size(max = 100)
     @NotNull
     private String text;
-
-    @ManyToOne
-    @JoinColumn(name = "MEMBER_ID")
-    private Member member;
-
-    @ManyToOne
-    @JoinColumn(name = "ITEM_ID")
-    private Item item;
-
 
     private String nowTime;
 

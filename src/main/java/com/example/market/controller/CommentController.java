@@ -1,30 +1,22 @@
 package com.example.market.controller;
 
-import com.example.market.entity.Comment;
-import com.example.market.entity.Item;
-import com.example.market.entity.Member;
 import com.example.market.service.CommentService;
-import com.example.market.service.ItemService;
-import com.example.market.service.MemberService;
+import com.example.market.service.ItemServiceImpl;
+import com.example.market.service.MemberServiceImpl;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Controller
 @Data
 @RequestMapping("/chanMarket/itemList")
 public class CommentController {
 
-    private final ItemService itemService;
-    private final MemberService memberService;
+    private final ItemServiceImpl itemService;
+    private final MemberServiceImpl memberServiceImpl;
     private final CommentService commentService;
 
-
+/*
     @PostMapping("{itemId}")
     public String itemComment(@PathVariable Long itemId, HttpServletRequest request, @ModelAttribute Comment comment, RedirectAttributes redirectAttributes) {
         try {
@@ -74,4 +66,6 @@ public class CommentController {
         }
         return "item/itemList";
     }
+
+ */
 }

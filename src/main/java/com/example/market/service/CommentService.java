@@ -1,17 +1,13 @@
 package com.example.market.service;
 
 import com.example.market.entity.Comment;
-import com.example.market.entity.Item;
-import com.example.market.entity.Member;
 import com.example.market.repository.JpaCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.crypto.Cipher;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,7 +16,7 @@ import java.util.List;
 public class CommentService {
 
     private final JpaCommentRepository jpaCommentRepository;
-
+/*
     @Transactional
     public Comment addComment(Comment comment){
         jpaCommentRepository.save(comment);
@@ -62,4 +58,6 @@ public class CommentService {
      jpaCommentRepository.deleteById(commentId);
     }
 
+
+ */
 }

@@ -8,18 +8,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Setter
-@Getter
+@Data
 public class BasketItem {
     @Id @GeneratedValue
     private Long id;
 
     @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "BASKET_ID")
+    @JoinColumn(name = "basket_id")
     private Basket basket;
 
     @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "ITEM_ID")
+    @JoinColumn(name = "item_id")
     private Item item;
 
     public static BasketItem addBasketItem(Basket basket, Item item){

@@ -1,13 +1,10 @@
 package com.example.market.controller;
 
-import com.example.market.entity.Comment;
 import com.example.market.entity.Item;
 import com.example.market.entity.Member;
-import com.example.market.service.BasketServiceImpl;
-import com.example.market.service.CommentService;
-import com.example.market.service.ItemService;
-import com.example.market.service.MemberService;
+import com.example.market.service.*;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,21 +15,42 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@Data
+@RequiredArgsConstructor
 @RequestMapping( "/chanMarket/itemList")
 public class ItemController {
 
-    private final ItemService itemService;
+    private final ItemServiceImpl itemService;
     private final MemberService memberService;
     private final CommentService commentService;
     private final BasketServiceImpl basketService;
 
 
-    @GetMapping
+    @GetMapping("")
     public String itemList(Model model){
-        List<Item> items = itemService.itemList();
-        model.addAttribute(items);
+        model.addAttribute("items", itemService.itemList());
         return "item/itemList";
+    }
+
+    @GetMapping("add")
+    public String addForm(HttpServletRequest request, Model model){
+        model.addAttribute("email", (String) request.getSession().getAttribute("loginMember"));
+        return "item/addForm";
+    }
+/*
+    @PostMapping("")
+    public String addItem(Item item, RedirectAttributes redirectAttributes, HttpServletRequest request){
+        try {
+            HttpSession session = request.getSession();
+            String member = (String)session.getAttribute("loginMember");
+            Member findByMember = memberService.findByEmail(member);
+            item.setMember(findByMember);
+            Item saveItem = itemService.addItem(item);
+            redirectAttributes.addAttribute("itemId", saveItem.getId());
+            redirectAttributes.addAttribute("status", true);
+            return "redirect:/chanMarket/itemList/" + item.getId();
+        }catch (Exception e){
+            return "item/addForm";
+        }
     }
 
     @GetMapping("{itemId}")
@@ -67,30 +85,7 @@ public class ItemController {
         return "member/no";
     }
 
-    @GetMapping("add")
-    public String addForm(HttpServletRequest request) throws Exception{
-        HttpSession session = request.getSession();
-        String member = (String)session.getAttribute("loginMember");
-        request.setAttribute("email", member);
 
-        return "item/addForm";
-    }
-
-    @PostMapping("")
-    public String addItem(Item item, RedirectAttributes redirectAttributes, HttpServletRequest request){
-        try {
-            HttpSession session = request.getSession();
-            String member = (String)session.getAttribute("loginMember");
-            Member findByMember = memberService.findByEmail(member);
-            item.setMember(findByMember);
-            Item saveItem = itemService.addItem(item);
-            redirectAttributes.addAttribute("itemId", saveItem.getId());
-            redirectAttributes.addAttribute("status", true);
-            return "redirect:/chanMarket/itemList/" + item.getId();
-        }catch (Exception e){
-            return "item/addForm";
-        }
-    }
 
     @GetMapping("{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model, HttpServletRequest request){
@@ -111,5 +106,7 @@ public class ItemController {
         itemService.editItem(itemId, item);
         return "redirect:/chanMarket/itemList/" + itemId;
     }
+
+ */
 
 }

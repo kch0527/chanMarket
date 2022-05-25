@@ -10,16 +10,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Setter
-@Getter
+@Data
 public class Basket {
     @Id
     @GeneratedValue
-    @Column(name = "BASKET_ID")
+    @Column(name = "basket_id")
     private Long id;
 
     @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "MEMBER_ID")
+    @JoinColumn(name = "member_id")
     private Member member;
 
 

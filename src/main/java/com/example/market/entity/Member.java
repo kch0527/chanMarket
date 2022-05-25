@@ -1,7 +1,6 @@
 package com.example.market.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,21 +11,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
 public class Member{
 
     @Id @GeneratedValue
-    @Column(name = "MEMBER_ID")
+    @Column(name = "member_id")
     private Long id;
-
-    @NotNull(message = "이름입력")
-    private String name;
 
     @NotNull
     @Email(message = "올바른 이메일 입력")
     private String email;
+
+    @NotNull(message = "이름입력")
+    private String name;
+
+    @Enumerated(EnumType.STRING)
+    private Grade grade;
 
     @NotNull
     @Size(min = 8, max = 15, message = "비밀번호는 8자 이상 15자 이하로 입력")
@@ -36,14 +40,17 @@ public class Member{
     @Pattern(regexp = "(01[016789])(\\d{3,4})(\\d{4})", message = "올바은 휴대폰 번호를 입력")
     private String tel;
 
-    @Enumerated(EnumType.STRING)
-    private Grade grade;
 
-    @OneToMany(mappedBy = "member")
-    private List<Item> items = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade=CascadeType.ALL)
+    private List<Board> boardList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade=CascadeType.ALL)
+    private List<ChatRoom> chatRoomList = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "member")
-    private List<Comment> comments = new ArrayList<>();
+
+
+
+
 
 }

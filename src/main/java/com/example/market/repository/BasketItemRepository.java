@@ -1,15 +1,11 @@
 package com.example.market.repository;
 
-import com.example.market.entity.Basket;
 import com.example.market.entity.BasketItem;
-import com.example.market.entity.Item;
-import com.example.market.entity.Member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 @Repository
 public class BasketItemRepository {

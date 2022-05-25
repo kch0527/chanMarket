@@ -1,6 +1,6 @@
 package com.example.market.repository;
 
-import com.example.market.service.ItemService;
+import com.example.market.service.ItemServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 class ItemTest {
 
-    private final ItemService service;
+    private final ItemServiceImpl service;
 
     @Autowired
-    public ItemTest(ItemService service){
+    public ItemTest(ItemServiceImpl service){
         this.service = service;
     }
 
@@ -38,8 +38,8 @@ class ItemTest {
 
     @Test
     public void test2(){
-        ItemService itemService1 = service;
-        ItemService itemService2 = service;
+        ItemServiceImpl itemService1 = service;
+        ItemServiceImpl itemService2 = service;
         System.out.println("itemService1 = " + itemService1);
         System.out.println("itemService2 = " + itemService2);
     }

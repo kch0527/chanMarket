@@ -6,32 +6,28 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
+@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Data
-public class Item {
+public class ChatRoom {
 
     @Id
     @GeneratedValue
-    @Column(name = "item_id")
+    @Column(name = "room_id")
     private Long id;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "member_id", insertable = false, updatable = false)
+    private Board owner;
+
+    @ManyToOne
     @JoinColumn(name = "board_id")
     private Board board;
 
-    @Size(max = 255)
-    private String itemInformation;
-
-    @NotNull
-    private String itemName;
-
-    @NotNull
-    private String price;
-
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 }

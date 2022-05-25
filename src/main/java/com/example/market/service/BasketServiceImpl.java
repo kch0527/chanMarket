@@ -2,7 +2,6 @@ package com.example.market.service;
 
 import com.example.market.entity.Basket;
 import com.example.market.entity.BasketItem;
-import com.example.market.entity.Item;
 import com.example.market.entity.Member;
 import com.example.market.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -13,14 +12,14 @@ import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class BasketServiceImpl implements BasketService {
+public class BasketServiceImpl{
 
     private final JpaBasketRepository basketRepository;
     private final JpaItemRepository itemRepository;
     private final JpaBasketItemRepository basketItemRepository;
     private final BasketItemRepository repository;
     private final JpaMemberRepository memberRepository;
-
+/*
     @Override
     @Transactional
     public boolean addBasketItem(Member member, Item addItem) {
@@ -51,4 +50,6 @@ public class BasketServiceImpl implements BasketService {
     boolean isExistBasketItem(BasketItem basketItem) {
         return basketItem != null;
     }
+
+ */
 }

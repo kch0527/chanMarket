@@ -9,7 +9,7 @@
 <body>
 로그인
 
-<form th:action method="post" action="/login">
+<form th:action="@{'/chanMarket/login'}" th:method="post">
     ID :<input type="email" name="email"><br>
     PASSWORD :<input type="text" name="pw"><br>
     <button type="submit">로그인</button>

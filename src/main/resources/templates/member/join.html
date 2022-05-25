@@ -12,7 +12,6 @@
     <script
             type="text/javascript"
             src="/js/lib/dummy.js"
-
     ></script>
     <link rel="stylesheet" type="text/css" href="/css/result-light.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -63,29 +62,29 @@
                 </div>
                 <div class="card-body p-4 p-sm-5">
                     <h5 class="card-title text-center mb-5 fw-light fs-5">회원가입</h5>
-                    <form action="/join" th:action method="post">
+                    <form th:action="@{'/chanMarket'}" th:method="post">
                         <form>
 
                             <div class="form-floating mb-3">
-                                <input type="text" name="name" class="form-control" id="floatingInputUsername" placeholder="Name" required autofocus>
-                                <label for="floatingInputUsername">Name</label>
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Name" required autofocus>
+                                <label for="name">Name</label>
                             </div>
 
 
                             <div class="form-floating mb-3">
-                                <input type="email" name="email" class="form-control" id="floatingInputEmail" placeholder="Email" required autofocus>
-                                <label for="floatingInputEmail">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Email" required autofocus>
+                                <label for="email">Email</label>
                             </div>
 
 
                             <div class="form-floating mb-3">
-                                <input type="password" name="pw" class="form-control" id="floatingPassword" placeholder="Password" required autofocus>
-                                <label for="floatingPassword">Password</label>
+                                <input type="password" name="pw" class="form-control" id="pw" placeholder="Password" required autofocus>
+                                <label for="pw">Password</label>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="tel" name="tel" class="form-control" id="floatingTel" placeholder="Tel" required autofocus>
-                                <label for="floatingTel">Tel</label>
+                                <input type="tel" name="tel" class="form-control" id="tel" placeholder="Tel" required autofocus>
+                                <label for="tel">Tel</label>
                             </div>
 
 
@@ -96,7 +95,7 @@
                             </div>
                             -->
                             <div class="d-grid mb-2">
-                                <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" onclick="location.href=''" type="submit">Register</button>
+                                <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase"  type="submit" value="Register">Register</button>
                             </div>
 
                             <a class="d-block text-center mt-2 small" href="#">Have an account? Sign In</a>
