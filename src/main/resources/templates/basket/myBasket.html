@@ -5,8 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-asd
-<!--
+
 <form>
     <table class ="tb_col">
         찜 목록
@@ -17,13 +16,13 @@ asd
         </tr>
         </thead>
         <tbody>
-        <tr th:each="item: ${basketItem}">
-            <td><a th:href="@{|/chanMarket/itemList/${itemId}|}" th:text="${}"></a></td>
-            <td th:text="${basket.price}"></td>
+        <tr th:each="basketItem: ${list}">
+            <td><a th:href="@{|/chanMarket/board/${basketItem.getItem().getBoard().id}|}" th:text="${basketItem.getItem().itemName}"></a></td>
+            <td th:text="${basketItem.getItem().getPrice()}"></td>
         </tr>
         </tbody>
     </table>
 </form>
--->
+
 </body>
 </html>

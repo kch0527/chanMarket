@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @Data
-@RequestMapping("/chanMarket/itemList")
+@RequestMapping("/chanMarket/item")
 public class CommentController {
 
     private final ItemServiceImpl itemService;

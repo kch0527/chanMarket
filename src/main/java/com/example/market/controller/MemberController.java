@@ -1,6 +1,7 @@
 package com.example.market.controller;
 
 import com.example.market.entity.Member;
+import com.example.market.service.BasketService;
 import com.example.market.service.MemberService;
 import com.example.market.service.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +21,7 @@ import javax.validation.Valid;
 public class MemberController {
 
     private final MemberService memberService;
+    private final BasketService basketService;
 
     @GetMapping("join")
     public String join() {
@@ -29,6 +32,7 @@ public class MemberController {
     public String joinId(@Valid Member member) {
         try {
             memberService.join(member);
+            basketService.addBasket(member);
             return "redirect:/chanMarket/joinSucceed";
         } catch (Exception e) {
             return "error/error";
@@ -54,7 +58,7 @@ public class MemberController {
         return "member/editForm";
     }
 
-    @PostMapping("myInfo/edit")
+    @PutMapping("myInfo")
     public String editItem(Member member) {
         memberService.editMember(member);
         return "redirect:/chanMarket/myInfo";

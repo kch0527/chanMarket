@@ -59,7 +59,7 @@
             <div class="col">
                 <button class="w-100 btn btn-primary btn-lg"
                         onclick="location.href='../basket/myBasket.html'"
-                        th:onclick="|location.href='@{/chanMarket/itemList/itemBasket}'|" type="button">찜목록 보기</button>
+                        th:onclick="|location.href='@{/chanMarket/basket/{basketId}(basketId=${myInfo.basket.id})}'|" type="button">찜목록 보기</button>
             </div>
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"

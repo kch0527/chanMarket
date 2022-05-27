@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping( "/chanMarket/itemList")
+@RequestMapping( "/chanMarket/item")
 public class ItemController {
 
     private final ItemService itemService;
@@ -42,6 +42,32 @@ public class ItemController {
         }catch (Exception e){
             return "error/error";
         }
+    }
+
+    @GetMapping("{itemId}/edit")
+    public String editForm(@PathVariable Long itemId, Model model, HttpServletRequest request){
+        String loginMember = (String) request.getSession().getAttribute("loginMember");
+        String ownerMember = itemService.readItem(itemId).getBoard().getMember().getEmail();
+
+        if (editAuthority(loginMember, ownerMember)) {
+            model.addAttribute("item", itemService.readItem(itemId));
+            return "item/editForm";
+        }
+        return "error/error";
+    }
+
+    @PutMapping("{itemId}")
+    public String editItem(@PathVariable Long itemId, Item item){
+        itemService.editItem(itemId, item);
+        return "redirect:/chanMarket/board/" + itemService.readItem(itemId).getBoard().getId();
+    }
+
+    public boolean editAuthority(String email1, String email2){
+        if (email1.equals(email2)){
+            return true;
+        }
+        else
+            return false;
     }
 /*
     @DeleteMapping("{itemId}")
@@ -78,25 +104,7 @@ public class ItemController {
     }
 
 
-    @GetMapping("{itemId}/edit")
-    public String editForm(@PathVariable Long itemId, Model model, HttpServletRequest request){
-        HttpSession session = request.getSession();
-        String sessionMember = (String)session.getAttribute("loginMember");
-        Item findItem = itemService.readItem(itemId);
 
-        if (findItem.getMember().getEmail().equals(sessionMember)) {
-            Item item = itemService.readItem(itemId);
-            model.addAttribute("item", item);
-            return "item/editForm";
-        }
-        return "member/no";
-    }
-
-    @PutMapping("{itemId}")
-    public String editItem(@PathVariable Long itemId, Item item){
-        itemService.editItem(itemId, item);
-        return "redirect:/chanMarket/itemList/" + itemId;
-    }
 
  */
 

@@ -1,5 +1,6 @@
 package com.example.market.service;
 
+import com.example.market.entity.Basket;
 import com.example.market.entity.Grade;
 import com.example.market.entity.Member;
 import com.example.market.repository.JpaMemberRepository;
@@ -47,6 +48,14 @@ public class MemberServiceImpl implements MemberService{
         findMember.setTel(updateParam.getTel());
         findMember.setGrade(updateParam.getGrade());
         jpaMemberRepository.save(findMember);
+    }
+
+    public Member findMemberById(Long id){
+        return jpaMemberRepository.getById(id);
+    }
+
+    public Basket findBasket(Long memberId){
+        return findMemberById(memberId).getBasket();
     }
 
 }

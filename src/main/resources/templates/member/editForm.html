@@ -15,7 +15,7 @@
     <div class="py-5 text-center">
         <h2>내 정보 수정</h2>
     </div>
-    <form action="editForm.html" th:action method="post">
+    <form th:action="@{'/chanMarket/myInfo'}" th:method="put">
         <div>
             <label for="name">이름</label>
             <input type="text" id="name" name="name" class="form-control" value=""
@@ -45,7 +45,7 @@
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"
                         onclick="location.href='myInfo.html'"
-                        th:onclick="|location.href='@{/chanMarket/itemList/myInfo}'|"
+                        th:onclick="|location.href='@{/chanMarket/myInfo}'|"
                         type="button">취소</button>
             </div>
         </div>

@@ -47,6 +47,8 @@ public class Member{
     @OneToMany(mappedBy = "member", cascade=CascadeType.ALL)
     private List<ChatRoom> chatRoomList = new ArrayList<>();
 
+    @OneToOne(mappedBy = "member", cascade=CascadeType.ALL)
+    private Basket basket;
 
 
 

@@ -34,6 +34,19 @@
                    value="10" th:value="${board.getItem().getItemInformation()}" readonly>
             <hr class="my-4">
 
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg"
+                        onclick="location.href='editForm.html'"
+                        th:onclick="|location.href='@{/chanMarket/item/{itemId}/edit(itemId=${board.item.id})}'|" type="button">상품 수정</button>
+            </div>
+
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        onclick="location.href='itemBasket.html'"
+                        th:onclick="|location.href='@{/chanMarket/basket/{itemId}/add(itemId=${board.item.id})}'|"
+                        type="button">찜하기</button>
+            </div>
+
             <div class="row">
                 <button><a href="javascript:void(0);" class="btn btn-danger" th:onclick="'deleteConfirm(' + ${board.id} + ')'">삭제</a></button>
             </div>
