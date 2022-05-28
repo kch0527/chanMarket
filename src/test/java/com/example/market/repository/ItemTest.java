@@ -27,13 +27,6 @@ class ItemTest {
     @Rollback(value = false)
     public void testItem() throws Exception{
 
-        service.deleteItem(49L);
-        service.deleteItem(50L);
-        service.deleteItem(51L);
-        service.deleteItem(52L);
-        service.deleteItem(53L);
-        service.deleteItem(54L);
-        service.deleteItem(55L);
     }
 
     @Test

@@ -1,38 +1,41 @@
 package com.example.market.controller;
 
-import com.example.market.service.CommentService;
-import com.example.market.service.ItemServiceImpl;
-import com.example.market.service.MemberServiceImpl;
+import com.example.market.entity.Board;
+import com.example.market.entity.Comment;
+import com.example.market.entity.Member;
+import com.example.market.service.*;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @Data
-@RequestMapping("/chanMarket/item")
+@RequestMapping("/chanMarket/board")
 public class CommentController {
 
     private final ItemServiceImpl itemService;
-    private final MemberServiceImpl memberServiceImpl;
+    private final MemberService memberService;
     private final CommentService commentService;
+    private final BoardService boardService;
 
-/*
-    @PostMapping("{itemId}")
-    public String itemComment(@PathVariable Long itemId, HttpServletRequest request, @ModelAttribute Comment comment, RedirectAttributes redirectAttributes) {
+    @PostMapping("{boardId}")
+    public String itemComment(@PathVariable Long boardId, HttpServletRequest request, @ModelAttribute Comment comment, RedirectAttributes redirectAttributes) {
         try {
-            Item item = itemService.readItem(itemId);
-            HttpSession session = request.getSession();
-            String loginMember = (String) session.getAttribute("loginMember");
+            Board board = boardService.findBoard(boardId);
+            Member loginMember = memberService.findByEmail((String) request.getSession().getAttribute("loginMember"));
 
-            Member member = memberService.findByEmail(loginMember);
-            comment.setMember(member);
-            comment.setItem(item);
+            comment.setBoard(board);
+            comment.setMember(loginMember);
             comment.setNowTime(commentService.nowTime());
             Comment saveComment = commentService.addComment(comment);
             redirectAttributes.addAttribute("commentId", saveComment.getId());
             redirectAttributes.addAttribute("status", true);
 
-            return "redirect:/chanMarket/itemList/" + itemId;
+            return "redirect:/chanMarket/board/" + boardId;
         } catch (Exception e) {
             e.printStackTrace();
             return "error/error";
@@ -50,22 +53,35 @@ public class CommentController {
     public String commentEdit(@PathVariable Long commentId, Comment comment) {
         commentService.editComment(commentId, comment);
         Comment findComment = commentService.findComment(commentId);
-        return "redirect:/chanMarket/itemList/" + findComment.getItem().getId();
+        return "redirect:/chanMarket/board/" + findComment.getBoard().getId();
 
     }
-
-    @DeleteMapping("delete/{commentId}")
-    public String commentDelete(@ModelAttribute Comment comment, @PathVariable Long commentId, RedirectAttributes redirectAttributes) {
+/*
+    @DeleteMapping("{commentId}/deleteComment")
+    public String commentDelete(@ModelAttribute Comment comment, @PathVariable Long commentId, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
         try {
-            commentService.deleteComment(commentId);
-            redirectAttributes.addFlashAttribute("msg", "삭제 완료");
+            if (sameMemberCheck(comment.getMember().getEmail(), (String) request.getSession().getAttribute("loginMember"))){
+                commentService.deleteComment(commentId);
+                redirectAttributes.addFlashAttribute("msg", "삭제 완료");
+            }
+            else {
+                redirectAttributes.addFlashAttribute("msg", "권한 없음");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("msg", "오류 발생");
         }
-        return "item/itemList";
+        return "board/boardList";
     }
 
- */
+    public boolean sameMemberCheck(String email1, String email2){
+        if (email1.equals(email2)) {
+            return true;
+        }
+        else
+            return false;
+    }
+*/
+
 }

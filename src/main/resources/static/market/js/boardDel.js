@@ -3,7 +3,7 @@ function deleteConfirm(boardId){
         return false;
     }else{
         const xhr = new XMLHttpRequest();
-        xhr.open("DELETE", `/chanMarket/board/${boardId}/delete/`, true);
+        xhr.open("DELETE", `/chanMarket/board/${boardId}/delete`, true);
         xhr.onload = function () {
             location.href = `/chanMarket/board`
         }

@@ -62,6 +62,42 @@
     </form>
 </div>
 
+<br>
+<br>
+
+
+<h1>댓글</h1>
+
+<form th:action="@{'/chanMarket/board/' + ${board.id}}" th:method="post">
+    <textarea id="text" name="text" cols="40" rows="5"></textarea>
+    <br>
+    <input type="submit" value="작성">
+    <input type="reset" value="취소">
+</form>
+
+
+<hr class="my-4">
+<form>
+    <div class="card">
+        <tr th:each="comments : ${board.getCommentList()}">
+            <div class="card-header">
+                <td th:text="${comments.member.email}"></td>
+                <td th:text="${comments.nowTime}"></td>
+            </div>
+            <div class="card-body">
+                <td th:text="${comments.text}"></td>
+            </div>
+
+            <button class="w-100 btn btn-secondary btn-lg"
+                    th:onclick="|location.href='@{/chanMarket/board/{commentId}/commentEdit(commentId=${comments.id})}'|"
+                    type="button">수정</button>
+            <!--
+            <button><a href="javascript:void(0);" class="btn btn-danger" th:onclick="'deleteComment(' + ${comments.getBoard().getId()} +','+ ${comments.id} + ')'">삭제</a></button>
+            -->
+        </tr>
+    </div>
+</form>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="../../market/js/boardDel.js"> </script>
 </body>

@@ -14,7 +14,7 @@
     <div class="py-5 text-center">
         <h2>수정 폼</h2>
     </div>
-    <form th:action="@{'/chanMarket/itemList/' + ${comment.id} + '/commentEdit'}" th:method="put">
+    <form th:action="@{'/chanMarket/board/' + ${comment.id} + '/commentEdit'}" th:method="put">
         <div>
             <label for="text">댓글</label>
             <input type="text" id="text" name="text" class="form-control" value=""
@@ -30,7 +30,7 @@
             <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"
                         onclick="location.href='itemList.html'"
-                        th:onclick="|location.href='@{/chanMarket/itemList/{itemId}(itemId=${comment.getItem.getId})}'|"
+                        th:onclick="|location.href='@{/chanMarket/board/{boardId}(boardId=${comment.getBoard.getId})}'|"
                         type="button">취소</button>
             </div>
         </div>

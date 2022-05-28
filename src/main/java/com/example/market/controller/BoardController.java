@@ -2,6 +2,7 @@ package com.example.market.controller;
 
 import com.example.market.entity.Board;
 import com.example.market.service.BoardService;
+import com.example.market.service.CommentService;
 import com.example.market.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ public class BoardController {
 
     private final BoardService boardService;
     private final ItemService itemService;
+    private final CommentService commentService;
 
 
     @GetMapping("")
@@ -37,7 +39,8 @@ public class BoardController {
             String loginEmail = (String) request.getSession().getAttribute("loginMember");
             String boardEmail = boardService.findBoard(boardId).getMember().getEmail();
             if (sameMemberCheck(loginEmail, boardEmail)) {
-                itemService.deleteItem(boardService.findBoard(boardId).getItem().getId());
+                itemService.deleteItem(boardService.findBoard(boardId).getItem());
+                commentService.boardDeleteByComment(boardId);
                 boardService.deleteBoard(boardId);
             }
         }catch (Exception e) {

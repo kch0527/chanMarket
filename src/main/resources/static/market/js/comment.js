@@ -1,18 +1,20 @@
+/*
+function deleteComment(boardId, commentId){
+    if(!confirm("삭제 하시겠습니까?")){
+        return false;
+    }else{
+        const xhr1 = new XMLHttpRequest();
+        xhr1.open("DELETE", `/chanMarket/board/${commentId}/deleteComment`, true);
+        xhr1.onload = function () {
+            location.href = `/chanMarket/board/${boardId}`
+        }
+        xhr1.send(null);
+    }
+}
+*/
 // $(document).ready(function() {
 //     var msg = "${msg}";
 //     if(msg != ""){
 //         alert(msg);
 //     }
 // });
-function deleteConfirm(itemId, commentId){
-    if(!confirm("삭제 하시겠습니까?")){
-        return false;
-    }else{
-        const xhr = new XMLHttpRequest();
-        xhr.open("DELETE", `/chanMarket/itemList/delete/${commentId}`, true);
-        xhr.onload = function () {
-            location.href = `/chanMarket/itemList/${itemId}`
-        }
-        xhr.send(null);
-    }
-}

@@ -1,5 +1,6 @@
 package com.example.market.service;
 
+import com.example.market.entity.Board;
 import com.example.market.entity.Comment;
 import com.example.market.repository.JpaCommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ import java.util.List;
 public class CommentService {
 
     private final JpaCommentRepository jpaCommentRepository;
-/*
+
     @Transactional
     public Comment addComment(Comment comment){
         jpaCommentRepository.save(comment);
@@ -27,18 +28,6 @@ public class CommentService {
         LocalDateTime nowTime = LocalDateTime.now();
         String format = nowTime.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
         return format;
-    }
-    public void itemDeleteByComment(Item item){
-        List<Comment> all = jpaCommentRepository.findAll();
-        Iterator<Comment> iter = all.iterator();
-        Long id = item.getId();
-
-        while (iter.hasNext()){
-            Comment id1 = iter.next();
-            if (id == id1.getItem().getId()){
-                jpaCommentRepository.delete(id1);
-            }
-        }
     }
 
     public Comment findComment(Long id){
@@ -53,11 +42,25 @@ public class CommentService {
         jpaCommentRepository.save(findComment);
     }
 
+
+    public void boardDeleteByComment(Long boardId){
+        List<Comment> all = jpaCommentRepository.findAll();
+        Iterator<Comment> iter = all.iterator();
+
+        while (iter.hasNext()){
+            Comment id1 = iter.next();
+            if (boardId == id1.getBoard().getId()){
+                jpaCommentRepository.delete(id1);
+            }
+        }
+    }
+
+
     @Transactional
     public void deleteComment(Long commentId){
      jpaCommentRepository.deleteById(commentId);
     }
 
 
- */
+
 }

@@ -18,7 +18,7 @@ public class Comment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id", insertable = false, updatable = false)
-    private Comment comment;
+    private Comment highLevelId;
 
     @ManyToOne
     @JoinColumn(name = "member_id")

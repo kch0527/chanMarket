@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ItemService {
     Item addItem(Item item);
-    void deleteItem(Long itemId);
+    void deleteItem(Item item);
     void editItem(Long itemId, Item updateParam);
     Item readItem(Long itemId);
     List<Item> itemList();

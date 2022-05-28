@@ -25,7 +25,7 @@ public class Board {
     private Member member;
 
 
-    @OneToMany(mappedBy = "comment", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "board", cascade=CascadeType.ALL)
     private List<Comment> commentList = new ArrayList<>();
 
     @OneToOne(mappedBy = "board", cascade=CascadeType.ALL)
