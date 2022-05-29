@@ -21,8 +21,8 @@ public class ItemServiceImpl implements ItemService{
     }
 
     @Transactional
-    public void deleteItem(Item item){
-        jpaItemRepository.delete(item);
+    public void deleteItem(Long id){
+        jpaItemRepository.deleteById(id);
     }
 
     @Transactional

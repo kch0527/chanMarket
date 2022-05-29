@@ -41,13 +41,13 @@ public class Member{
     private String tel;
 
 
-    @OneToMany(mappedBy = "member", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "member", cascade=CascadeType.REMOVE)
     private List<Board> boardList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "member", cascade=CascadeType.REMOVE)
     private List<ChatRoom> chatRoomList = new ArrayList<>();
 
-    @OneToOne(mappedBy = "member", cascade=CascadeType.ALL)
+    @OneToOne(mappedBy = "member", cascade=CascadeType.REMOVE)
     private Basket basket;
 
 

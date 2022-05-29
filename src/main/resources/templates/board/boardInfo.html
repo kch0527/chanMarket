@@ -91,14 +91,15 @@
             <button class="w-100 btn btn-secondary btn-lg"
                     th:onclick="|location.href='@{/chanMarket/board/{commentId}/commentEdit(commentId=${comments.id})}'|"
                     type="button">수정</button>
-            <!--
+
             <button><a href="javascript:void(0);" class="btn btn-danger" th:onclick="'deleteComment(' + ${comments.getBoard().getId()} +','+ ${comments.id} + ')'">삭제</a></button>
-            -->
+
         </tr>
     </div>
 </form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="../../market/js/boardDel.js"> </script>
+<script type="text/javascript" src="../../market/js/comment.js"> </script>
 </body>
 </html>

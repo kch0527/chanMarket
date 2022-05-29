@@ -56,22 +56,20 @@ public class CommentController {
         return "redirect:/chanMarket/board/" + findComment.getBoard().getId();
 
     }
-/*
-    @DeleteMapping("{commentId}/deleteComment")
-    public String commentDelete(@ModelAttribute Comment comment, @PathVariable Long commentId, RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
-        try {
-            if (sameMemberCheck(comment.getMember().getEmail(), (String) request.getSession().getAttribute("loginMember"))){
+    @DeleteMapping("{commentId}")
+    public String commentDelete(@ModelAttribute Comment comment, @PathVariable Long commentId, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+            String loginMember = (String) request.getSession().getAttribute("loginMember");
+            String commentMember = commentService.findComment(commentId).getMember().getEmail();
+            if (sameMemberCheck(commentMember, loginMember)){
                 commentService.deleteComment(commentId);
                 redirectAttributes.addFlashAttribute("msg", "삭제 완료");
             }
             else {
                 redirectAttributes.addFlashAttribute("msg", "권한 없음");
+                return "error/error";
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            redirectAttributes.addFlashAttribute("msg", "오류 발생");
-        }
+
         return "board/boardList";
     }
 
@@ -82,6 +80,6 @@ public class CommentController {
         else
             return false;
     }
-*/
+
 
 }

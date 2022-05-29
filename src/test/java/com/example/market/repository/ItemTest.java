@@ -1,5 +1,6 @@
 package com.example.market.repository;
 
+import com.example.market.service.ItemService;
 import com.example.market.service.ItemServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 class ItemTest {
 
-    private final ItemServiceImpl service;
+    private final ItemService service;
 
     @Autowired
     public ItemTest(ItemServiceImpl service){
@@ -24,17 +25,13 @@ class ItemTest {
 
     @Test
     @Transactional
-    @Rollback(value = false)
-    public void testItem() throws Exception{
-
+    public void itemDelete(){
+        service.deleteItem(4L);
     }
 
     @Test
     public void test2(){
-        ItemServiceImpl itemService1 = service;
-        ItemServiceImpl itemService2 = service;
-        System.out.println("itemService1 = " + itemService1);
-        System.out.println("itemService2 = " + itemService2);
+
     }
 
 

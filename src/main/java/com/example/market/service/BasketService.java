@@ -12,4 +12,6 @@ public interface BasketService {
     void addBasket(Member member);
     List<BasketItem> BasketList();
     Basket findBasket(Long id);
+
+    void deleteBasketItem(Long itemId);
 }

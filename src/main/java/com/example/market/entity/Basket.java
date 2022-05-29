@@ -17,12 +17,12 @@ public class Basket {
     @Column(name = "basket_id")
     private Long id;
 
-    @OneToOne(cascade=CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "member_id")
     private Member member;
 
 
-    @OneToMany(mappedBy = "basket", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "basket", cascade=CascadeType.REMOVE)
     private List<BasketItem> basketItemList = new ArrayList<>();
 
     public static Basket createBasket(Member member){

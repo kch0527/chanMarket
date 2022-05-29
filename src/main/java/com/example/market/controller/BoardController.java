@@ -1,6 +1,7 @@
 package com.example.market.controller;
 
 import com.example.market.entity.Board;
+import com.example.market.service.BasketService;
 import com.example.market.service.BoardService;
 import com.example.market.service.CommentService;
 import com.example.market.service.ItemService;
@@ -20,6 +21,7 @@ public class BoardController {
     private final ItemService itemService;
     private final CommentService commentService;
 
+    private final BasketService basketService;
 
     @GetMapping("")
     public String boardList(Model model){
@@ -34,20 +36,23 @@ public class BoardController {
     }
 
     @DeleteMapping("/{boardId}/delete")
-    public String boardDelete(@PathVariable Long boardId, HttpServletRequest request){
-        try {
-            String loginEmail = (String) request.getSession().getAttribute("loginMember");
-            String boardEmail = boardService.findBoard(boardId).getMember().getEmail();
-            if (sameMemberCheck(loginEmail, boardEmail)) {
-                itemService.deleteItem(boardService.findBoard(boardId).getItem());
-                commentService.boardDeleteByComment(boardId);
-                boardService.deleteBoard(boardId);
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
+    public String boardDelete(@PathVariable Long boardId, HttpServletRequest request) {
+
+        String loginEmail = (String) request.getSession().getAttribute("loginMember");
+        String boardEmail = boardService.findBoard(boardId).getMember().getEmail();
+        if (sameMemberCheck(loginEmail, boardEmail)) {
+            //basketService.deleteBasketItem(boardService.findBoard(boardId).getItem().getId());
+            //itemService.deleteItem(boardService.findBoard(boardId).getItem().getId());
+            //commentService.boardDeleteByComment(boardId);
+            boardService.deleteBoard(boardId);
+
+            return "board/boardList";
         }
-        return "board/boardList";
-    }
+        else{
+                return "error/error";
+            }
+        }
+
 
     public boolean sameMemberCheck(String email1, String email2){
         if (email1.equals(email2)) {

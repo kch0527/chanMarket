@@ -1,14 +1,13 @@
 package com.example.market.service;
 
-import com.example.market.entity.Basket;
-import com.example.market.entity.BasketItem;
-import com.example.market.entity.Item;
-import com.example.market.entity.Member;
+import com.example.market.entity.*;
 import com.example.market.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -66,6 +65,18 @@ public class BasketServiceImpl implements BasketService{
 
     boolean isExistBasketItem(BasketItem basketItem) {
         return basketItem != null;
+    }
+
+    public void deleteBasketItem(Long itemId){
+        List<BasketItem> all = basketItemRepository.findAll();
+        Iterator<BasketItem> iter = all.iterator();
+
+        while (iter.hasNext()){
+            BasketItem basketItem = iter.next();
+            if (itemId == basketItem.getItem().getId()){
+                basketItemRepository.delete(basketItem);
+            }
+        }
     }
 
 }
