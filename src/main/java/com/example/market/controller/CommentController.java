@@ -43,10 +43,15 @@ public class CommentController {
     }
 
     @GetMapping("{commentId}/commentEdit")
-    public String commentEdit(@PathVariable Long commentId, Model model) {
-        Comment comment = commentService.findComment(commentId);
-        model.addAttribute(comment);
-        return "comments/commentEdit";
+    public String commentEdit(@PathVariable Long commentId, Model model, HttpServletRequest request) {
+        String loginMember = (String) request.getSession().getAttribute("loginMember");
+        String commentMember = commentService.findComment(commentId).getMember().getEmail();
+        if (sameMemberCheck(commentMember, loginMember)) {
+            Comment comment = commentService.findComment(commentId);
+            model.addAttribute(comment);
+            return "comments/commentEdit";
+        }
+        else return "error/error";
     }
 
     @PutMapping("{commentId}/commentEdit")
@@ -64,13 +69,12 @@ public class CommentController {
             if (sameMemberCheck(commentMember, loginMember)){
                 commentService.deleteComment(commentId);
                 redirectAttributes.addFlashAttribute("msg", "삭제 완료");
+                return "board/boardList";
             }
             else {
                 redirectAttributes.addFlashAttribute("msg", "권한 없음");
                 return "error/error";
             }
-
-        return "board/boardList";
     }
 
     public boolean sameMemberCheck(String email1, String email2){

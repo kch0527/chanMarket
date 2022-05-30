@@ -23,13 +23,12 @@ public class LoginController {
 
     @PostMapping("")
     public String loginId(String email, String pw, HttpServletRequest request){
-
         if (memberService.login(email, pw) == null) {
             return "error/error";
         }
-
         request.getSession().setAttribute("loginMember", email);
-
         return "redirect:/chanMarket/board";
     }
+
+
 }
