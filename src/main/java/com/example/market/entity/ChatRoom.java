@@ -20,8 +20,7 @@ public class ChatRoom {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "member_id", insertable = false, updatable = false)
-    private Board owner;
+    private Member owner;
 
     @ManyToOne
     @JoinColumn(name = "board_id")

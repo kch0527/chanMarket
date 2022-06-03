@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{'/chanMarket/chat/' + ${board.id} + '/ChatCreate'}" th:method="post">
+    <tr>
+        물건 : <td th:text="${board.item.itemName}"></td>
+        <br>
+        <td th:text="${board.member.email}"></td>님과 채팅을 시작하시겠습니까?
+    </tr>
+
+<div><input type="submit" value="채팅"></div>
+
+   <div class="col">
+        <button class="w-100 btn btn-secondary btn-lg"
+                th:onclick="|location.href='@{/chanMarket/board/{boardId}(boardId=${board.id})}'|"
+                type="button">취소</button>
+    </div>
+</form>
+</body>
+</html>

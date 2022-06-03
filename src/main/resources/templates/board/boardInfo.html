@@ -52,6 +52,12 @@
             </div>
 
             <div class="col">
+                <button class="w-100 btn btn-primary btn-lg"
+                        onclick="location.href='../chat/createForm.html'"
+                        th:onclick="|location.href='@{/chanMarket/chat/{boardId}/ChatCreate(boardId=${board.id})}'|" type="button">채팅 하기</button>
+            </div>
+
+            <div class="col">
                 <button class="w-100 btn btn-secondary btn-lg"
                         onclick="location.href='boardList.html'"
                         th:onclick="|location.href='@{/chanMarket/board}'|"

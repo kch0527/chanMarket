@@ -24,11 +24,13 @@ public class Board {
     @JoinColumn(name = "member_id")
     private Member member;
 
-
     @OneToMany(mappedBy = "board", cascade=CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
 
     @OneToOne(mappedBy = "board", cascade=CascadeType.REMOVE)
     private Item item;
+
+    //@OneToMany(mappedBy = "board", cascade=CascadeType.REMOVE)
+    //private List<ChatRoom> chatRoomList = new ArrayList<>();
 
 }
