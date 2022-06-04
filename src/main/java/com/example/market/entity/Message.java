@@ -29,4 +29,10 @@ public class Message {
     private String text;
 
     private String nowTime;
+
+    @OneToOne
+    private Member caller;
+
+    @OneToOne
+    private Member receiver;
 }

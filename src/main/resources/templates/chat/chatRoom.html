@@ -5,6 +5,18 @@
     <title>Title</title>
 </head>
 <body>
+채팅방에 입장하셨습니다.
+
+<form>
+    <div class="card">
+        <tr th:each="messages : ${chatRoom.getMessage()}">
+            <div class="card-header">
+                <td th:text="${messages.text}"></td>
+                <td th:text="${messages.nowTime}"></td>
+            </div>
+        </tr>
+    </div>
+</form>
 
 </body>
 </html>

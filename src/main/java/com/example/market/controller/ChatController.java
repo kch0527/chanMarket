@@ -27,8 +27,11 @@ public class ChatController {
     @GetMapping("/{boardId}/ChatCreate")
     public String createChatRoom(@PathVariable Long boardId, Model model, HttpServletRequest request){
         if (boardService.findBoard(boardId).getMember() != memberService.findByEmail((String) request.getSession().getAttribute("loginMember"))) {
-            model.addAttribute("board", boardService.findBoard(boardId));
-            return "chat/createForm";
+            if (chatRoomService.chatRoomDeduplication(boardId, memberService.findByEmail((String) request.getSession().getAttribute("loginMember")).getId())) {
+                model.addAttribute("board", boardService.findBoard(boardId));
+                return "chat/createForm";
+            }
+            else return "chat/chatExistError";
         }
         else return "chat/chatError";
     }
@@ -43,9 +46,15 @@ public class ChatController {
             return "redirect:/chanMarket/chat/" + chatRoom.getId();
     }
 
-    @GetMapping("{roomId}")
-    public String chatRoom(@PathVariable Long roomId,  HttpServletRequest request){
+    @GetMapping("/{memberId}/ChatList")
+    public String chatRoomList(@PathVariable Long memberId, Model model){
+        model.addAttribute("myChatRooms", chatRoomService.findMyRoom(memberId));
+        return "chat/chatRoomList";
+    }
 
+    @GetMapping("{roomId}")
+    public String chatRoom(@PathVariable Long roomId, Model model){
+        model.addAttribute("chatRoom",chatRoomService.findRoom(roomId));
 
         return "chat/chatRoom";
     }

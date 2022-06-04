@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+나의 채팅방 목록
+
+<form th:action="@{'/chanMarket/chat/' + ${memberId} + '/ChatList'}" th:method="get">
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>물건</th>
+                <th>대화상대</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="myChat : ${myChatRooms}">
+                <td><a href="chatRoom.html" th:href="@{/chanMarket/board/{boardId}
+                                (boardId=${myChat.board.id})}" th:text="${myChat.board.item.itemName}"></a></td>
+
+                <td th:if="${session.loginMember.equals(myChat.owner.email)}"
+                    th:text="${myChat.member.email}">
+                </td>
+                <td th:if="${session.loginMember.equals(myChat.member.email)}"
+                    th:text="${myChat.owner.email}">
+                </td>
+                <td><button th:onClick="|location.href='@{/chanMarket/chat/{roomId}(roomId=${myChat.id})}'|" type="button">채팅하기</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
+
+</body>
+</html>
