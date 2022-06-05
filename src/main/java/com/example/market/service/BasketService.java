@@ -10,8 +10,10 @@ import java.util.List;
 public interface BasketService {
     public boolean addBasketItem(Member member, Item item);
     void addBasket(Member member);
-    List<BasketItem> BasketList();
     Basket findBasket(Long id);
 
-    void deleteBasketItem(Long itemId);
+    List<BasketItem> BasketList(Long basketId);
+
+    void deleteBasketItem(Long basketItemId);
+
 }

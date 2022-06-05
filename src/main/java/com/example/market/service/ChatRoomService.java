@@ -12,4 +12,5 @@ public interface ChatRoomService {
     List<ChatRoom> findMyRoom(Long memberId);
     List<ChatRoom> findChatRoomAll();
     boolean chatRoomDeduplication(Long ownerId, Long memberId);
+    void delChatRoom(Long roomId);
 }

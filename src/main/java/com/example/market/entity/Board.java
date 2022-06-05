@@ -24,13 +24,19 @@ public class Board {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    private Long countView;
+
     @OneToMany(mappedBy = "board", cascade=CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
 
     @OneToOne(mappedBy = "board", cascade=CascadeType.REMOVE)
     private Item item;
 
-    //@OneToMany(mappedBy = "board", cascade=CascadeType.REMOVE)
-    //private List<ChatRoom> chatRoomList = new ArrayList<>();
+    @OneToMany(mappedBy = "board", cascade=CascadeType.REMOVE)
+    private List<ChatRoom> chatRoomList = new ArrayList<>();
+
+    public void updateView(Long countView){
+        this.countView = countView;
+    }
 
 }

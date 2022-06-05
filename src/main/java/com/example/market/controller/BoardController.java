@@ -31,7 +31,13 @@ public class BoardController {
 
     @GetMapping("/{boardId}")
     public String boardInfo(@PathVariable Long boardId, Model model){
-        model.addAttribute("board", boardService.findBoard(boardId));
+        Board board = boardService.findBoard(boardId);
+        Long countView = board.getCountView() + 1L;
+
+        board.setCountView(countView);
+        boardService.updateView(board.getId(), board);
+
+        model.addAttribute("board", board);
         return "board/boardInfo";
     }
 
@@ -41,7 +47,6 @@ public class BoardController {
         String loginEmail = (String) request.getSession().getAttribute("loginMember");
         String boardEmail = boardService.findBoard(boardId).getMember().getEmail();
         if (sameMemberCheck(loginEmail, boardEmail)) {
-            //basketService.deleteBasketItem(boardService.findBoard(boardId).getItem().getId());
             //itemService.deleteItem(boardService.findBoard(boardId).getItem().getId());
             //commentService.boardDeleteByComment(boardId);
             boardService.deleteBoard(boardId);

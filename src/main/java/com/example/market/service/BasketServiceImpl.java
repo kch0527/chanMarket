@@ -32,8 +32,8 @@ public class BasketServiceImpl implements BasketService{
         }
     }
 
-    public List<BasketItem> BasketList(){
-        return basketItemRepository.findAll();
+    public List<BasketItem> BasketList(Long basketId){
+        return findBasket(basketId).getBasketItemList();
     }
 
     public Basket findBasket(Long id){
@@ -67,16 +67,10 @@ public class BasketServiceImpl implements BasketService{
         return basketItem != null;
     }
 
-    public void deleteBasketItem(Long itemId){
-        List<BasketItem> all = basketItemRepository.findAll();
-        Iterator<BasketItem> iter = all.iterator();
 
-        while (iter.hasNext()){
-            BasketItem basketItem = iter.next();
-            if (itemId == basketItem.getItem().getId()){
-                basketItemRepository.delete(basketItem);
-            }
-        }
+    @Transactional
+    public void deleteBasketItem(Long basketItemId){
+       basketItemRepository.deleteById(basketItemId);
     }
 
 }

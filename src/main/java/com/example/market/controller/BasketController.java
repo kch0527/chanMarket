@@ -6,10 +6,7 @@ import com.example.market.service.*;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,15 +21,18 @@ public class BasketController {
 
     @GetMapping("{basketId}")
     public String basketList(@PathVariable Long basketId, Model model) {
-        model.addAttribute("list",basketService.BasketList());
+        model.addAttribute("list",basketService.BasketList(basketId));
         return "basket/myBasket";
     }
 
     @GetMapping("{itemId}/add")
     public String itemPutBasket(@PathVariable Long itemId, Model model, HttpServletRequest request) {
-        model.addAttribute("member", memberService.findByEmail((String) request.getSession().getAttribute("loginMember")));
-        model.addAttribute("item", itemService.readItem(itemId));
-        return "basket/addForm";
+        if (itemService.readItem(itemId).getBoard().getMember() != memberService.findByEmail((String) request.getSession().getAttribute("loginMember"))) {
+            model.addAttribute("member", memberService.findByEmail((String) request.getSession().getAttribute("loginMember")));
+            model.addAttribute("item", itemService.readItem(itemId));
+            return "basket/addForm";
+        }
+        else return "basket/error";
     }
 
     @PostMapping("{itemId}/add")
@@ -48,6 +48,12 @@ public class BasketController {
         else {
             return "basket/exist";
         }
+    }
+
+    @DeleteMapping("{basketId}/{baskItemId}/delete")
+    public String deleteBasketItem(@PathVariable Long basketId, @PathVariable Long baskItemId){
+        basketService.deleteBasketItem(baskItemId);
+        return "redirect:/chanMarket/basket/" + basketId;
     }
 
 }

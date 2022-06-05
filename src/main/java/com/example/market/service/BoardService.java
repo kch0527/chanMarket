@@ -11,5 +11,6 @@ public interface BoardService {
     Board findBoard(Long id);
     void deleteBoard(Long id);
     List<Board> boardList();
+    void updateView(Long boardId, Board board);
 
 }

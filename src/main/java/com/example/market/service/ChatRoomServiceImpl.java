@@ -47,4 +47,8 @@ public class ChatRoomServiceImpl implements ChatRoomService{
        return chatRoomRepository.findMyChatRooms(memberId);
     }
 
+    public void delChatRoom(Long roomId){
+        chatRoomRepository.deleteById(roomId);
+    }
+
 }

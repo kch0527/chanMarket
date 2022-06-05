@@ -14,6 +14,10 @@
     <!-- 추가 -->
     <form>
         <div>
+            조회수 : <td th:text="${board.countView}" readonly></td>회
+        </div>
+        <br>
+        <div>
             <label for="email">판매자</label>
             <input type="text" id="email" name="email" class="form-control"
                    value="1" th:value="${board.getMember().getEmail()}" readonly>

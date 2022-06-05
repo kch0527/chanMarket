@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -18,6 +19,7 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public Board createBoard(Board board, Member member) {
         board.setMember(member);
+        board.setCountView(0L);
         boardRepository.save(board);
         return board;
     }
@@ -31,6 +33,13 @@ public class BoardServiceImpl implements BoardService{
 
     public List<Board> boardList(){
         return boardRepository.findAll();
+    }
+
+    @Transactional
+    public void updateView(Long boardId, Board board){
+        Board updateBoard = boardRepository.findById(boardId).orElseThrow(()->
+                new IllegalStateException("존재하지 않는 Board"));
+        updateBoard.updateView(board.getCountView());
     }
 
 }

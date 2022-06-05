@@ -15,6 +15,7 @@ public class LogOutController {
     @PostMapping("")
     public String logout(HttpServletRequest request){
         request.getSession().removeAttribute("loginMember");
+        //request.getSession().invalidate();
         return "redirect:/chanMarket/login";
     }
 }
