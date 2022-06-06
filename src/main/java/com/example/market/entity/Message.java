@@ -26,13 +26,15 @@ public class Message {
 
     @Size(max = 30)
     @NotNull
-    private String text;
+    private String message;
 
     private String nowTime;
 
-    @OneToOne
+    @ManyToOne
     private Member caller;
 
-    @OneToOne
+    @ManyToOne
     private Member receiver;
+
+
 }

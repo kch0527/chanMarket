@@ -31,7 +31,7 @@
                 </td>
                 <td><button th:onClick="|location.href='@{/chanMarket/chat/{roomId}(roomId=${myChat.id})}'|" type="button">채팅하기</button></td>
 
-                <td> <button><a href="javascript:void(0);" class="btn btn-danger" th:onclick="'deleteChatRoom(' + ${myChat.id} ','+ ${memberId} + ')'">나가기</a></button></td>
+                <td><button><a href="javascript:void(0);" class="btn btn-danger" th:onclick="'deleteChatRoom(' + ${myChat.id} ','+ ${memberId} + ')'">나가기</a></button></td>
             </tr>
             </tbody>
         </table>
@@ -41,10 +41,7 @@
 </form>
 
 
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="../../../market/js/chatDel.js"> </script>
-
+<script type="text/javascript" src="../../../market/js/chatDel.js"></script>
 </body>
 </html>

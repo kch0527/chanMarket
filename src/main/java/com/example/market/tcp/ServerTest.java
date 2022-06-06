@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server {
+public class ServerTest {
 
     Socket socket = null;  //Client와 통신하기 위한 Socket
     ServerSocket serverSocket = null;  //서버 생성을 위한 ServerSocket

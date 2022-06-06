@@ -49,16 +49,38 @@ public class ChatController {
         return "chat/chatRoomList";
     }
 
-    @GetMapping("{roomId}")
-    public String chatRoom(@PathVariable Long roomId, Model model){
-        model.addAttribute("chatRoom",chatRoomService.findRoom(roomId));
-
-        return "chat/chatRoom";
-    }
-
-    @DeleteMapping("{roomId}/delete")
+    @DeleteMapping("{roomId}/ChatList/delete")
     public String delChatRoom(@PathVariable Long roomId){
         chatRoomService.delChatRoom(roomId);
         return "chat/chatRoomList";
     }
+
+    @GetMapping("{roomId}")
+    public String chatRoom(@PathVariable Long roomId, Model model, HttpServletRequest request){
+        model.addAttribute("chatRoom",chatRoomService.findRoom(roomId));
+        model.addAttribute("userid", memberService.findByEmail((String)request.getSession().getAttribute("loginMember")));
+
+        return "chat/chatRoom";
+    }
+/*
+    @PostMapping("{roomId}/message")
+    public String chatting(@PathVariable Long roomId, HttpServletRequest request){
+        Member my = null;
+        Member opponent = null;
+        if(chatRoomService.findRoom(roomId).getOwner().getEmail() == (String) request.getSession().getAttribute("loginMember")){
+            my = chatRoomService.findRoom(roomId).getOwner();
+            opponent = chatRoomService.findRoom(roomId).getMember();
+        }
+        else if(chatRoomService.findRoom(roomId).getMember().getEmail() == (String) request.getSession().getAttribute("loginMember")){
+            my = chatRoomService.findRoom(roomId).getMember();
+            opponent = chatRoomService.findRoom(roomId).getOwner();
+        }
+        else throw new RuntimeException("존재하지 않는 채팅방");
+
+
+
+        return "chat/chatRoom";
+    }
+*/
+
 }

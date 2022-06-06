@@ -1,13 +1,17 @@
 package com.example.market.entity;
 
+import com.example.market.service.ChatRoomService;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.socket.WebSocketSession;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -34,4 +38,7 @@ public class ChatRoom {
 
     @OneToMany(mappedBy = "chatRoom", cascade=CascadeType.REMOVE)
     private List<Message> message = new ArrayList<>();
+
+
+
 }

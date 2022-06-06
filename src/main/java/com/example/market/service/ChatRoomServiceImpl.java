@@ -5,9 +5,14 @@ import com.example.market.entity.ChatRoom;
 import com.example.market.entity.Member;
 import com.example.market.repository.ChatRoomRepository;
 import com.example.market.repository.JpaMemberRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -50,5 +55,7 @@ public class ChatRoomServiceImpl implements ChatRoomService{
     public void delChatRoom(Long roomId){
         chatRoomRepository.deleteById(roomId);
     }
+
+
 
 }
