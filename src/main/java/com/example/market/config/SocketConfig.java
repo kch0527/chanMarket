@@ -1,21 +1,16 @@
 package com.example.market.config;
 
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.config.annotation.EnableWebSocket;
-import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
-import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.socket.config.annotation.*;
 
-@RequiredArgsConstructor
+
 @Configuration
-@EnableWebSocket
-public class SocketConfig implements WebSocketConfigurer {
-    private final WebSocketHandler webSocketHandler;
-
+@EnableWebSocketMessageBroker //웹소켓 서버 사용 설정
+public class SocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
-    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(webSocketHandler, "ws/chat").setAllowedOrigins("*");
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/").setAllowedOrigins("*").withSockJS(); //양 사용자 간 웹소켓 핸드 셰이크를 위해 지정
     }
 }

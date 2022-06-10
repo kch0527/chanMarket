@@ -62,25 +62,6 @@ public class ChatController {
 
         return "chat/chatRoom";
     }
-/*
-    @PostMapping("{roomId}/message")
-    public String chatting(@PathVariable Long roomId, HttpServletRequest request){
-        Member my = null;
-        Member opponent = null;
-        if(chatRoomService.findRoom(roomId).getOwner().getEmail() == (String) request.getSession().getAttribute("loginMember")){
-            my = chatRoomService.findRoom(roomId).getOwner();
-            opponent = chatRoomService.findRoom(roomId).getMember();
-        }
-        else if(chatRoomService.findRoom(roomId).getMember().getEmail() == (String) request.getSession().getAttribute("loginMember")){
-            my = chatRoomService.findRoom(roomId).getMember();
-            opponent = chatRoomService.findRoom(roomId).getOwner();
-        }
-        else throw new RuntimeException("존재하지 않는 채팅방");
 
-
-
-        return "chat/chatRoom";
-    }
-*/
 
 }

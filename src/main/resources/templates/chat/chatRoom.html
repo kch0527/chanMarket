@@ -3,34 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
-
 </head>
 <body>
 채팅방에 입장하셨습니다.<br>
-채팅인원 : <td th:text="${chatRoom.owner.email}"></td>, <td th:text="${chatRoom.member.email}"></td>
 
+채팅인원 : <td th:text="${chatRoom.owner.email}"></td>, <td th:text="${chatRoom.member.email}"></td> <br>
 
-    <div class="container">
-        <div class="col-6">
-            <label><b>채팅창</b></label>
-        </div>
-        <div>
-            <div id="msgArea" class="col">
-
-            </div>
-            <div class="col-6">
-                <div class="input-group mb-3">
-                    <input type="text" id="msg" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-send">전송</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6">
-        </div>
-    </div>
+<input type="text" placeholder="보낼 메세지를 입력하세요." class="content">
+<button type="button" value="전송" class="sendBtn" onclick="sendMsg()">전송</button>
+<div>
+    <span>메세지</span>
+    <div class="msgArea"></div>
+</div>
 
 </body>
+<script>
+    let socket = new WebSocket("ws://localhost:8080/chat");
+
+    socket.onopen = function (e) {  //서버 연결될 때, 발생하는 함수
+        console.log('open server!')
+    };
+
+    socket.onerror = function (e){  //에러 발생 함수
+        console.log(e);
+    }
+
+    socket.onmessage = function (e) {  //메시지 받을 때 함수
+        console.log(e.data);
+        let msgArea = document.querySelector('.msgArea');
+        let newMsg = document.createElement('div');
+        newMsg.innerText=e.data;
+        msgArea.append(newMsg);
+    }
+
+    function sendMsg() {
+        let content=document.querySelector('.content').value;
+        socket.send(content);
+    }
+</script>
 </html>
