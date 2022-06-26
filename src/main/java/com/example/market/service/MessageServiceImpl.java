@@ -1,10 +1,12 @@
 package com.example.market.service;
 
+import com.example.market.entity.ChatRoom;
 import com.example.market.entity.Message;
 import com.example.market.repository.MessageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -12,8 +14,11 @@ import java.util.List;
 public class MessageServiceImpl implements MessageService{
 
     private final MessageRepository messageRepository;
+    private final ChatRoomService chatRoomService;
 
-    public List<Message> messages(){
-        return messageRepository.findAll();
+    public List<Message> messageList(Long roomId){
+        return messageRepository.findRoomMessage(chatRoomService.findRoom(roomId).getId());
     }
+
+
 }

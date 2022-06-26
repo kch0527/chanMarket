@@ -5,6 +5,7 @@ import com.example.market.entity.Member;
 import com.example.market.service.BoardService;
 import com.example.market.service.ChatRoomService;
 import com.example.market.service.MemberService;
+import com.example.market.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ public class ChatController {
     private final ChatRoomService chatRoomService;
     private final MemberService memberService;
     private final BoardService boardService;
+    private final MessageService messageService;
 
     @GetMapping("/{boardId}/ChatCreate")
     public String createChatRoom(@PathVariable Long boardId, Model model, HttpServletRequest request){
@@ -59,6 +61,7 @@ public class ChatController {
     public String chatRoom(@PathVariable Long roomId, Model model, HttpServletRequest request){
         model.addAttribute("chatRoom",chatRoomService.findRoom(roomId));
         model.addAttribute("userid", memberService.findByEmail((String)request.getSession().getAttribute("loginMember")));
+        model.addAttribute("messageList", messageService.messageList(roomId));
 
         return "chat/chatRoom";
     }

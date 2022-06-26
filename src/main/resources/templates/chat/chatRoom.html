@@ -13,6 +13,11 @@
 <button type="button" value="전송" class="sendBtn" onclick="sendMsg()">전송</button>
 <div>
     <span>메세지</span>
+
+    <tr th:each="message : ${messageList}">
+        <td th:text="${message.message}"></td>
+    </tr>
+
     <div class="msgArea"></div>
 </div>
 
