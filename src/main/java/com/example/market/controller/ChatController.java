@@ -1,7 +1,6 @@
 package com.example.market.controller;
 
 import com.example.market.entity.ChatRoom;
-import com.example.market.entity.Member;
 import com.example.market.service.BoardService;
 import com.example.market.service.ChatRoomService;
 import com.example.market.service.MemberService;

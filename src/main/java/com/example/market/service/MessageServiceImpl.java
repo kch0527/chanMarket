@@ -20,5 +20,8 @@ public class MessageServiceImpl implements MessageService{
         return messageRepository.findRoomMessage(chatRoomService.findRoom(roomId).getId());
     }
 
-
+    @Transactional
+    public void messageSave(Message message){
+        messageRepository.save(message);
+    }
 }

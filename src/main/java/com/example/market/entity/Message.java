@@ -4,10 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Entity
 @Builder
@@ -28,7 +30,9 @@ public class Message {
     @NotNull
     private String message;
 
-    private String nowTime;
+    @CreatedDate
+    @Column(updatable = false)
+    private LocalDateTime nowTime;
 
     @ManyToOne
     private Member caller;
