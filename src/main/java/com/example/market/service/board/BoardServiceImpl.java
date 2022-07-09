@@ -1,19 +1,18 @@
-package com.example.market.service;
+package com.example.market.service.board;
 
 import com.example.market.entity.Board;
-import com.example.market.entity.Member;
+import com.example.market.entity.member.Member;
 import com.example.market.repository.JpaBoardRepository;
-import com.example.market.repository.JpaMemberRepository;
+import com.example.market.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BoardServiceImpl implements BoardService{
+public class BoardServiceImpl implements BoardService {
 
     private final JpaBoardRepository boardRepository;
     @Override

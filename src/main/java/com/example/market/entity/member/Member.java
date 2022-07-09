@@ -1,17 +1,13 @@
-package com.example.market.entity;
+package com.example.market.entity.member;
 
+import com.example.market.entity.*;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -22,24 +18,36 @@ public class Member{
     @Column(name = "member_id")
     private Long id;
 
-    @NotNull
-    @Email(message = "올바른 이메일 입력")
     private String email;
-
-    @NotNull(message = "이름입력")
     private String name;
-
-    @Enumerated(EnumType.STRING)
     private Grade grade;
-
-    @NotNull
-    @Size(min = 8, max = 15, message = "비밀번호는 8자 이상 15자 이하로 입력")
     private String pw;
-
-    @NotNull
-    @Pattern(regexp = "(01[016789])(\\d{3,4})(\\d{4})", message = "올바은 휴대폰 번호를 입력")
     private String tel;
 
+    @Builder
+    public Member(String email, String name, String pw, String tel) {
+        this.email = email;
+        this.name = name;
+        this.grade = Grade.USER;
+        this.pw = pw;
+        this.tel = tel;
+    }
+
+    public MemberEditor.MemberEditorBuilder toEditor(){
+        return MemberEditor.builder()
+                .email(email)
+                .name(name)
+                .pw(pw)
+                .tel(tel);
+    }
+
+    public void edit(MemberEditor memberEditor){
+        email = memberEditor.getEmail();
+        name = memberEditor.getName();
+        pw = memberEditor.getPw();
+        tel = memberEditor.getTel();
+
+    }
 
     @OneToMany(mappedBy = "member", cascade=CascadeType.REMOVE)
     private List<Board> boardList = new ArrayList<>();

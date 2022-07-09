@@ -1,8 +1,8 @@
-package com.example.market.service;
+package com.example.market.service.chatRoom;
 
 import com.example.market.entity.Board;
 import com.example.market.entity.ChatRoom;
-import com.example.market.entity.Member;
+import com.example.market.entity.member.Member;
 
 import java.util.List;
 

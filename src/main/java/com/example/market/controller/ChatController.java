@@ -1,10 +1,10 @@
 package com.example.market.controller;
 
 import com.example.market.entity.ChatRoom;
-import com.example.market.service.BoardService;
-import com.example.market.service.ChatRoomService;
-import com.example.market.service.MemberService;
-import com.example.market.service.MessageService;
+import com.example.market.service.board.BoardService;
+import com.example.market.service.chatRoom.ChatRoomService;
+import com.example.market.service.member.MemberService;
+import com.example.market.service.message.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

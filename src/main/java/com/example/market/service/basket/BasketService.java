@@ -1,9 +1,9 @@
-package com.example.market.service;
+package com.example.market.service.basket;
 
 import com.example.market.entity.Basket;
 import com.example.market.entity.BasketItem;
 import com.example.market.entity.Item;
-import com.example.market.entity.Member;
+import com.example.market.entity.member.Member;
 
 import java.util.List;
 

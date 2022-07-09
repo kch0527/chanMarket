@@ -1,7 +1,7 @@
 package com.example.market.repository;
 
 import com.example.market.entity.Grade;
-import com.example.market.entity.Member;
+import com.example.market.entity.member.Member;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

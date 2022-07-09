@@ -1,7 +1,8 @@
-package com.example.market.service;
+package com.example.market.service.item;
 
 import com.example.market.entity.Item;
 import com.example.market.repository.JpaItemRepository;
+import com.example.market.service.item.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ItemServiceImpl implements ItemService{
+public class ItemServiceImpl implements ItemService {
 
     private final JpaItemRepository jpaItemRepository;
 

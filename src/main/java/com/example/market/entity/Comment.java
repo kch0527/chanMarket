@@ -1,5 +1,6 @@
 package com.example.market.entity;
 
+import com.example.market.entity.member.Member;
 import lombok.*;
 
 import javax.persistence.*;

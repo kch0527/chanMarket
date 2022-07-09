@@ -1,4 +1,4 @@
-package com.example.market.service;
+package com.example.market.service.message;
 
 import com.example.market.entity.Message;
 

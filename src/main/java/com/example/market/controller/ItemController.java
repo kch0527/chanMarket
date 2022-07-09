@@ -2,18 +2,17 @@ package com.example.market.controller;
 
 import com.example.market.entity.Board;
 import com.example.market.entity.Item;
-import com.example.market.entity.Member;
-import com.example.market.service.*;
-import lombok.Data;
+import com.example.market.service.basket.BasketServiceImpl;
+import com.example.market.service.board.BoardService;
+import com.example.market.service.comment.CommentService;
+import com.example.market.service.item.ItemService;
+import com.example.market.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor

@@ -1,24 +1,19 @@
-package com.example.market.service;
+package com.example.market.service.chatRoom;
 
 import com.example.market.entity.Board;
 import com.example.market.entity.ChatRoom;
-import com.example.market.entity.Member;
+import com.example.market.entity.member.Member;
 import com.example.market.repository.ChatRoomRepository;
-import com.example.market.repository.JpaMemberRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.market.service.chatRoom.ChatRoomService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ChatRoomServiceImpl implements ChatRoomService{
+public class ChatRoomServiceImpl implements ChatRoomService {
 
     private final ChatRoomRepository chatRoomRepository;
 

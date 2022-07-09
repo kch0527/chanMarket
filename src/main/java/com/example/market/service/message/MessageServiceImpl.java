@@ -1,8 +1,9 @@
-package com.example.market.service;
+package com.example.market.service.message;
 
-import com.example.market.entity.ChatRoom;
 import com.example.market.entity.Message;
 import com.example.market.repository.MessageRepository;
+import com.example.market.service.chatRoom.ChatRoomService;
+import com.example.market.service.message.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class MessageServiceImpl implements MessageService{
+public class MessageServiceImpl implements MessageService {
 
     private final MessageRepository messageRepository;
     private final ChatRoomService chatRoomService;

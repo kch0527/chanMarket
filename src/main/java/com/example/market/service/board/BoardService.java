@@ -1,9 +1,8 @@
-package com.example.market.service;
+package com.example.market.service.board;
 
 import com.example.market.entity.Board;
-import com.example.market.entity.Member;
+import com.example.market.entity.member.Member;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface BoardService {

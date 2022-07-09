@@ -1,6 +1,6 @@
 package com.example.market.controller;
 
-import com.example.market.service.MemberService;
+import com.example.market.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

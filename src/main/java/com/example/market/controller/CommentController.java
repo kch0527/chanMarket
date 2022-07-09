@@ -2,8 +2,11 @@ package com.example.market.controller;
 
 import com.example.market.entity.Board;
 import com.example.market.entity.Comment;
-import com.example.market.entity.Member;
-import com.example.market.service.*;
+import com.example.market.entity.member.Member;
+import com.example.market.service.board.BoardService;
+import com.example.market.service.comment.CommentService;
+import com.example.market.service.item.ItemServiceImpl;
+import com.example.market.service.member.MemberService;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

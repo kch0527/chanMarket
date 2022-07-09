@@ -1,26 +1,18 @@
 package com.example.market.controller;
 
 
-import com.example.market.entity.ChatRoom;
-import com.example.market.entity.Member;
-import com.example.market.entity.Message;
-import com.example.market.service.ChatRoomService;
-import com.example.market.service.MemberService;
-import com.example.market.service.MessageService;
+import com.example.market.service.chatRoom.ChatRoomService;
+import com.example.market.service.member.MemberService;
+import com.example.market.service.message.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import java.util.List;

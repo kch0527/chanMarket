@@ -1,26 +1,35 @@
-package com.example.market.service;
+package com.example.market.service.member;
 
 import com.example.market.entity.Basket;
-import com.example.market.entity.Grade;
-import com.example.market.entity.Member;
+import com.example.market.entity.member.Member;
+import com.example.market.entity.member.MemberEditor;
 import com.example.market.repository.JpaMemberRepository;
+import com.example.market.request.member.MemberCreate;
+import com.example.market.request.member.MemberEdit;
+import com.example.market.service.basket.BasketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
 
     private final JpaMemberRepository jpaMemberRepository;
+    private final BasketService basketService;
 
     @Transactional
-    public void join(Member member){
+    public void join(MemberCreate memberCreate){
+        Member member = Member.builder()
+                .email(memberCreate.getEmail())
+                .name(memberCreate.getName())
+                .pw(memberCreate.getPw())
+                .tel(memberCreate.getTel())
+                .build();
         validateDuplicateMember(member);
-        member.setGrade(Grade.USER);
+        basketService.addBasket(member);
         jpaMemberRepository.save(member);
     }
 
@@ -42,21 +51,21 @@ public class MemberServiceImpl implements MemberService{
     }
 
     @Transactional
-    public void editMember(Member updateParam){
+    public void editMember(MemberEdit updateParam){
         Member findMember = jpaMemberRepository.findByEmail(updateParam.getEmail());
-        findMember.setName(updateParam.getName());
-        findMember.setEmail(updateParam.getEmail());
-        findMember.setTel(updateParam.getTel());
-        findMember.setGrade(updateParam.getGrade());
-        jpaMemberRepository.save(findMember);
+        MemberEditor.MemberEditorBuilder memberEditorBuilder = findMember.toEditor();
+        MemberEditor memberEditor = memberEditorBuilder
+                .email(updateParam.getEmail())
+                .name(updateParam.getName())
+                .pw(updateParam.getPw())
+                .tel(updateParam.getTel())
+                        .build();
+        findMember.edit(memberEditor);
     }
 
     public Member findMemberById(Long id){
         return jpaMemberRepository.getById(id);
     }
 
-    public Basket findBasket(Long memberId){
-        return findMemberById(memberId).getBasket();
-    }
 
 }

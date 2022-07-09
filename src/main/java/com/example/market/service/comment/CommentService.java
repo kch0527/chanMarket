@@ -1,4 +1,4 @@
-package com.example.market.service;
+package com.example.market.service.comment;
 
 import com.example.market.entity.Board;
 import com.example.market.entity.Comment;

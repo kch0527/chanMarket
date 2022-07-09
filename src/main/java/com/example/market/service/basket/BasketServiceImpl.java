@@ -1,35 +1,28 @@
-package com.example.market.service;
+package com.example.market.service.basket;
 
 import com.example.market.entity.*;
+import com.example.market.entity.member.Member;
 import com.example.market.repository.*;
+import com.example.market.service.basket.BasketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 
 @Service
 @RequiredArgsConstructor
-public class BasketServiceImpl implements BasketService{
+public class BasketServiceImpl implements BasketService {
 
     private final JpaBasketRepository basketRepository;
     private final JpaItemRepository itemRepository;
     private final JpaBasketItemRepository basketItemRepository;
     private final BasketItemRepository repository;
 
-
-    private final MemberService memberService;
-
     @Transactional
     public void addBasket(Member member){
-        Basket basket = memberService.findBasket(member.getId());
-        if (!isExistBasket(basket)) {
-            basket = Basket.createBasket(member);
-            basketRepository.save(basket);
-        }
+        basketRepository.save(Basket.createBasket(member));
     }
 
     public List<BasketItem> BasketList(Long basketId){
@@ -44,7 +37,7 @@ public class BasketServiceImpl implements BasketService{
     @Override
     @Transactional
     public boolean addBasketItem(Member member, Item addItem) {
-        Basket basket = memberService.findBasket(member.getId());
+        Basket basket = findBasket(member.getBasket().getId());
 
         Item item = itemRepository.getById(addItem.getId());
         BasketItem basketItem = repository.findByItemAndBasket(item.getId(), basket.getId());
