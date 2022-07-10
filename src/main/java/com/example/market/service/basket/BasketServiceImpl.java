@@ -1,9 +1,9 @@
 package com.example.market.service.basket;
 
 import com.example.market.entity.*;
+import com.example.market.entity.item.Item;
 import com.example.market.entity.member.Member;
 import com.example.market.repository.*;
-import com.example.market.service.basket.BasketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -4,6 +4,9 @@ import com.example.market.entity.Grade;
 import lombok.Builder;
 import lombok.Getter;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 @Getter
 public class MemberEditor {
 

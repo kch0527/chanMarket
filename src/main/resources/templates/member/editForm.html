@@ -27,6 +27,11 @@
                    value="" th:value="${myInfo.email}" readonly>
         </div>
         <div>
+            <label for="email">비밀번호</label>
+            <input type="text" id="pw" name="pw" class="form-control"
+                   value="" th:value="${myInfo.pw}" >
+        </div>
+        <div>
             <label for="tel">전화번호</label>
             <input type="text" id="tel" name="tel" class="form-control"
                    th:value="${myInfo.tel}">

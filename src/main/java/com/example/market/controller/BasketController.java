@@ -1,6 +1,6 @@
 package com.example.market.controller;
 
-import com.example.market.entity.Item;
+import com.example.market.entity.item.Item;
 import com.example.market.entity.member.Member;
 import com.example.market.service.basket.BasketService;
 import com.example.market.service.item.ItemService;

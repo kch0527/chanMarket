@@ -1,13 +1,15 @@
 package com.example.market.service.item;
 
-import com.example.market.entity.Item;
+import com.example.market.entity.item.Item;
+import com.example.market.request.item.ItemCreate;
+import com.example.market.request.item.ItemEdit;
 
 import java.util.List;
 
 public interface ItemService {
-    Item addItem(Item item);
+    Item addItem(ItemCreate itemCreate);
     void deleteItem(Long id);
-    void editItem(Long itemId, Item updateParam);
+    void editItem(Long itemId, ItemEdit updateParam);
     Item readItem(Long itemId);
     List<Item> itemList();
 }

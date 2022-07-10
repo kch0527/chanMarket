@@ -35,6 +35,7 @@ public class MemberController {
             memberService.join(memberCreate);
             return "redirect:/chanMarket/joinSucceed";
         } catch (Exception e) {
+            e.printStackTrace();
             return "error/error";
         }
     }

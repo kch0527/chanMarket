@@ -1,7 +1,9 @@
 package com.example.market.controller;
 
 import com.example.market.entity.Board;
-import com.example.market.entity.Item;
+import com.example.market.entity.item.Item;
+import com.example.market.request.item.ItemCreate;
+import com.example.market.request.item.ItemEdit;
 import com.example.market.service.basket.BasketServiceImpl;
 import com.example.market.service.board.BoardService;
 import com.example.market.service.comment.CommentService;
@@ -22,9 +24,6 @@ public class ItemController {
     private final ItemService itemService;
     private final BoardService boardService;
     private final MemberService memberService;
-    private final CommentService commentService;
-    private final BasketServiceImpl basketService;
-
 
     @GetMapping("add")
     public String addForm(HttpServletRequest request, Model model){
@@ -33,10 +32,10 @@ public class ItemController {
     }
 
     @PostMapping("")
-    public String addItem(Item item, Board board, HttpServletRequest request){
+    public String addItem(ItemCreate itemCreate, Board board, HttpServletRequest request){
         try {
-            item.setBoard(boardService.createBoard(board, memberService.findByEmail((String) request.getSession().getAttribute("loginMember"))));
-            itemService.addItem(item);
+            itemCreate.setBoard(boardService.createBoard(board, memberService.findByEmail((String) request.getSession().getAttribute("loginMember"))));
+            itemService.addItem(itemCreate);
             return "redirect:/chanMarket/board/" + board.getId();
         }catch (Exception e){
             return "error/error";
@@ -56,8 +55,8 @@ public class ItemController {
     }
 
     @PutMapping("{itemId}")
-    public String editItem(@PathVariable Long itemId, Item item){
-        itemService.editItem(itemId, item);
+    public String editItem(@PathVariable Long itemId, ItemEdit itemEdit){
+        itemService.editItem(itemId, itemEdit);
         return "redirect:/chanMarket/board/" + itemService.readItem(itemId).getBoard().getId();
     }
 

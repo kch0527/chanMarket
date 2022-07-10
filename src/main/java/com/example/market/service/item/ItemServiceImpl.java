@@ -1,8 +1,11 @@
 package com.example.market.service.item;
 
-import com.example.market.entity.Item;
+import com.example.market.entity.item.Item;
+import com.example.market.entity.item.ItemEditor;
+import com.example.market.exception.ItemNotFound;
 import com.example.market.repository.JpaItemRepository;
-import com.example.market.service.item.ItemService;
+import com.example.market.request.item.ItemCreate;
+import com.example.market.request.item.ItemEdit;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +19,13 @@ public class ItemServiceImpl implements ItemService {
     private final JpaItemRepository jpaItemRepository;
 
     @Transactional
-    public Item addItem(Item item){
+    public Item addItem(ItemCreate itemCreate){
+        Item item = Item.builder()
+                .itemName(itemCreate.getItemName())
+                .itemInformation(itemCreate.getItemInformation())
+                .price(itemCreate.getPrice())
+                .board(itemCreate.getBoard())
+                .build();
         jpaItemRepository.save(item);
         return item;
     }
@@ -27,12 +36,17 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Transactional
-    public void editItem(Long itemId, Item updateParam){
-        Item findItem = jpaItemRepository.getById(itemId);
-        findItem.setItemName(updateParam.getItemName());
-        findItem.setPrice(updateParam.getPrice());
-        findItem.setItemInformation(updateParam.getItemInformation());
-        jpaItemRepository.save(findItem);
+    public void editItem(Long itemId, ItemEdit updateParam){
+        Item item = jpaItemRepository.findById(itemId).orElseThrow(ItemNotFound::new);
+
+        ItemEditor.ItemEditorBuilder itemEditorBuilder =item.toEditor();
+
+        ItemEditor itemEditor = itemEditorBuilder.itemName(updateParam.getItemName())
+                .itemInformation(updateParam.getItemInformation())
+                .price(updateParam.getPrice())
+                .build();
+        item.edit(itemEditor);
+
     }
 
     @Transactional

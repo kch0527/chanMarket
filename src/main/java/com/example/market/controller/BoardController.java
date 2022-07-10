@@ -18,10 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 public class BoardController {
 
     private final BoardService boardService;
-    private final ItemService itemService;
-    private final CommentService commentService;
-
-    private final BasketService basketService;
 
     @GetMapping("")
     public String boardList(Model model){
@@ -47,8 +43,6 @@ public class BoardController {
         String loginEmail = (String) request.getSession().getAttribute("loginMember");
         String boardEmail = boardService.findBoard(boardId).getMember().getEmail();
         if (sameMemberCheck(loginEmail, boardEmail)) {
-            //itemService.deleteItem(boardService.findBoard(boardId).getItem().getId());
-            //commentService.boardDeleteByComment(boardId);
             boardService.deleteBoard(boardId);
 
             return "board/boardList";
