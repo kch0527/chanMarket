@@ -2,6 +2,7 @@ package com.example.market.service.board;
 
 import com.example.market.entity.Board;
 import com.example.market.entity.member.Member;
+import com.example.market.exception.ItemNotFound;
 import com.example.market.repository.JpaBoardRepository;
 import com.example.market.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,8 @@ public class BoardServiceImpl implements BoardService {
     private final JpaBoardRepository boardRepository;
     @Override
     public Board createBoard(Board board, Member member) {
-        board.setMember(member);
-        board.setCountView(0L);
+                board.setMember(member);
+                board.setCountView(0L);
         boardRepository.save(board);
         return board;
     }
@@ -27,7 +28,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     public void deleteBoard(Long id){
-        boardRepository.deleteById(id);
+        boardRepository.delete(boardRepository.findById(id).orElseThrow(ItemNotFound::new));
     }
 
     public List<Board> boardList(){

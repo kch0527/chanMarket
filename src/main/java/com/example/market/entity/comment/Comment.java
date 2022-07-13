@@ -1,5 +1,6 @@
-package com.example.market.entity;
+package com.example.market.entity.comment;
 
+import com.example.market.entity.Board;
 import com.example.market.entity.member.Member;
 import lombok.*;
 
@@ -7,11 +8,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Builder
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Data
+@Builder
 public class Comment {
     @Id @GeneratedValue
     @Column(name = "comment_id")
@@ -29,11 +31,21 @@ public class Comment {
     @JoinColumn(name = "board_id")
     private Board board;
 
-    @Size(max = 100)
-    @NotNull
+    @Lob
     private String text;
 
     private String nowTime;
+
+    public CommentEditor.CommentEditorBuilder commentEditorBuilder(){
+        return CommentEditor.builder()
+                .nowTime(nowTime)
+                .text(text);
+    }
+
+    public void edit(CommentEditor commentEditor){
+        text = commentEditor.getText();
+        nowTime = commentEditor.getNowTime();
+    }
 
 
 }

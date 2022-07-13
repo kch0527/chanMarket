@@ -1,5 +1,6 @@
 package com.example.market.entity;
 
+import com.example.market.entity.comment.Comment;
 import com.example.market.entity.item.Item;
 import com.example.market.entity.member.Member;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -41,4 +41,9 @@ public class Board {
         this.countView = countView;
     }
 
+    @Builder
+    public Board(Member member) {
+        this.member = member;
+        this.countView = 0L;
+    }
 }

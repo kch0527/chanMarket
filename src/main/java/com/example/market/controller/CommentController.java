@@ -1,8 +1,10 @@
 package com.example.market.controller;
 
 import com.example.market.entity.Board;
-import com.example.market.entity.Comment;
+import com.example.market.entity.comment.Comment;
 import com.example.market.entity.member.Member;
+import com.example.market.request.comment.CommentCreate;
+import com.example.market.request.comment.CommentEdit;
 import com.example.market.service.board.BoardService;
 import com.example.market.service.comment.CommentService;
 import com.example.market.service.item.ItemServiceImpl;
@@ -26,15 +28,11 @@ public class CommentController {
     private final BoardService boardService;
 
     @PostMapping("{boardId}")
-    public String itemComment(@PathVariable Long boardId, HttpServletRequest request, @ModelAttribute Comment comment, RedirectAttributes redirectAttributes) {
+    public String itemComment(@PathVariable Long boardId, HttpServletRequest request, @ModelAttribute CommentCreate commentCreate, RedirectAttributes redirectAttributes) {
         try {
-            Board board = boardService.findBoard(boardId);
             Member loginMember = memberService.findByEmail((String) request.getSession().getAttribute("loginMember"));
 
-            comment.setBoard(board);
-            comment.setMember(loginMember);
-            comment.setNowTime(commentService.nowTime());
-            Comment saveComment = commentService.addComment(comment);
+            Comment saveComment = commentService.addComment(commentCreate, boardId ,loginMember);
             redirectAttributes.addAttribute("commentId", saveComment.getId());
             redirectAttributes.addAttribute("status", true);
 
@@ -58,8 +56,8 @@ public class CommentController {
     }
 
     @PutMapping("{commentId}/commentEdit")
-    public String commentEdit(@PathVariable Long commentId, Comment comment) {
-        commentService.editComment(commentId, comment);
+    public String commentEdit(@PathVariable Long commentId, CommentEdit commentEdit) {
+        commentService.editComment(commentId, commentEdit);
         Comment findComment = commentService.findComment(commentId);
         return "redirect:/chanMarket/board/" + findComment.getBoard().getId();
 

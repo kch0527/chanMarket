@@ -30,10 +30,6 @@ public class ItemServiceImpl implements ItemService {
         return item;
     }
 
-    @Transactional
-    public void deleteItem(Long id){
-        jpaItemRepository.deleteById(id);
-    }
 
     @Transactional
     public void editItem(Long itemId, ItemEdit updateParam){

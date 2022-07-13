@@ -44,7 +44,6 @@ public class BoardController {
         String boardEmail = boardService.findBoard(boardId).getMember().getEmail();
         if (sameMemberCheck(loginEmail, boardEmail)) {
             boardService.deleteBoard(boardId);
-
             return "board/boardList";
         }
         else{
