@@ -1,6 +1,5 @@
 package com.example.market.service.member;
 
-import com.example.market.entity.Basket;
 import com.example.market.entity.member.Member;
 import com.example.market.entity.member.MemberEditor;
 import com.example.market.repository.JpaMemberRepository;

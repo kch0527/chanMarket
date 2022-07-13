@@ -1,6 +1,6 @@
 package com.example.market.entity.item;
 
-import com.example.market.entity.BasketItem;
+import com.example.market.entity.basket.BasketItem;
 import com.example.market.entity.Board;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,6 +1,6 @@
 package com.example.market.repository;
 
-import com.example.market.entity.BasketItem;
+import com.example.market.entity.basket.BasketItem;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

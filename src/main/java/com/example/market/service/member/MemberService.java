@@ -1,6 +1,5 @@
 package com.example.market.service.member;
 
-import com.example.market.entity.Basket;
 import com.example.market.entity.member.Member;
 import com.example.market.request.member.MemberCreate;
 import com.example.market.request.member.MemberEdit;

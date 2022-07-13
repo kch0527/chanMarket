@@ -38,7 +38,7 @@ public class BasketController {
     }
 
     @PostMapping("{itemId}/add")
-    public String itemPutBasket(@PathVariable Long itemId, HttpServletRequest request, Model model) {
+    public String itemPutBasket(@PathVariable Long itemId, HttpServletRequest request) {
         Member member = memberService.findByEmail((String) request.getSession().getAttribute("loginMember"));
         Item item = itemService.readItem(itemId);
 

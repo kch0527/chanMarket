@@ -1,4 +1,4 @@
-package com.example.market.entity;
+package com.example.market.entity.basket;
 
 import com.example.market.entity.item.Item;
 import lombok.*;
