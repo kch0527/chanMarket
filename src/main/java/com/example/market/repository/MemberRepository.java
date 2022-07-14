@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Repository
+
 public class MemberRepository{
 
     @PersistenceContext //스프링이 엔티티매니저 만들어서 주입

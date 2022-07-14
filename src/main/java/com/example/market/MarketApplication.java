@@ -12,9 +12,11 @@ public class MarketApplication {
         SpringApplication.run(MarketApplication.class, args);
     }
 
+    /*
     @Bean
     public ServerEndpointExporter serverEndpointExporter(){
         return new ServerEndpointExporter();
     }
+     */
 
 }
