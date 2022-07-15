@@ -29,7 +29,7 @@ public class MemberController {
         return "member/join";
     }
 
-    @PostMapping("")
+    @PostMapping("/join")
     public String joinId(@Valid MemberCreate memberCreate) {
         try {
             memberService.join(memberCreate);
