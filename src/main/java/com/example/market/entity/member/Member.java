@@ -21,7 +21,8 @@ public class Member{
 
     private String email;
     private String name;
-    private Grade grade;
+    @Enumerated(EnumType.STRING)
+    private Role role;
     private String pw;
     private String tel;
 
@@ -29,7 +30,7 @@ public class Member{
     public Member(String email, String name, String pw, String tel) {
         this.email = email;
         this.name = name;
-        this.grade = Grade.USER;
+        this.role = Role.USER;
         this.pw = pw;
         this.tel = tel;
     }

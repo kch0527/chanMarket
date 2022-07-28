@@ -1,5 +1,5 @@
 package com.example.market.entity;
 
-public enum Grade {
+public enum Role {
     USER, ADMIN
 }

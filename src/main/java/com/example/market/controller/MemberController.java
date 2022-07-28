@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Slf4j
@@ -48,14 +49,14 @@ public class MemberController {
 
 
     @GetMapping("myInfo")
-    public String myInfo(HttpServletRequest request, Model model) {
-        model.addAttribute("myInfo", memberService.findByEmail((String) request.getSession().getAttribute("loginMember")));
+    public String myInfo(HttpSession session, Model model) {
+        model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         return "member/myInfo";
     }
 
     @GetMapping("myInfo/edit")
-    public String memberEditForm(Model model, HttpServletRequest request) {
-        model.addAttribute("myInfo", memberService.findByEmail((String) request.getSession().getAttribute("loginMember")));
+    public String memberEditForm(Model model, HttpSession session) {
+        model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         return "member/editForm";
     }
 

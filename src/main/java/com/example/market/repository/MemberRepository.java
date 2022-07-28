@@ -1,8 +1,7 @@
 package com.example.market.repository;
 
-import com.example.market.entity.Grade;
+import com.example.market.entity.Role;
 import com.example.market.entity.member.Member;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +14,7 @@ public class MemberRepository{
     private EntityManager entityManager;
 
     public void save(Member member) {
-        member.setGrade(Grade.USER);
+        member.setRole(Role.USER);
         entityManager.persist(member);
     }
 

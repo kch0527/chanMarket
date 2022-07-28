@@ -1,5 +1,7 @@
 package com.example.market.controller;
 
+import com.example.market.entity.member.Member;
+import com.example.market.oauth2.SessionUser;
 import com.example.market.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,11 +26,13 @@ public class LoginController {
 
     @PostMapping("")
     public String loginId(String email, String pw, HttpServletRequest request){
-        if (memberService.login(email, pw) == null) {
-            return "error/error";
+        if (memberService.login(email, pw) != null) {
+            HttpSession httpSession = request.getSession();
+            httpSession.setAttribute("loginMember", email);
+
+            return "redirect:/chanMarket/board";
         }
-        request.getSession().setAttribute("loginMember", email);
-        return "redirect:/chanMarket/board";
+        else return "error/error";
     }
 
 

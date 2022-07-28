@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,15 +27,15 @@ public class ItemController {
     private final MemberService memberService;
 
     @GetMapping("add")
-    public String addForm(HttpServletRequest request, Model model){
-        model.addAttribute("email", (String) request.getSession().getAttribute("loginMember"));
+    public String addForm(HttpSession session, Model model){
+        model.addAttribute("email", (String) session.getAttribute("loginMember"));
         return "item/addForm";
     }
 
     @PostMapping("")
-    public String addItem(ItemCreate itemCreate, Board board, HttpServletRequest request){
+    public String addItem(ItemCreate itemCreate, Board board, HttpSession session){
         try {
-            itemCreate.setBoard(boardService.createBoard(board, memberService.findByEmail((String) request.getSession().getAttribute("loginMember"))));
+            itemCreate.setBoard(boardService.createBoard(board, memberService.findByEmail((String) session.getAttribute("loginMember"))));
             itemService.addItem(itemCreate);
             return "redirect:/chanMarket/board/" + board.getId();
         }catch (Exception e){
@@ -43,8 +44,8 @@ public class ItemController {
     }
 
     @GetMapping("{itemId}/edit")
-    public String editForm(@PathVariable Long itemId, Model model, HttpServletRequest request){
-        String loginMember = (String) request.getSession().getAttribute("loginMember");
+    public String editForm(@PathVariable Long itemId, Model model, HttpSession session){
+        String loginMember = (String) session.getAttribute("loginMember");
         String ownerMember = itemService.readItem(itemId).getBoard().getMember().getEmail();
 
         if (editAuthority(loginMember, ownerMember)) {

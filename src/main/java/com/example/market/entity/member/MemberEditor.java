@@ -1,18 +1,15 @@
 package com.example.market.entity.member;
 
-import com.example.market.entity.Grade;
+import com.example.market.entity.Role;
 import lombok.Builder;
 import lombok.Getter;
-
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 
 @Getter
 public class MemberEditor {
 
     private String email;
     private String name;
-    private Grade grade;
+    private Role role;
     private String pw;
     private String tel;
 
@@ -20,7 +17,7 @@ public class MemberEditor {
     public MemberEditor(String email, String name, String pw, String tel) {
         this.email = email;
         this.name = name;
-        this.grade = Grade.USER;
+        this.role = Role.USER;
         this.pw = pw;
         this.tel = tel;
     }

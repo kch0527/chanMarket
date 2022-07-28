@@ -1,6 +1,6 @@
 package com.example.market.request.member;
 
-import com.example.market.entity.Grade;
+import com.example.market.entity.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -28,7 +27,7 @@ public class MemberCreate {
     private String name;
 
     @Enumerated(EnumType.STRING)
-    private Grade grade;
+    private Role role;
 
     @NotBlank(message = "memberPw 없음")
     @Size(min = 8, max = 15, message = "비밀번호는 8자 이상 15자 이하로 입력")
@@ -42,7 +41,7 @@ public class MemberCreate {
     public MemberCreate(String email, String name, String pw, String tel) {
         this.email = email;
         this.name = name;
-        this.grade = Grade.USER;
+        this.role = Role.USER;
         this.pw = pw;
         this.tel = tel;
     }

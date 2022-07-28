@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @Data
@@ -28,9 +29,9 @@ public class BasketController {
     }
 
     @GetMapping("{itemId}/add")
-    public String itemPutBasket(@PathVariable Long itemId, Model model, HttpServletRequest request) {
-        if (itemService.readItem(itemId).getBoard().getMember() != memberService.findByEmail((String) request.getSession().getAttribute("loginMember"))) {
-            model.addAttribute("member", memberService.findByEmail((String) request.getSession().getAttribute("loginMember")));
+    public String itemPutBasket(@PathVariable Long itemId, Model model, HttpSession session) {
+        if (itemService.readItem(itemId).getBoard().getMember() != memberService.findByEmail((String) session.getAttribute("loginMember"))) {
+            model.addAttribute("member", memberService.findByEmail((String) session.getAttribute("loginMember")));
             model.addAttribute("item", itemService.readItem(itemId));
             return "basket/addForm";
         }
@@ -38,8 +39,8 @@ public class BasketController {
     }
 
     @PostMapping("{itemId}/add")
-    public String itemPutBasket(@PathVariable Long itemId, HttpServletRequest request) {
-        Member member = memberService.findByEmail((String) request.getSession().getAttribute("loginMember"));
+    public String itemPutBasket(@PathVariable Long itemId, HttpSession session) {
+        Member member = memberService.findByEmail((String) session.getAttribute("loginMember"));
         Item item = itemService.readItem(itemId);
 
         boolean isAddOk = basketService.addBasketItem(member, item);

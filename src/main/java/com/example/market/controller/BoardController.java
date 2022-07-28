@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
@@ -38,9 +39,9 @@ public class BoardController {
     }
 
     @DeleteMapping("/{boardId}/delete")
-    public String boardDelete(@PathVariable Long boardId, HttpServletRequest request) {
+    public String boardDelete(@PathVariable Long boardId, HttpSession session) {
 
-        String loginEmail = (String) request.getSession().getAttribute("loginMember");
+        String loginEmail = (String) session.getAttribute("loginMember");
         String boardEmail = boardService.findBoard(boardId).getMember().getEmail();
         if (sameMemberCheck(loginEmail, boardEmail)) {
             boardService.deleteBoard(boardId);

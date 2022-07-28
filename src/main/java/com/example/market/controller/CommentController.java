@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @Data
@@ -28,9 +29,9 @@ public class CommentController {
     private final BoardService boardService;
 
     @PostMapping("{boardId}")
-    public String itemComment(@PathVariable Long boardId, HttpServletRequest request, @ModelAttribute CommentCreate commentCreate, RedirectAttributes redirectAttributes) {
+    public String itemComment(@PathVariable Long boardId, HttpSession session, @ModelAttribute CommentCreate commentCreate, RedirectAttributes redirectAttributes) {
         try {
-            Member loginMember = memberService.findByEmail((String) request.getSession().getAttribute("loginMember"));
+            Member loginMember = memberService.findByEmail((String) session.getAttribute("loginMember"));
 
             Comment saveComment = commentService.addComment(commentCreate, boardId ,loginMember);
             redirectAttributes.addAttribute("commentId", saveComment.getId());
@@ -44,8 +45,8 @@ public class CommentController {
     }
 
     @GetMapping("{commentId}/commentEdit")
-    public String commentEdit(@PathVariable Long commentId, Model model, HttpServletRequest request) {
-        String loginMember = (String) request.getSession().getAttribute("loginMember");
+    public String commentEdit(@PathVariable Long commentId, Model model, HttpSession session) {
+        String loginMember = (String) session.getAttribute("loginMember");
         String commentMember = commentService.findComment(commentId).getMember().getEmail();
         if (sameMemberCheck(commentMember, loginMember)) {
             Comment comment = commentService.findComment(commentId);
@@ -64,8 +65,8 @@ public class CommentController {
     }
 
     @DeleteMapping("{commentId}")
-    public String commentDelete(@ModelAttribute Comment comment, @PathVariable Long commentId, RedirectAttributes redirectAttributes, HttpServletRequest request) {
-            String loginMember = (String) request.getSession().getAttribute("loginMember");
+    public String commentDelete(@ModelAttribute Comment comment, @PathVariable Long commentId, RedirectAttributes redirectAttributes, HttpSession session) {
+            String loginMember = (String) session.getAttribute("loginMember");
             String commentMember = commentService.findComment(commentId).getMember().getEmail();
             if (sameMemberCheck(commentMember, loginMember)){
                 commentService.deleteComment(commentId);

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,9 +24,9 @@ public class ChatController {
     private final MessageService messageService;
 
     @GetMapping("/{boardId}/ChatCreate")
-    public String createChatRoom(@PathVariable Long boardId, Model model, HttpServletRequest request){
-        if (boardService.findBoard(boardId).getMember() != memberService.findByEmail((String) request.getSession().getAttribute("loginMember"))) {
-            if (chatRoomService.chatRoomDeduplication(boardId, memberService.findByEmail((String) request.getSession().getAttribute("loginMember")).getId())) {
+    public String createChatRoom(@PathVariable Long boardId, Model model, HttpSession session){
+        if (boardService.findBoard(boardId).getMember() != memberService.findByEmail((String) session.getAttribute("loginMember"))) {
+            if (chatRoomService.chatRoomDeduplication(boardId, memberService.findByEmail((String) session.getAttribute("loginMember")).getId())) {
                 model.addAttribute("board", boardService.findBoard(boardId));
                 return "chat/createForm";
             }
@@ -35,11 +36,11 @@ public class ChatController {
     }
 
     @PostMapping("/{boardId}/ChatCreate")
-    public String createChatRoom(@PathVariable Long boardId, ChatRoom chatRoom, HttpServletRequest request){
+    public String createChatRoom(@PathVariable Long boardId, ChatRoom chatRoom, HttpSession session){
             chatRoomService.createChatRoom(
                     chatRoom,
                     boardService.findBoard(boardId),
-                    memberService.findByEmail((String) request.getSession().getAttribute("loginMember")));
+                    memberService.findByEmail((String) session.getAttribute("loginMember")));
 
             return "redirect:/chanMarket/chat/" + chatRoom.getId();
     }
@@ -57,9 +58,9 @@ public class ChatController {
     }
 
     @GetMapping("{roomId}")
-    public String chatRoom(@PathVariable Long roomId, Model model, HttpServletRequest request){
+    public String chatRoom(@PathVariable Long roomId, Model model, HttpSession session){
         model.addAttribute("chatRoom",chatRoomService.findRoom(roomId));
-        model.addAttribute("userid", memberService.findByEmail((String)request.getSession().getAttribute("loginMember")));
+        model.addAttribute("userid", memberService.findByEmail((String) session.getAttribute("loginMember")));
         model.addAttribute("messageList", messageService.messageList(roomId));
 
         return "chat/chatRoom";

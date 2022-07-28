@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
@@ -13,9 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 public class LogOutController {
 
     @PostMapping("")
-    public String logout(HttpServletRequest request){
-        request.getSession().removeAttribute("loginMember");
-        //request.getSession().invalidate();
+    public String logout(HttpSession session){
+        session.invalidate();
         return "redirect:/chanMarket/login";
     }
 }
