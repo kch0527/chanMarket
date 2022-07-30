@@ -4,12 +4,13 @@ import com.example.market.entity.Board;
 import com.example.market.entity.member.Member;
 import com.example.market.exception.ItemNotFound;
 import com.example.market.repository.JpaBoardRepository;
-import com.example.market.service.board.BoardService;
+import com.example.market.response.BoardResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -31,8 +32,8 @@ public class BoardServiceImpl implements BoardService {
         boardRepository.delete(boardRepository.findById(id).orElseThrow(ItemNotFound::new));
     }
 
-    public List<Board> boardList(){
-        return boardRepository.findAll();
+    public Page<Board> boardList(Pageable pageable){
+        return boardRepository.findAll(pageable);
     }
 
     @Transactional

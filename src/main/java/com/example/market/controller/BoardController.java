@@ -4,6 +4,9 @@ import com.example.market.entity.Board;
 import com.example.market.service.board.BoardService;
 import com.example.market.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +22,14 @@ public class BoardController {
     private final MemberService memberService;
 
     @GetMapping("")
-    public String boardList(Model model, HttpSession session){
-        model.addAttribute("boards", boardService.boardList());
+    public String boardList(Model model, HttpSession session, @PageableDefault(size = 4, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+        model.addAttribute("boards", boardService.boardList(pageable));
         model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         return "board/boardList";
     }
 
     @GetMapping("/{boardId}")
-    public String boardInfo(@PathVariable Long boardId, Model model){
+    public String boardInfo(@PathVariable Long boardId, Model model, HttpSession session){
         Board board = boardService.findBoard(boardId);
         Long countView = board.getCountView() + 1L;
 
@@ -34,6 +37,7 @@ public class BoardController {
         boardService.updateView(board.getId(), board);
 
         model.addAttribute("board", board);
+        model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         return "board/boardInfo";
     }
 

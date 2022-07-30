@@ -665,6 +665,16 @@ progress {
     max-width: 1320px;
   }
 }
+
+.chan {
+  display: flex;
+}
+
+.chan1 {
+  margin: 10px;
+  padding: 20px;
+}
+
 .row {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
@@ -7090,6 +7100,10 @@ textarea.form-control-lg {
 
 .justify-content-center {
   justify-content: center !important;
+}
+
+.justify-content-center1 {
+  justify-content: start !important;
 }
 
 .justify-content-between {

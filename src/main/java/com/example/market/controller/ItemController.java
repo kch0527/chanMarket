@@ -28,7 +28,7 @@ public class ItemController {
 
     @GetMapping("add")
     public String addForm(HttpSession session, Model model){
-        model.addAttribute("email", (String) session.getAttribute("loginMember"));
+        model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         return "item/addForm";
     }
 
@@ -50,6 +50,7 @@ public class ItemController {
 
         if (editAuthority(loginMember, ownerMember)) {
             model.addAttribute("item", itemService.readItem(itemId));
+            model.addAttribute("myInfo", memberService.findByEmail(loginMember));
             return "item/editForm";
         }
         return "error/error";
