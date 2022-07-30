@@ -3,6 +3,7 @@ package com.example.market.entity.member;
 import com.example.market.entity.*;
 import com.example.market.entity.basket.Basket;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.util.ArrayList;

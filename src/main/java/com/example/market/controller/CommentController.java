@@ -1,6 +1,5 @@
 package com.example.market.controller;
 
-import com.example.market.entity.Board;
 import com.example.market.entity.comment.Comment;
 import com.example.market.entity.member.Member;
 import com.example.market.request.comment.CommentCreate;
@@ -15,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller

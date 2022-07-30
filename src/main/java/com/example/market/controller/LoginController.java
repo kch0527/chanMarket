@@ -27,6 +27,7 @@ public class LoginController {
     @PostMapping("")
     public String loginId(String email, String pw, HttpServletRequest request){
         if (memberService.login(email, pw) != null) {
+            //Member member = memberService.findByEmail(email);
             HttpSession httpSession = request.getSession();
             httpSession.setAttribute("loginMember", email);
 

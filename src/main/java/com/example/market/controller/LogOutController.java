@@ -16,6 +16,6 @@ public class LogOutController {
     @PostMapping("")
     public String logout(HttpSession session){
         session.invalidate();
-        return "redirect:/chanMarket/login";
+        return "redirect:/chanMarket/board";
     }
 }

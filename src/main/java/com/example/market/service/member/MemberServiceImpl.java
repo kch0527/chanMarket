@@ -9,17 +9,20 @@ import com.example.market.service.basket.BasketService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.transaction.Transactional;
+
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class MemberServiceImpl implements MemberService {
 
     private final JpaMemberRepository jpaMemberRepository;
     private final BasketService basketService;
 
-    @Transactional
+
     public void join(MemberCreate memberCreate){
         Member member = Member.builder()
                 .email(memberCreate.getEmail())
@@ -49,7 +52,7 @@ public class MemberServiceImpl implements MemberService {
         return member;
     }
 
-    @Transactional
+
     public void editMember(MemberEdit updateParam){
         Member findMember = jpaMemberRepository.findByEmail(updateParam.getEmail());
         MemberEditor.MemberEditorBuilder memberEditorBuilder = findMember.toEditor();

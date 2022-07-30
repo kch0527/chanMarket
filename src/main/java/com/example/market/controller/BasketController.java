@@ -23,8 +23,9 @@ public class BasketController {
     private final BasketService basketService;
 
     @GetMapping("{basketId}")
-    public String basketList(@PathVariable Long basketId, Model model) {
+    public String basketList(@PathVariable Long basketId, Model model, HttpSession session) {
         model.addAttribute("list",basketService.BasketList(basketId));
+        model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         return "basket/myBasket";
     }
 

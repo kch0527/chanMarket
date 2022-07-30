@@ -46,8 +46,9 @@ public class ChatController {
     }
 
     @GetMapping("/{memberId}/ChatList")
-    public String chatRoomList(@PathVariable Long memberId, Model model){
+    public String chatRoomList(@PathVariable Long memberId, Model model, HttpSession session){
         model.addAttribute("myChatRooms", chatRoomService.findMyRoom(memberId));
+        model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         return "chat/chatRoomList";
     }
 

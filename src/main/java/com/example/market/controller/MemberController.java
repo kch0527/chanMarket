@@ -1,5 +1,7 @@
 package com.example.market.controller;
 
+import com.example.market.entity.member.Member;
+import com.example.market.oauth2.SessionUser;
 import com.example.market.request.member.MemberCreate;
 import com.example.market.request.member.MemberEdit;
 import com.example.market.service.basket.BasketService;

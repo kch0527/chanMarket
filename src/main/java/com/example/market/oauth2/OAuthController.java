@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -18,13 +17,19 @@ public class OAuthController {
     
     @GetMapping("")
     public String oauthLogin(Model model){
-        SessionUser user = (SessionUser) httpSession.getAttribute("loginMember");
+        SessionUser user = (SessionUser) httpSession.getAttribute("googleLogin");
 
         if (user != null){
-            model.addAttribute("loginMember", user.getEmail());
+            model.addAttribute("googleLogin", user);
         }
 
         model.addAttribute("boards", boardService.boardList());
         return "board/boardList";
     }
+
+    @GetMapping("chanMarket/myInfo/google")
+    public String googleInfo(){
+        return "";
+    }
+
 }

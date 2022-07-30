@@ -1,16 +1,13 @@
 package com.example.market.controller;
 
 import com.example.market.entity.Board;
-import com.example.market.service.basket.BasketService;
 import com.example.market.service.board.BoardService;
-import com.example.market.service.comment.CommentService;
-import com.example.market.service.item.ItemService;
+import com.example.market.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -19,10 +16,12 @@ import javax.servlet.http.HttpSession;
 public class BoardController {
 
     private final BoardService boardService;
+    private final MemberService memberService;
 
     @GetMapping("")
-    public String boardList(Model model){
+    public String boardList(Model model, HttpSession session){
         model.addAttribute("boards", boardService.boardList());
+        model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         return "board/boardList";
     }
 
