@@ -6,6 +6,7 @@ import com.example.market.service.member.MemberService;
 import com.example.market.service.message.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -21,14 +22,12 @@ import java.util.List;
 @ServerEndpoint(value = "/chat") //WEB 소켓으로 접속 가능한 URL 정보를 명시하여 소켓 서버를 생성해줌
 public class MessageController {
 
-    @Autowired
-    private ChatRoomService chatRoomService;
-    @Autowired
-    private MessageService messageService;
-    @Autowired
-    private MemberService memberService;
-
     private static final List<Session> session = new ArrayList<>(); //사용자 정보
+
+    @GetMapping("/")
+    public String chat(){
+        return "chat/chatRoom";
+    }
 
     @OnOpen //접속시 실행
     public void open(Session member){
@@ -54,11 +53,7 @@ public class MessageController {
             }
         }
     }
-
-    @OnClose
-    public void close(Session session) {
-
-    }
+    
 /*
     @MessageMapping("/chanMarket/chat/{roomId}") // 메세지가 목적지로 전송되면 chat()메서드를 호출
     @SendTo("/chanMarket/chat/{roomId}") // 결과를 리턴시키는 목적지

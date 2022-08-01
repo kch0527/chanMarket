@@ -18,10 +18,12 @@ public class ChatRoomServiceImpl implements ChatRoomService {
     private final ChatRoomRepository chatRoomRepository;
 
     public void createChatRoom(ChatRoom chatRoom, Board board, Member member){
-        chatRoom.setBoard(board);
-        chatRoom.setOwner(board.getMember());
-        chatRoom.setMember(member);
-        chatRoomRepository.save(chatRoom);
+        ChatRoom room = ChatRoom.builder()
+                .board(board)
+                .owner(board.getMember())
+                .member(member)
+                .build();
+        chatRoomRepository.save(room);
     }
 
     public boolean chatRoomDeduplication(Long boardId, Long memberId){

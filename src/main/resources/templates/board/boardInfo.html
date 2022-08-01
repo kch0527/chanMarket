@@ -1,46 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
     <title>ChanMarket</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico"/>
     <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="/css/styles.css" rel="stylesheet" />
+    <link href="/css/styles.css" rel="stylesheet"/>
 </head>
 <body>
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container px-4 px-lg-5">
         <a class="navbar-brand" th:href="@{/chanMarket/board}">ChanMarket</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" th:if="${session.loginMember == null && session.googleLogin == null}" aria-current="page" th:href="@{/chanMarket/join}">Join</a></li>
-                <li class="nav-item"><a class="nav-link" th:if="${session.loginMember == null && session.googleLogin == null}" th:href="@{/chanMarket/login}">Login</a></li>
-                <li class="nav-item"><a class="nav-link" th:if="${session.loginMember != null || session.googleLogin != null}" th:href="@{/chanMarket/myInfo}">myInfo</a></li>
+                <li class="nav-item"><a class="nav-link active"
+                                        th:if="${session.loginMember == null && session.googleLogin == null}"
+                                        aria-current="page" th:href="@{/chanMarket/join}">Join</a></li>
+                <li class="nav-item"><a class="nav-link"
+                                        th:if="${session.loginMember == null && session.googleLogin == null}"
+                                        th:href="@{/chanMarket/login}">Login</a></li>
+                <li class="nav-item"><a class="nav-link"
+                                        th:if="${session.loginMember != null || session.googleLogin != null}"
+                                        th:href="@{/chanMarket/myInfo}">myInfo</a></li>
 
                 <form th:action="@{'/chanMarket/board'}" th:method="post">
-                    <li class="nav-item"><button class="nav-link" th:if="${session.loginMember != null || session.googleLogin != null}" type="submit">LogOut</button></li>
+                    <li class="nav-item">
+                        <button class="nav-link" th:if="${session.loginMember != null || session.googleLogin != null}"
+                                type="submit">LogOut
+                        </button>
+                    </li>
                 </form>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" th:if="${session.loginMember != null || session.googleLogin != null}" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">My Options</a>
+                    <a class="nav-link dropdown-toggle"
+                       th:if="${session.loginMember != null || session.googleLogin != null}" id="navbarDropdown"
+                       href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">My Options</a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" th:if="${session.loginMember != null || session.googleLogin != null}" th:href="@{/chanMarket/myInfo}">My Info</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" th:if="${session.loginMember != null || session.googleLogin != null}" th:href="@{/chanMarket/basket/{basketId}(basketId=${myInfo.basket.id})}">My Basket</a></li>
-                        <li><a class="dropdown-item" th:if="${session.loginMember != null || session.googleLogin != null}" th:href="@{/chanMarket/chat/{memberId}/ChatList(memberId=${myInfo.id})}">My Chat</a></li>
+                        <li><a class="dropdown-item"
+                               th:if="${session.loginMember != null || session.googleLogin != null}"
+                               th:href="@{/chanMarket/myInfo}">My Info</a></li>
+                        <li>
+                            <hr class="dropdown-divider"/>
+                        </li>
+                        <li><a class="dropdown-item"
+                               th:if="${session.loginMember != null || session.googleLogin != null}"
+                               th:href="@{/chanMarket/basket/{basketId}(basketId=${myInfo.basket.id})}">My Basket</a>
+                        </li>
+                        <li><a class="dropdown-item"
+                               th:if="${session.loginMember != null || session.googleLogin != null}"
+                               th:href="@{/chanMarket/chat/{memberId}/ChatList(memberId=${myInfo.id})}">My Chat</a></li>
                     </ul>
                 </li>
             </ul>
             <form class="d-flex">
-                <button class="btn btn-outline-dark" th:if="${session.loginMember != null || session.googleLogin != null}"
+                <button class="btn btn-outline-dark"
+                        th:if="${session.loginMember != null || session.googleLogin != null}"
                         th:onclick="|location.href='@{/chanMarket/item/add}'|" type="button">
                     <i class="bi-cart-fill me-1"></i>
                     Sell Item
@@ -65,7 +89,9 @@
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <form th:action="@{'/chanMarket/baord/{boardId}(boardId=${board.id})'}" th:method="get">
                 <div>
-                    조회수 : <td th:text="${board.countView}" readonly></td>회
+                    조회수 :
+                    <td th:text="${board.countView}" readonly></td>
+                    회
                 </div>
                 <br>
                 <div>
@@ -93,69 +119,71 @@
                     <div class="col">
                         <button class="w-100 btn btn-primary btn-lg"
                                 onclick="location.href='editForm.html'"
-                                th:onclick="|location.href='@{/chanMarket/item/{itemId}/edit(itemId=${board.item.id})}'|" type="button">상품 수정</button>
+                                th:onclick="|location.href='@{/chanMarket/item/{itemId}/edit(itemId=${board.item.id})}'|"
+                                type="button">상품 수정
+                        </button>
                     </div>
 
                     <div class="col">
                         <button class="w-100 btn btn-secondary btn-lg"
                                 onclick="location.href='itemBasket.html'"
                                 th:onclick="|location.href='@{/chanMarket/basket/{itemId}/add(itemId=${board.item.id})}'|"
-                                type="button">찜하기</button>
+                                type="button">찜하기
+                        </button>
                     </div>
 
                     <div class="col">
-                            <a href="javascript:void(0);" class="w-100 btn btn-primary btn-lg" th:onclick="'deleteConfirm(' + ${board.id} + ')'">삭제</a>
+                        <a href="javascript:void(0);" class="w-100 btn btn-primary btn-lg"
+                           th:onclick="'chatRoomCreate(' + ${board.id} +','+ ${myInfo.id} + ')'">채팅하기</a>
                     </div>
 
                     <div class="col">
-                        <button class="w-100 btn btn-secondary btn-lg"
-                                onclick="location.href='../chat/createForm.html'"
-                                th:onclick="|location.href='@{/chanMarket/chat/{boardId}/ChatCreate(boardId=${board.id})}'|" type="button">채팅 하기</button>
+                        <a href="javascript:void(0);" class="w-100 btn btn-primary btn-lg"
+                           th:onclick="'deleteConfirm(' + ${board.id} + ')'">삭제</a>
                     </div>
 
                     <div class="col">
                         <button class="w-100 btn btn-primary btn-lg"
                                 onclick="location.href='boardList.html'"
                                 th:onclick="|location.href='@{/chanMarket/board}'|"
-                                type="button">목록으로</button>
+                                type="button">목록으로
+                        </button>
                     </div>
                 </div>
             </form>
 
             <div class="container px-4 px-lg-5 mt-5" style="float: right">
                 <label>댓글</label>
-                    <form th:action="@{'/chanMarket/board/' + ${board.id}}" th:method="post">
-                        <textarea id="text" name="text" cols="40" rows="5"></textarea>
-                        <br>
-                        <input type="submit" value="작성">
-                        <input type="reset" value="취소">
-                    </form>
+                <form th:action="@{'/chanMarket/board/' + ${board.id}}" th:method="post">
+                    <textarea id="text" name="text" cols="40" rows="5"></textarea>
                     <br>
-                    <form>
-                        <div class="card" style="width: 320px">
-                            <tr th:each="comments : ${board.getCommentList()}">
-                                <div class="card-header">
-                                    <td th:text="${comments.member.email}"></td>
-                                    <td th:text="${comments.nowTime}"></td>
-                                </div>
-                                <div class="card-body">
-                                    <td th:text="${comments.text}"></td>
-                                </div>
-                                <!--
-                                <button class="w-100 btn btn-primary btn-lg" th:onclick="|location.href='@{/chanMarket/board/{commentId}/commentEdit(commentId=${comments.id})}'|"
-                                        type="button">수정</button>
-                                -->
-                                <a href="javascript:void(0);" class="btn btn-danger" th:onclick="'deleteComment(' + ${comments.getBoard().getId()} +','+ ${comments.id} + ')'">삭제</a>
-                            </tr>
-                        </div>
-                    </form>
+                    <input type="submit" value="작성">
+                    <input type="reset" value="취소">
+                </form>
+                <br>
+                <form>
+                    <div class="card" style="width: 320px">
+                        <tr th:each="comments : ${board.getCommentList()}">
+                            <div class="card-header">
+                                <td th:text="${comments.member.email}"></td>
+                                <td th:text="${comments.nowTime}"></td>
+                            </div>
+                            <div class="card-body">
+                                <td th:text="${comments.text}"></td>
+                            </div>
+                            <!--
+                            <button class="w-100 btn btn-primary btn-lg" th:onclick="|location.href='@{/chanMarket/board/{commentId}/commentEdit(commentId=${comments.id})}'|"
+                                    type="button">수정</button>
+                            -->
+                            <a href="javascript:void(0);" class="btn btn-danger"
+                               th:onclick="'deleteComment(' + ${comments.getBoard().getId()} +','+ ${comments.id} + ')'">삭제</a>
+                        </tr>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </section>
-
-
-
 
 
 <!-- Footer-->
@@ -167,8 +195,9 @@
 <!-- Core theme JS-->
 <script src="/js/scripts.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="/js/boardDel.js"> </script>
-<script type="text/javascript" src="/js/comment.js"> </script>
+<script type="text/javascript" src="/js/boardDel.js"></script>
+<script type="text/javascript" src="/js/comment.js"></script>
+<script type="text/javascript" src="/js/chatRoomCreate.js"></script>
 </body>
 </html>
 

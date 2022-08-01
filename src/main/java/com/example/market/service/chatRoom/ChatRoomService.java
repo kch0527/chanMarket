@@ -7,7 +7,7 @@ import com.example.market.entity.member.Member;
 import java.util.List;
 
 public interface ChatRoomService {
-    public void createChatRoom(ChatRoom chatRoom, Board board, Member member);
+    void createChatRoom(ChatRoom chatRoom, Board board, Member member);
     ChatRoom findRoom(Long RoomId);
     List<ChatRoom> findMyRoom(Long memberId);
     List<ChatRoom> findChatRoomAll();

@@ -23,49 +23,33 @@ public class ChatController {
     private final BoardService boardService;
     private final MessageService messageService;
 
-    @GetMapping("/{boardId}/ChatCreate")
-    public String createChatRoom(@PathVariable Long boardId, Model model, HttpSession session){
-        if (boardService.findBoard(boardId).getMember() != memberService.findByEmail((String) session.getAttribute("loginMember"))) {
-            if (chatRoomService.chatRoomDeduplication(boardId, memberService.findByEmail((String) session.getAttribute("loginMember")).getId())) {
-                model.addAttribute("board", boardService.findBoard(boardId));
-                return "chat/createForm";
-            }
-            else return "chat/chatExistError";
-        }
-        else return "chat/chatError";
-    }
-
     @PostMapping("/{boardId}/ChatCreate")
-    public String createChatRoom(@PathVariable Long boardId, ChatRoom chatRoom, HttpSession session){
-            chatRoomService.createChatRoom(
-                    chatRoom,
-                    boardService.findBoard(boardId),
-                    memberService.findByEmail((String) session.getAttribute("loginMember")));
-
-            return "redirect:/chanMarket/chat/" + chatRoom.getId();
+    public void createChatRoom(@PathVariable Long boardId, ChatRoom chatRoom, HttpSession session) {
+        chatRoomService.createChatRoom(
+                chatRoom,
+                boardService.findBoard(boardId),
+                memberService.findByEmail((String) session.getAttribute("loginMember")));
     }
 
     @GetMapping("/{memberId}/ChatList")
-    public String chatRoomList(@PathVariable Long memberId, Model model, HttpSession session){
+    public String chatRoomList(@PathVariable Long memberId, Model model, HttpSession session) {
         model.addAttribute("myChatRooms", chatRoomService.findMyRoom(memberId));
         model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         return "chat/chatRoomList";
     }
 
     @DeleteMapping("{roomId}/ChatList/delete")
-    public String delChatRoom(@PathVariable Long roomId){
+    public String delChatRoom(@PathVariable Long roomId) {
         chatRoomService.delChatRoom(roomId);
         return "chat/chatRoomList";
     }
 
     @GetMapping("{roomId}")
-    public String chatRoom(@PathVariable Long roomId, Model model, HttpSession session){
-        model.addAttribute("chatRoom",chatRoomService.findRoom(roomId));
+    public String chatRoom(@PathVariable Long roomId, Model model, HttpSession session) {
+        model.addAttribute("chatRoom", chatRoomService.findRoom(roomId));
         model.addAttribute("userid", memberService.findByEmail((String) session.getAttribute("loginMember")));
         model.addAttribute("messageList", messageService.messageList(roomId));
 
         return "chat/chatRoom";
     }
-
-
 }
