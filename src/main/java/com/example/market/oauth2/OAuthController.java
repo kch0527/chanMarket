@@ -1,8 +1,11 @@
 package com.example.market.oauth2;
 
 import com.example.market.service.board.BoardService;
+import com.example.market.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,23 +17,14 @@ import javax.servlet.http.HttpSession;
 public class OAuthController {
 
     private final BoardService boardService;
-    private final HttpSession httpSession;
+    private final MemberService memberService;
     
     @GetMapping("")
-    public String oauthLogin(Model model, Pageable pageable){
-        SessionUser user = (SessionUser) httpSession.getAttribute("googleLogin");
+    public String oauthLogin(Model model, @PageableDefault(size = 4, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, HttpSession session){
 
-        if (user != null){
-            model.addAttribute("googleLogin", user);
-        }
-
+        model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         model.addAttribute("boards", boardService.boardList(pageable));
         return "board/boardList";
-    }
-
-    @GetMapping("chanMarket/myInfo/google")
-    public String googleInfo(){
-        return "";
     }
 
 }

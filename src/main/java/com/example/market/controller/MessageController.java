@@ -24,11 +24,6 @@ public class MessageController {
 
     private static final List<Session> session = new ArrayList<>(); //사용자 정보
 
-    @GetMapping("/")
-    public String chat(){
-        return "chat/chatRoom";
-    }
-
     @OnOpen //접속시 실행
     public void open(Session member){
         System.out.println("connected");

@@ -3,7 +3,6 @@ package com.example.market.entity.member;
 import com.example.market.entity.*;
 import com.example.market.entity.basket.Basket;
 import lombok.*;
-import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -61,9 +60,14 @@ public class Member{
     @OneToOne(mappedBy = "member", cascade=CascadeType.REMOVE)
     private Basket basket;
 
+    public Member update(String name) {
+        this.name = name;
+        this.pw = "googlePw";
+        this.tel = "01011111111";
+        return this;
+    }
 
-
-
-
-
+    public  String getRoleKey() {
+        return this.role.getKey();
+    }
 }

@@ -1,10 +1,9 @@
 package com.example.market.controller;
 
-import com.example.market.entity.member.Member;
-import com.example.market.oauth2.SessionUser;
+
 import com.example.market.request.member.MemberCreate;
 import com.example.market.request.member.MemberEdit;
-import com.example.market.service.basket.BasketService;
+
 import com.example.market.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 

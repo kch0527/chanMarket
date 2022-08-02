@@ -1,5 +1,6 @@
 package com.example.market.oauth2;
 
+import com.example.market.entity.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,6 +12,8 @@ public class OAuthAttributes {
     private String nameAttributeKey;
     private String name;
     private String email;
+    private String pw;
+    private String tel;
     private String picture;
 
     @Builder
@@ -20,6 +23,8 @@ public class OAuthAttributes {
         this.name = name;
         this.email = email;
         this.picture = picture;
+        this.pw = "googlePw";
+        this.tel = "01011111111";
     }
 
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
@@ -37,12 +42,12 @@ public class OAuthAttributes {
                 .build();
     }
 
-    public User toEntity() {
-        return User.builder()
+    public Member toEntity() {
+        return Member.builder()
                 .name(name)
                 .email(email)
-                .picture(picture)
-                .role(Role.GUEST)
+                .pw("googlePw")
+                .tel("01011111111")
                 .build();
     }
 }
