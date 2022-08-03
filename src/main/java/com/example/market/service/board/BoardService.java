@@ -14,5 +14,6 @@ public interface BoardService {
     void deleteBoard(Long id);
     Page<Board> boardList(Pageable pageable);
     void updateView(Long boardId, Board board);
+    Page<Board> searchList(String Keyword, Pageable pageable);
 
 }

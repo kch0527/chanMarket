@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Iterator;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,8 +28,16 @@ public class BoardController {
     private final CommentService commentService;
 
     @GetMapping("")
-    public String boardList(Model model, HttpSession session, @PageableDefault(size = 4, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
-        model.addAttribute("boards", boardService.boardList(pageable));
+    public String boardList(Model model, HttpSession session, @PageableDefault(size = 4, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, String keyword){
+        Page<Board> boards = null;
+
+        if (keyword == null){
+            boards = boardService.boardList(pageable);
+        }else {
+            boards = boardService.searchList(keyword, pageable);
+        }
+
+        model.addAttribute("boards", boards);
         model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         return "board/boardList";
     }
