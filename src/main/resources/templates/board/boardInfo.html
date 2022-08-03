@@ -167,7 +167,7 @@
                 <br>
                 <form>
                     <div class="card" style="width: 320px">
-                        <tr th:each="comments : ${board.getCommentList()}">
+                        <tr th:each="comments : ${commentPage}">
                             <div class="card-header">
                                 <td th:text="${comments.member.email}"></td>
                                 <td th:text="${comments.nowTime}"></td>
@@ -184,6 +184,47 @@
                                th:onclick="'deleteComment(' + ${comments.getBoard().getId()} +','+ ${comments.id} + ')'">삭제</a>
                         </tr>
                     </div>
+
+                    <div th:if="${!commentPage.isEmpty()}">
+                        <nav
+                                th:with="
+                                        pageNumber = ${commentPage.pageable.pageNumber},
+                                        pageSize = ${commentPage.pageable.pageSize},
+                                        totalPages = ${commentPage.totalPages},
+                                        startPage = ${T(java.lang.Math).floor(pageNumber / pageSize) * pageSize + 1},
+                                        tempEndPage = ${startPage + pageSize - 1},
+                                        endPage = (${tempEndPage > totalPages ? totalPages : tempEndPage})"
+                                aria-label="Page navigation"
+                        >
+                            <ul class="pagination ">
+
+                                <li th:classappend="${commentPage.first} ? 'disabled'" class="page-item">
+                                    <a class="page-link"
+                                       th:href="${commentPage.first} ? '#' : @{/chanMarket/board/{boardId}(page=${#numbers.formatDecimal((pageNumber + 1) - 1, 0, -1)}, boardId=${board.id})}"
+                                       aria-label="Previous">
+                                        <span aria-hidden="true">&lt;</span>
+                                    </a>
+                                </li>
+
+                                <ul class="pagination ">
+                                    <li th:each="page: ${#numbers.sequence(startPage, endPage)}"
+                                        th:classappend="${page == pageNumber + 1} ? 'active'" class="page-item">
+                                        <a th:text="${page}" class="page-link" th:href="@{/chanMarket/board/{boardId}(page=${page}, boardId=${board.id})}"></a>
+                                    </li>
+                                </ul>
+
+                                <li th:classappend="${commentPage.last} ? 'disabled'" class="page-item">
+                                    <a class="page-link"
+                                       th:href="${commentPage.last} ? '#' : @{/chanMarket/board/{boardId}(page=${#numbers.formatDecimal((pageNumber + 1) + 1, 0, -1)}, boardId=${board.id})}"
+                                       aria-label="Next">
+                                        <span aria-hidden="true">&gt;</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </nav>
+                    </div>
+
                 </form>
             </div>
         </div>

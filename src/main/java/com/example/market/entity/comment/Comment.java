@@ -19,9 +19,9 @@ public class Comment {
     @Column(name = "comment_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "comment_id", insertable = false, updatable = false)
-    private Comment highLevelId;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "comment_id", insertable = false, updatable = false)
+    //private Comment highLevelId;
 
     @ManyToOne
     @JoinColumn(name = "member_id")

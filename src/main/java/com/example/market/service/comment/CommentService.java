@@ -10,6 +10,8 @@ import com.example.market.request.comment.CommentCreate;
 import com.example.market.request.comment.CommentEdit;
 import com.example.market.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +36,10 @@ public class CommentService {
                 .build();
         jpaCommentRepository.save(comment);
         return comment;
+    }
+
+    public Page<Comment> commentList(Pageable pageable){
+        return jpaCommentRepository.findAll(pageable);
     }
 
     public String nowTime(){
