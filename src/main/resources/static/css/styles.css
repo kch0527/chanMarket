@@ -668,6 +668,8 @@ progress {
 
 .chan {
   display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .chan1 {

@@ -120,6 +120,7 @@
                         <button class="w-100 btn btn-primary btn-lg"
                                 onclick="location.href='editForm.html'"
                                 th:onclick="|location.href='@{/chanMarket/item/{itemId}/edit(itemId=${board.item.id})}'|"
+                                th:if="${(session.loginMember != null && session.loginMember == board.member.email)}"
                                 type="button">상품 수정
                         </button>
                     </div>
@@ -128,17 +129,20 @@
                         <button class="w-100 btn btn-secondary btn-lg"
                                 onclick="location.href='itemBasket.html'"
                                 th:onclick="|location.href='@{/chanMarket/basket/{itemId}/add(itemId=${board.item.id})}'|"
+                                th:if="${(session.loginMember != null && session.loginMember != board.member.email)}"
                                 type="button">찜하기
                         </button>
                     </div>
 
                     <div class="col">
                         <a href="javascript:void(0);" class="w-100 btn btn-primary btn-lg"
+                           th:if="${(session.loginMember != null && session.loginMember != board.member.email)}"
                            th:onclick="'chatRoomCreate(' + ${board.id} +','+ ${myInfo.id} + ')'">채팅하기</a>
                     </div>
 
                     <div class="col">
                         <a href="javascript:void(0);" class="w-100 btn btn-primary btn-lg"
+                           th:if="${(session.loginMember != null && session.loginMember == board.member.email)}"
                            th:onclick="'deleteConfirm(' + ${board.id} + ')'">삭제</a>
                     </div>
 
@@ -153,12 +157,12 @@
             </form>
 
             <div class="container px-4 px-lg-5 mt-5" style="float: right">
-                <label>댓글</label>
+                <label>댓글(로그인한 사용자만 입력가능)</label>
                 <form th:action="@{'/chanMarket/board/' + ${board.id}}" th:method="post">
                     <textarea id="text" name="text" cols="40" rows="5"></textarea>
                     <br>
-                    <input type="submit" value="작성">
-                    <input type="reset" value="취소">
+                    <input type="submit" th:if="${session.loginMember != null}" value="작성">
+                    <input type="reset" th:if="${session.loginMember != null}" value="취소">
                 </form>
                 <br>
                 <form>
@@ -176,6 +180,7 @@
                                     type="button">수정</button>
                             -->
                             <a href="javascript:void(0);" class="btn btn-danger"
+                               th:if="${(session.loginMember != null && session.loginMember == comments.member.email)}"
                                th:onclick="'deleteComment(' + ${comments.getBoard().getId()} +','+ ${comments.id} + ')'">삭제</a>
                         </tr>
                     </div>
