@@ -28,7 +28,7 @@ public class BoardController {
     private final CommentService commentService;
 
     @GetMapping("")
-    public String boardList(Model model, HttpSession session, @PageableDefault(size = 4, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+    public String boardList(Model model, HttpSession session, @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
         model.addAttribute("boards", boardService.boardList(pageable));
         model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         return "board/boardList";
