@@ -38,8 +38,8 @@ public class CommentService {
         return comment;
     }
 
-    public Page<Comment> commentList(Pageable pageable){
-        return jpaCommentRepository.findAll(pageable);
+    public Page<Comment> commentList(Long boardId, Pageable pageable){
+        return jpaCommentRepository.findByComment(boardId, pageable);
     }
 
     public String nowTime(){
@@ -64,12 +64,9 @@ public class CommentService {
         findComment.edit(commentEditor);
     }
 
-
     @Transactional
     public void deleteComment(Long commentId){
      jpaCommentRepository.delete(jpaCommentRepository.findById(commentId).orElseThrow(CommentNotFound::new));
     }
-
-
 
 }

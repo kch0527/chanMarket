@@ -28,26 +28,18 @@ public class BoardController {
     private final CommentService commentService;
 
     @GetMapping("")
-    public String boardList(Model model, HttpSession session, @PageableDefault(size = 4, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, String keyword){
-        Page<Board> boards = null;
-
-        if (keyword == null){
-            boards = boardService.boardList(pageable);
-        }else {
-            boards = boardService.searchList(keyword, pageable);
-        }
-
-        model.addAttribute("boards", boards);
+    public String boardList(Model model, HttpSession session, @PageableDefault(size = 4, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
+        model.addAttribute("boards", boardService.boardList(pageable));
         model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         return "board/boardList";
     }
 
     @GetMapping("/{boardId}")
     public String boardInfo(@PathVariable Long boardId, Model model, HttpSession session, @PageableDefault(size = 2, sort = "id", direction = Sort.Direction.DESC) Pageable pageable){
-        Page<Comment> comments = commentService.commentList(pageable);
+        Page<Comment> comments = commentService.commentList(boardId, pageable);
+
         Board board = boardService.findBoard(boardId);
         Long countView = board.getCountView() + 1L;
-
         board.setCountView(countView);
         boardService.updateView(board.getId(), board);
 
@@ -71,7 +63,6 @@ public class BoardController {
             }
         }
 
-
     public boolean sameMemberCheck(String email1, String email2){
         if (email1.equals(email2)) {
             return true;
@@ -79,5 +70,4 @@ public class BoardController {
         else
             return false;
     }
-
 }

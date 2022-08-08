@@ -9,5 +9,4 @@ import java.util.List;
 
 public interface JpaBoardRepository extends JpaRepository<Board, Long> {
 
-    Page<Board> findSearchBy(List<Board> boards, Pageable pageable);
 }

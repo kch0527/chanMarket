@@ -44,16 +44,4 @@ public class BoardServiceImpl implements BoardService {
         updateBoard.updateView(board.getCountView());
     }
 
-    public Page<Board> searchList(String Keyword, Pageable pageable){
-        List<Board> board = null;
-        List<Board> boards = boardRepository.findAll();
-        Iterator<Board> boardIterator = boards.iterator();
-        while (boardIterator.hasNext()){
-            if (boardIterator.next().getItem().getItemName().contains(Keyword)){
-                board.add(boardIterator.next());
-            }
-        }
-        return boardRepository.findSearchBy(board, pageable);
-    }
-
 }
