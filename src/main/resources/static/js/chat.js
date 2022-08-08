@@ -20,3 +20,7 @@ function sendMsg() {
     let content=document.querySelector('.content').value;
     socket.send(content);
 }
+
+function inputReset(){
+    $('#msg').val('');
+}

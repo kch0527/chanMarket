@@ -4,20 +4,20 @@ package com.example.market.controller;
 import com.example.market.service.chatRoom.ChatRoomService;
 import com.example.market.service.member.MemberService;
 import com.example.market.service.message.MessageService;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.websocket.OnClose;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
+import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.net.http.WebSocket;
 import java.util.ArrayList;
 
 import java.util.List;
 
+@Log
 @Controller
 @ServerEndpoint(value = "/chat") //WEB 소켓으로 접속 가능한 URL 정보를 명시하여 소켓 서버를 생성해줌
 public class MessageController {
@@ -47,6 +47,17 @@ public class MessageController {
                 }
             }
         }
+    }
+
+    @OnClose
+    public void close(Session member){
+        session.remove(member);
+    }
+
+    @OnError
+    public void error(Session member, Throwable throwable){
+        log.warning(throwable.getMessage());
+        session.remove(member);
     }
     
 /*

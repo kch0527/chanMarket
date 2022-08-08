@@ -6,11 +6,11 @@
 </head>
 <body>
 채팅방에 입장하셨습니다.<br>
-
+<a href="javascript:window.history.back();">나가기</a><br>
 채팅인원 : <td th:text="${chatRoom.owner.email}"></td>, <td th:text="${chatRoom.member.email}"></td> <br>
 
-<input type="text" placeholder="보낼 메세지를 입력하세요." class="content">
-<button type="button" value="전송" class="sendBtn" onclick="sendMsg()">전송</button>
+<input type="text" id="msg" placeholder="보낼 메세지를 입력하세요." class="content">
+<button type="button" value="전송" class="sendBtn" onclick="sendMsg(); inputReset();">전송</button>
 <div>
     <span>메세지</span>
 
@@ -22,5 +22,7 @@
 </div>
 
 </body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="/js/chat.js"></script>
+
 </html>
