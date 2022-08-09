@@ -20,24 +20,23 @@ import java.util.Map;
 @ServerEndpoint(value = "/chat", configurator = WebSocketSessionConfigurator.class) //WEB 소켓으로 접속 가능한 URL 정보를 명시하여 소켓 서버를 생성해줌
 public class MessageController {
 
-    private static final List<Session> session = new ArrayList<>(); //사용자 정보
     private static final Map<Session, HttpSession> map = new HashMap<>(); //로그인세션 정보
 
     @OnOpen //접속시 실행
-    public void open(Session session1, EndpointConfig config){
+    public void open(Session session, EndpointConfig config){
         HttpSession httpSession = (HttpSession) config.getUserProperties().get("loginMember");
         System.out.println("connected");
-        map.put(session1, httpSession);
-        session.add(session1);
-        System.out.println("접속중인 유저수:" + session.size());
+        map.put(session, httpSession);
+        System.out.println("접속중인 유저수:" + map.size());
         System.out.println("접속중한 유저:" + (String) httpSession.getAttribute("loginMember"));
     }
     @OnMessage //메시지를 받았을 때 실행
-    public void getMessage(Session session1, String sendMessage){ //메시지를 받았을 때, 세션을 가져옴
-        HttpSession httpSession = map.get(session1);
-        for (int i = 0; i < session.size(); i++){ //세션에 담겨있는 모든 메시지를 전달하기 위해 size만큼 반복
+    public void getMessage(Session session, String sendMessage){ //메시지를 받았을 때, 세션을 가져옴
+        HttpSession httpSession = map.get(session);
+        List<Session> sessionList = new ArrayList(map.keySet());
+        for (int i = 0; i < sessionList.size(); i++){ //세션에 담겨있는 모든 메시지를 전달하기 위해 size만큼 반복
                 try {
-                    session.get(i).getBasicRemote().sendText((String) httpSession.getAttribute("loginMember")+" : "+sendMessage);
+                    sessionList.get(i).getBasicRemote().sendText((String) httpSession.getAttribute("loginMember")+" : "+sendMessage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -47,14 +46,14 @@ public class MessageController {
     }
 
     @OnClose
-    public void close(Session session1){
-        session.remove(session1);
+    public void close(Session session){
+        map.remove(session);
     }
 
     @OnError
-    public void error(Session session1, Throwable throwable){
+    public void error(Session session, Throwable throwable){
         log.warning(throwable.getMessage());
-        session.remove(session1);
+        map.remove(session);
     }
 
 
