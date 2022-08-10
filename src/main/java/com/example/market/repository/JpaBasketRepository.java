@@ -7,7 +7,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface JpaBasketRepository extends JpaRepository<Basket, Long> {
 
-    @Query("select m from Basket m where m.member.id = :member")
-    Basket findByMember(@Param("member") Long memberId);
 
 }
