@@ -1,5 +1,6 @@
 package com.example.market.service.member;
 
+import com.example.market.MarketApplication;
 import com.example.market.entity.member.Member;
 import com.example.market.repository.JpaMemberRepository;
 import com.example.market.request.member.MemberCreate;
@@ -20,10 +21,10 @@ import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
 @Transactional
+@SpringBootTest(classes = MarketApplication.class,
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class MemberServiceImplTest {
 
     @Autowired

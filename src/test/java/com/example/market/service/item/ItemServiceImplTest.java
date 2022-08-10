@@ -1,5 +1,6 @@
 package com.example.market.service.item;
 
+import com.example.market.MarketApplication;
 import com.example.market.entity.Board;
 import com.example.market.entity.item.Item;
 import com.example.market.entity.member.Member;
@@ -21,10 +22,10 @@ import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
 @Transactional
+@SpringBootTest(classes = MarketApplication.class,
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ItemServiceImplTest {
 
     @Autowired

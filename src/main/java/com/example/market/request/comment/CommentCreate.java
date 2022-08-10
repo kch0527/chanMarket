@@ -15,12 +15,6 @@ import javax.validation.constraints.NotBlank;
 @ToString
 public class CommentCreate {
 
-    @NotBlank(message = "member 없음")
-    private Member member;
-
-    @NotBlank(message = "board 없음")
-    private Board board;
-
     @NotBlank(message = "text 없음")
     private String text;
 
@@ -28,10 +22,7 @@ public class CommentCreate {
     private String nowTime;
 
     @Builder
-    public CommentCreate(Member member, Board board, String text, String nowTime) {
-        this.member = member;
-        this.board = board;
+    public CommentCreate(String text) {
         this.text = text;
-        this.nowTime = nowTime;
     }
 }
