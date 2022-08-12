@@ -4,6 +4,7 @@ import com.example.market.entity.Board;
 import com.example.market.entity.comment.Comment;
 import com.example.market.service.board.BoardService;
 import com.example.market.service.comment.CommentService;
+import com.example.market.service.comment.CommentServiceImpl;
 import com.example.market.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,8 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.Iterator;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor

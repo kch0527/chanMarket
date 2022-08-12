@@ -1,12 +1,9 @@
 package com.example.market.controller;
 
 import com.example.market.entity.Board;
-import com.example.market.entity.item.Item;
 import com.example.market.request.item.ItemCreate;
 import com.example.market.request.item.ItemEdit;
-import com.example.market.service.basket.BasketServiceImpl;
 import com.example.market.service.board.BoardService;
-import com.example.market.service.comment.CommentService;
 import com.example.market.service.item.ItemService;
 import com.example.market.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller

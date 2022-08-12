@@ -1,17 +1,22 @@
 package com.example.market.controller;
 
 import com.example.market.entity.ChatRoom;
+import com.example.market.entity.Message;
 import com.example.market.service.board.BoardService;
 import com.example.market.service.chatRoom.ChatRoomService;
 import com.example.market.service.member.MemberService;
 import com.example.market.service.message.MessageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 
 @Controller
 @RequiredArgsConstructor

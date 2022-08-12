@@ -2,13 +2,19 @@ package com.example.market.controller;
 
 
 import com.example.market.config.WebSocketSessionConfigurator;
+import com.example.market.entity.ChatRoom;
+import com.example.market.entity.Message;
+import com.example.market.service.chatRoom.ChatRoomService;
+import com.example.market.service.message.MessageService;
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import java.util.HashMap;
@@ -19,7 +25,6 @@ import java.util.Map;
 @Controller
 @ServerEndpoint(value = "/chat", configurator = WebSocketSessionConfigurator.class) //WEB 소켓으로 접속 가능한 URL 정보를 명시하여 소켓 서버를 생성해줌
 public class MessageController {
-
     private static final Map<Session, HttpSession> map = new HashMap<>(); //로그인세션 정보
 
     @OnOpen //접속시 실행
@@ -77,7 +82,6 @@ public class MessageController {
             return message;
         } else
             return message;
-
     }
 */
 

@@ -13,7 +13,6 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Entity
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -23,7 +22,7 @@ public class Message {
     @Column(name = "message_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "room_id")
     private ChatRoom chatRoom;
 
@@ -35,11 +34,17 @@ public class Message {
     @Column(updatable = false)
     private LocalDateTime nowTime;
 
-    @ManyToOne
-    private Member caller;
 
-    @ManyToOne
-    private Member receiver;
+    private String caller;
 
+    private String receiver;
 
+    @Builder
+    public Message(ChatRoom chatRoom, String message, LocalDateTime nowTime, String caller, String receiver) {
+        this.chatRoom = chatRoom;
+        this.message = message;
+        this.nowTime = nowTime;
+        this.caller = caller;
+        this.receiver = receiver;
+    }
 }

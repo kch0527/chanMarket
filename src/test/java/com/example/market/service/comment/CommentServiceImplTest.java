@@ -3,18 +3,11 @@ package com.example.market.service.comment;
 import com.example.market.MarketApplication;
 import com.example.market.entity.Board;
 import com.example.market.entity.comment.Comment;
-import com.example.market.entity.item.Item;
 import com.example.market.entity.member.Member;
 import com.example.market.repository.JpaCommentRepository;
 import com.example.market.repository.JpaMemberRepository;
-import com.example.market.repository.MemberRepository;
 import com.example.market.request.comment.CommentCreate;
-import com.example.market.request.item.ItemCreate;
-import com.example.market.request.member.MemberCreate;
 import com.example.market.service.board.BoardServiceImpl;
-import com.example.market.service.item.ItemServiceImpl;
-import com.example.market.service.member.MemberServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CommentServiceImplTest {
 
     @Autowired
-    private CommentService commentService;
+    private CommentServiceImpl commentService;
     @Autowired
     private JpaCommentRepository repository;
     @Autowired
