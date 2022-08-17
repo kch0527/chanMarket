@@ -1,5 +1,7 @@
-package com.example.market.oauth2;
 
+package com.example.market.config;
+
+import com.example.market.oauth2.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
