@@ -79,18 +79,31 @@
         <div class="text-center text-white">
             <h1 class="display-4 fw-bolder">ChanMarket</h1>
             <p class="lead fw-normal text-white-50 mb-0">With this chanMarket</p>
-            </br>
-            <form th:action="@{'/chanMarket/board'}" method="get">
-                <input type="text" name="keyword">
-                <button type="submit">search</button>
-            </form>
         </div>
+    </div>
+    <div class="card-tools">
+        <form th:action="@{'/chanMarket/board'}" method="get">
+            <div class="input-group input-group-sm" style="margin-left: 790px; width: 320px;">
+                <select class="form-control" name="category">
+                    <option value="">category</option>
+                    <option value="가전제품">가전제품</option>
+                    <option value="가구">가구</option>
+                    <option value="미용">미용</option>
+                    <option value="컴퓨터">컴퓨터</option>
+                    <option value="기타">기타</option>
+                </select>
+
+                <input type="text" name="keyword" placeholder="글 제목을 입력해주세요">
+                <button type="submit">search</button>
+            </div>
+        </form>
     </div>
 </header>
 <!-- Section-->
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
-        <form th:action="@{'/chanMarket/board'}" th:method="get" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        <form th:action="@{'/chanMarket/board'}" th:method="get"
+              class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <tr th:each="board : ${boards}">
                 <div class="col mb-5 chan1">
                     <div class="card h-100">
@@ -105,7 +118,9 @@
                                            th:text="${board.getTitle()}"></a></td>
                                 </h5>
                                 <!-- Product price-->
-                                <td th:text="${board.getPrice()}"></td>
+                                ₩ : <td th:text="${board.getPrice()}"></td>
+                                </br>
+                                category : <td th:text="${board.getCategory()}"></td>
                             </div>
                         </div>
                         <!-- Product actions-->
@@ -133,7 +148,8 @@
 
                     <li th:classappend="${boards.first} ? 'disabled'" class="page-item">
                         <a class="page-link"
-                           th:href="${boards.first} ? '#' : @{/chanMarket/board(page=${#numbers.formatDecimal((pageNumber + 1) - 1, 0, -1)}, keyword=${param.keyword})}"
+                           th:href="${boards.first} ? '#' : @{/chanMarket/board(page=${#numbers.formatDecimal((pageNumber + 1) - 1, 0, -1)},
+                           keyword=${param.keyword}, category=${param.category})}"
                            aria-label="Previous">
                             <span aria-hidden="true">&lt;</span>
                         </a>
@@ -142,13 +158,15 @@
                     <ul class="pagination ">
                         <li th:each="page: ${#numbers.sequence(startPage, endPage)}"
                             th:classappend="${page == pageNumber + 1} ? 'active'" class="page-item">
-                            <a th:text="${page}" class="page-link" th:href="@{/chanMarket/board(page=${page}, keyword=${param.keyword})}"></a>
+                            <a th:text="${page}" class="page-link"
+                               th:href="@{/chanMarket/board(page=${page}, keyword=${param.keyword}, category=${param.category})}"></a>
                         </li>
                     </ul>
 
                     <li th:classappend="${boards.last} ? 'disabled'" class="page-item">
                         <a class="page-link"
-                           th:href="${boards.last} ? '#' : @{/chanMarket/board(page=${#numbers.formatDecimal((pageNumber + 1) + 1, 0, -1)}, keyword=${param.keyword})}"
+                           th:href="${boards.last} ? '#' : @{/chanMarket/board(page=${#numbers.formatDecimal((pageNumber + 1) + 1, 0, -1)},
+                           keyword=${param.keyword}, category=${param.category})}"
                            aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>

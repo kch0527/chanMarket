@@ -14,6 +14,6 @@ public interface BoardService {
     Page<Board> boardList(Pageable pageable);
     void updateView(Long boardId, Board board);
     void editBoard(Long boardId , BoardEdit updateParam);
-    Page<Board> boardSearchList(String keyword, Pageable pageable);
+    Page<Board> boardSearchList(String keyword, String category, Pageable pageable);
 
 }

@@ -30,12 +30,13 @@ public class BoardController {
     private final CommentService commentService;
 
     @GetMapping("")
-    public String boardList(Model model, HttpSession session, @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, String keyword){
+    public String boardList(Model model, HttpSession session, @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+                            String keyword, String category){
         Page<Board> list = null;
-        if (keyword == null){
+        if (keyword == null && category == null){
             list = boardService.boardList(pageable);
         }else {
-            list = boardService.boardSearchList(keyword, pageable);
+            list = boardService.boardSearchList(keyword, category, pageable);
         }
         model.addAttribute("boards", list);
         model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
