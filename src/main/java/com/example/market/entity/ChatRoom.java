@@ -1,5 +1,6 @@
 package com.example.market.entity;
 
+import com.example.market.entity.board.Board;
 import com.example.market.entity.member.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

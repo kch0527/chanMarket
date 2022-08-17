@@ -1,6 +1,6 @@
 package com.example.market.response;
 
-import com.example.market.entity.Board;
+import com.example.market.entity.board.Board;
 import lombok.Builder;
 import lombok.Getter;
 

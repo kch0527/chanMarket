@@ -41,7 +41,7 @@
             </ul>
             <form class="d-flex">
                 <button class="btn btn-outline-dark" th:if="${session.loginMember != null || session.googleLogin != null}"
-                        th:onclick="|location.href='@{/chanMarket/item/add}'|" type="button">
+                        th:onclick="|location.href='@{/chanMarket/board/add}'|" type="button">
                     <i class="bi-cart-fill me-1"></i>
                     Sell Item
                 </button>
@@ -62,22 +62,33 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <form th:action="@{'/chanMarket/item'}" th:method="post">
+            <form th:action="@{'/chanMarket/board/add'}" th:method="post">
 
                 <div>
-                    <label for="email">등록하는 이메일</label>
-                    <input type="text" id="email" name="email" class="form-control"
+                    <label for="member">등록하는 이메일</label>
+                    <input type="text" id="member" name="member" class="form-control"
                            th:value="${myInfo.getEmail()}" readonly>
                 </div>
                 <div>
-                    <label for="itemName">상품명</label>
-                    <input type="text" id="itemName" name="itemName" class="form-control"
+                    <label for="title">상품명</label>
+                    <input type="text" id="title" name="title" class="form-control"
                            placeholder="이름을 입력하세요">
                 </div>
                 <div>
                     <label for="price">가격</label>
                     <input type="text" id="price" name="price" class="form-control"
                            placeholder="가격을 입력하세요">
+                </div>
+                <div>
+                    <label for="category">카테고리</label>
+                    <select class="form-control" name="category" id="category">
+                        <option value="">선택해주세요</option>
+                        <option value="가전제품">가전제품</option>
+                        <option value="가구">가구</option>
+                        <option value="미용">미용</option>
+                        <option value="컴퓨터">컴퓨터</option>
+                        <option value="기타">기타</option>
+                    </select>
                 </div>
                 <hr class="my-4">
                 <div>

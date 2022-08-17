@@ -6,9 +6,6 @@ import com.example.market.request.comment.CommentCreate;
 import com.example.market.request.comment.CommentEdit;
 import com.example.market.service.board.BoardService;
 import com.example.market.service.comment.CommentService;
-import com.example.market.service.comment.CommentServiceImpl;
-import com.example.market.service.item.ItemService;
-import com.example.market.service.item.ItemServiceImpl;
 import com.example.market.service.member.MemberService;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
@@ -22,8 +19,6 @@ import javax.servlet.http.HttpSession;
 @Data
 @RequestMapping("/chanMarket/board")
 public class CommentController {
-
-    private final ItemService itemService;
     private final MemberService memberService;
     private final CommentService commentService;
     private final BoardService boardService;

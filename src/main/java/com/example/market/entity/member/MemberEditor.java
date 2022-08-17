@@ -1,6 +1,5 @@
 package com.example.market.entity.member;
 
-import com.example.market.entity.Role;
 import lombok.Builder;
 import lombok.Getter;
 

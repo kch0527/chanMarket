@@ -3,7 +3,6 @@ package com.example.market.service.message;
 import com.example.market.entity.Message;
 import com.example.market.repository.MessageRepository;
 import com.example.market.service.chatRoom.ChatRoomService;
-import com.example.market.service.message.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

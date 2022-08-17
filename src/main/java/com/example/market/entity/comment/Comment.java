@@ -1,12 +1,10 @@
 package com.example.market.entity.comment;
 
-import com.example.market.entity.Board;
+import com.example.market.entity.board.Board;
 import com.example.market.entity.member.Member;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 
 @NoArgsConstructor

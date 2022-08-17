@@ -1,4 +1,4 @@
-package com.example.market.entity;
+package com.example.market.entity.member;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

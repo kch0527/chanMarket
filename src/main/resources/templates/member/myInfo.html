@@ -41,7 +41,7 @@
                     </ul>
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" th:if="${session.loginMember != null || session.googleLogin != null}"
-                                th:onclick="|location.href='@{/chanMarket/item/add}'|" type="button">
+                                th:onclick="|location.href='@{/chanMarket/board/add}'|" type="button">
                             <i class="bi-cart-fill me-1"></i>
                             Sell Item
                         </button>

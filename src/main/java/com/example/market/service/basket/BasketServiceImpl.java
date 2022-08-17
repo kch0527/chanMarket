@@ -2,9 +2,12 @@ package com.example.market.service.basket;
 
 import com.example.market.entity.basket.Basket;
 import com.example.market.entity.basket.BasketItem;
-import com.example.market.entity.item.Item;
+import com.example.market.entity.board.Board;
 import com.example.market.entity.member.Member;
-import com.example.market.repository.*;
+import com.example.market.repository.BasketItemRepository;
+import com.example.market.repository.JpaBasketItemRepository;
+import com.example.market.repository.JpaBasketRepository;
+import com.example.market.repository.JpaBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +20,9 @@ import java.util.List;
 public class BasketServiceImpl implements BasketService {
 
     private final JpaBasketRepository basketRepository;
-    private final JpaItemRepository itemRepository;
     private final JpaBasketItemRepository basketItemRepository;
     private final BasketItemRepository repository;
+    private final JpaBoardRepository boardRepository;
 
     @Transactional
     public void addBasket(Member member){
@@ -37,14 +40,14 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     @Transactional
-    public boolean addBasketItem(Member member, Item addItem) {
+    public boolean addBasketItem(Member member, Board addBoard) {
         Basket basket = findBasket(member.getBasket().getId());
 
-        Item item = itemRepository.getById(addItem.getId());
-        BasketItem basketItem = repository.findByItemAndBasket(item.getId(), basket.getId());
+        Board board = boardRepository.getById(addBoard.getId());
+        BasketItem basketItem = repository.findByItemAndBasket(board.getId(), basket.getId());
 
         if (!isExistBasketItem(basketItem)) {
-            basketItem = BasketItem.addBasketItem(basket, item);
+            basketItem = BasketItem.addBasketItem(basket, board);
             basketItemRepository.save(basketItem);
             return true;
         }

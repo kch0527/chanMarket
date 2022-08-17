@@ -41,7 +41,7 @@
             </ul>
             <form class="d-flex">
                 <button class="btn btn-outline-dark" th:if="${session.loginMember != null || session.googleLogin != null}"
-                        th:onclick="|location.href='@{/chanMarket/item/add}'|" type="button">
+                        th:onclick="|location.href='@{/chanMarket/board/add}'|" type="button">
                     <i class="bi-cart-fill me-1"></i>
                     Sell Item
                 </button>
@@ -74,8 +74,8 @@
                         </thead>
                         <tbody>
                         <tr th:each="basketItem: ${list}">
-                            <td><a th:href="@{|/chanMarket/board/${basketItem.getItem().getBoard().id}|}" th:text="${basketItem.getItem().itemName}"></a></td>
-                            <td th:text="${basketItem.getItem().getPrice()}"></td>
+                            <td><a th:href="@{|/chanMarket/board/${basketItem.getBoard().id}|}" th:text="${basketItem.getBoard().getTitle()}"></a></td>
+                            <td th:text="${basketItem.getBoard().getPrice()}"></td>
 
                             <td><button><a href="javascript:void(0);" class="btn btn-danger" th:onclick="'deleteBasketItem(' + ${basketItem.basket.id} +','+ ${basketItem.id} + ')'">삭제</a></button></td>
                         </tr>

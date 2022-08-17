@@ -1,10 +1,9 @@
 package com.example.market.service.chatRoom;
 
-import com.example.market.entity.Board;
+import com.example.market.entity.board.Board;
 import com.example.market.entity.ChatRoom;
 import com.example.market.entity.member.Member;
 import com.example.market.repository.ChatRoomRepository;
-import com.example.market.service.chatRoom.ChatRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

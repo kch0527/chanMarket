@@ -7,8 +7,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface JpaBasketItemRepository extends JpaRepository<BasketItem, Long> {
 
-    @Query("select m from BasketItem m where m.basket = :basket and m.item = :item")
-    BasketItem findBasketAndItem(@Param("basket") Long basket, @Param("item") Long item);
+//    @Query("select m from BasketItem m where m.basket = :basket and m.item = :item")
+//    BasketItem findBasketAndItem(@Param("basket") Long basket, @Param("item") Long item);
 }
 
 

@@ -1,7 +1,10 @@
 package com.example.market.entity.basket;
 
-import com.example.market.entity.item.Item;
-import lombok.*;
+import com.example.market.entity.board.Board;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -19,13 +22,13 @@ public class BasketItem {
     private Basket basket;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_id")
-    private Item item;
+    @JoinColumn(name = "board_id")
+    private Board board;
 
-    public static BasketItem addBasketItem(Basket basket, Item item){
+    public static BasketItem addBasketItem(Basket basket, Board board){
         BasketItem basketItem = new BasketItem();
         basketItem.setBasket(basket);
-        basketItem.setItem(item);
+        basketItem.setBoard(board);
         return basketItem;
     }
 

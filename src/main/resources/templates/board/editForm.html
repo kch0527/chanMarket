@@ -41,7 +41,7 @@
             </ul>
             <form class="d-flex">
                 <button class="btn btn-outline-dark" th:if="${session.loginMember != null || session.googleLogin != null}"
-                        th:onclick="|location.href='@{/chanMarket/item/add}'|" type="button">
+                        th:onclick="|location.href='@{/chanMarket/board/add}'|" type="button">
                     <i class="bi-cart-fill me-1"></i>
                     Sell Item
                 </button>
@@ -62,31 +62,43 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <form th:action="@{'/chanMarket/item/' + ${item.id}}" th:method="put">
+            <form th:action="@{'/chanMarket/board/' + ${boardId} + '/edit'}" th:method="put">
                 <div>
-                    <label for="email">판매자</label>
-                    <input type="text" id="email" name="email" class="form-control" value="1"
-                           th:value="${item.board.member.email}" readonly>
+                    <label for="member">판매자</label>
+                    <input type="text" id="member" name="member" class="form-control" value="1"
+                           th:value="${board.member.email}" readonly>
                 </div>
                 <div>
-                    <label for="itemName">상품명</label>
-                    <input type="text" id="itemName" name="itemName" class="form-control"
-                           value="상품A"  th:value="${item.itemName}">
+                    <label for="title">상품명</label>
+                    <input type="text" id="title" name="title" class="form-control"
+                           value="상품A"  th:value="${board.title}">
                 </div>
                 <div>
                     <label for="price">가격</label>
                     <input type="text" id="price" name="price" class="form-control"
-                           th:value="${item.price}">
+                           th:value="${board.price}">
                 </div>
+                <div>
+                    <label for="category">카테고리</label>
+                    <select class="form-control" name="category" id="category">
+                        <option th:value="${board.category}">[[${board.category}]]</option>
+                        <option value="가전제품">가전제품</option>
+                        <option value="가구">가구</option>
+                        <option value="미용">미용</option>
+                        <option value="컴퓨터">컴퓨터</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </div>
+                <hr class="my-4">
                 <div>
                     <label for="itemInformation">제품 설명</label>
                     <input type="text" id="itemInformation" name="itemInformation" class="form-control"
-                           th:value="${item.itemInformation}">
+                           th:value="${board.itemInformation}">
                 </div>
                 <br>
                 <div>
                     <button class="w-100 btn btn-secondary btn-lg" type="submit" value="Update">저장
-                    <button class="w-100 btn btn-primary btn-lg" th:onclick="|location.href='@{/chanMarket/board/{boardId}(boardId=${item.board.id})}'|" type="button">취소</button>
+                    <button class="w-100 btn btn-primary btn-lg" th:onclick="|location.href='@{/chanMarket/board/{boardId}(boardId=${board.id})}'|" type="button">취소</button>
                 </div>
 
             </form>

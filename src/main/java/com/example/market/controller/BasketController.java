@@ -1,16 +1,15 @@
 package com.example.market.controller;
 
-import com.example.market.entity.item.Item;
+import com.example.market.entity.board.Board;
 import com.example.market.entity.member.Member;
 import com.example.market.service.basket.BasketService;
-import com.example.market.service.item.ItemService;
+import com.example.market.service.board.BoardService;
 import com.example.market.service.member.MemberService;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -18,9 +17,9 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/chanMarket/basket")
 public class BasketController {
 
-    private final ItemService itemService;
     private final MemberService memberService;
     private final BasketService basketService;
+    private final BoardService boardService;
 
     @GetMapping("{basketId}")
     public String basketList(@PathVariable Long basketId, Model model, HttpSession session) {
@@ -29,22 +28,22 @@ public class BasketController {
         return "basket/myBasket";
     }
 
-    @GetMapping("{itemId}/add")
-    public String itemPutBasket(@PathVariable Long itemId, Model model, HttpSession session) {
-        if (itemService.readItem(itemId).getBoard().getMember() != memberService.findByEmail((String) session.getAttribute("loginMember"))) {
+    @GetMapping("{boardId}/add")
+    public String boardPutBasket(@PathVariable Long boardId, Model model, HttpSession session) {
+        if (boardService.findBoard(boardId).getMember() != memberService.findByEmail((String) session.getAttribute("loginMember"))) {
             model.addAttribute("member", memberService.findByEmail((String) session.getAttribute("loginMember")));
-            model.addAttribute("item", itemService.readItem(itemId));
+            model.addAttribute("item", boardService.findBoard(boardId));
             return "basket/addForm";
         }
         else return "basket/error";
     }
 
-    @PostMapping("{itemId}/add")
-    public String itemPutBasket(@PathVariable Long itemId, HttpSession session) {
+    @PostMapping("{boardId}/add")
+    public String boardPutBasket(@PathVariable Long boardId, HttpSession session) {
         Member member = memberService.findByEmail((String) session.getAttribute("loginMember"));
-        Item item = itemService.readItem(itemId);
+        Board board = boardService.findBoard(boardId);
 
-        boolean isAddOk = basketService.addBasketItem(member, item);
+        boolean isAddOk = basketService.addBasketItem(member, board);
 
         if(isAddOk) {
             return "redirect:/chanMarket/basket/" + member.getBasket().getId();

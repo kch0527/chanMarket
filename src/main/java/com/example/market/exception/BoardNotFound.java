@@ -1,10 +1,10 @@
 package com.example.market.exception;
 
-public class ItemNotFound extends TopException{
+public class BoardNotFound extends TopException{
 
     private static final String MESSAGE = "존재하지 않는 상품";
 
-    public ItemNotFound(){
+    public BoardNotFound(){
         super(MESSAGE);
     }
 

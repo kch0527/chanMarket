@@ -1,7 +1,5 @@
 package com.example.market.request.comment;
 
-import com.example.market.entity.Board;
-import com.example.market.entity.member.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

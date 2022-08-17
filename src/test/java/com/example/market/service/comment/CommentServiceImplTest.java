@@ -1,7 +1,8 @@
+/*
 package com.example.market.service.comment;
 
 import com.example.market.MarketApplication;
-import com.example.market.entity.Board;
+import com.example.market.entity.board.Board;
 import com.example.market.entity.comment.Comment;
 import com.example.market.entity.member.Member;
 import com.example.market.repository.JpaCommentRepository;
@@ -178,3 +179,4 @@ public class CommentServiceImplTest {
         assertEquals(commentService.nowTime() ,findComment1.getNowTime());
     }
 }
+*/

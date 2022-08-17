@@ -1,17 +1,18 @@
 package com.example.market.service.board;
 
-import com.example.market.entity.Board;
+import com.example.market.entity.board.Board;
+import com.example.market.entity.board.BoardEditor;
 import com.example.market.entity.member.Member;
-import com.example.market.exception.ItemNotFound;
+import com.example.market.exception.BoardNotFound;
 import com.example.market.repository.JpaBoardRepository;
+import com.example.market.request.board.BoardCreate;
+import com.example.market.request.board.BoardEdit;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Iterator;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,9 +20,15 @@ public class BoardServiceImpl implements BoardService {
 
     private final JpaBoardRepository boardRepository;
     @Override
-    public Board createBoard(Board board, Member member) {
-                board.setMember(member);
-                board.setCountView(0L);
+    public Board createBoard(BoardCreate boardCreate, Member member) {
+                Board board = Board.builder()
+                        .member(member)
+                        .title(boardCreate.getTitle())
+                        .price(boardCreate.getPrice())
+                        .itemInformation(boardCreate.getItemInformation())
+                        .category(boardCreate.getCategory())
+                        .countView(0L)
+                        .build();
         boardRepository.save(board);
         return board;
     }
@@ -30,7 +37,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     public void deleteBoard(Long id){
-        boardRepository.delete(boardRepository.findById(id).orElseThrow(ItemNotFound::new));
+        boardRepository.delete(boardRepository.findById(id).orElseThrow(BoardNotFound::new));
     }
 
     public Page<Board> boardList(Pageable pageable){
@@ -42,6 +49,19 @@ public class BoardServiceImpl implements BoardService {
         Board updateBoard = boardRepository.findById(boardId).orElseThrow(()->
                 new IllegalStateException("존재하지 않는 Board"));
         updateBoard.updateView(board.getCountView());
+    }
+
+    @Transactional
+    public void editBoard(Long boardId ,BoardEdit updateParam){
+        Board board = findBoard(boardId);
+        BoardEditor.BoardEditorBuilder boardEditorBuilder = board.toEditor();
+        BoardEditor boardEditor = boardEditorBuilder
+                .title(updateParam.getTitle())
+                .price(updateParam.getPrice())
+                .itemInformation(updateParam.getItemInformation())
+                .category(updateParam.getCategory())
+                .build();
+        board.edit(boardEditor);
     }
 
 }

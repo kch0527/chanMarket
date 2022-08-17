@@ -1,19 +1,16 @@
 package com.example.market.service.basket;
 
+/*
 import com.example.market.MarketApplication;
-import com.example.market.entity.basket.Basket;
 import com.example.market.entity.basket.BasketItem;
 import com.example.market.entity.item.Item;
 import com.example.market.entity.member.Member;
 import com.example.market.repository.JpaBasketItemRepository;
 import com.example.market.repository.JpaBasketRepository;
-import com.example.market.repository.JpaItemRepository;
 import com.example.market.repository.JpaMemberRepository;
 import com.example.market.request.item.ItemCreate;
 import com.example.market.request.member.MemberCreate;
-import com.example.market.service.item.ItemServiceImpl;
 import com.example.market.service.member.MemberServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -127,3 +124,4 @@ public class basketServiceTest {
         assertEquals(0L, basketItemRepository.count());
     }
 }
+*/

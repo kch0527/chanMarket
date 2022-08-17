@@ -1,6 +1,6 @@
 package com.example.market;
 
-import com.example.market.entity.Role;
+import com.example.market.entity.member.Role;
 import com.example.market.entity.member.Member;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

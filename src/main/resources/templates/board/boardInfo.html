@@ -65,7 +65,7 @@
             <form class="d-flex">
                 <button class="btn btn-outline-dark"
                         th:if="${session.loginMember != null || session.googleLogin != null}"
-                        th:onclick="|location.href='@{/chanMarket/item/add}'|" type="button">
+                        th:onclick="|location.href='@{/chanMarket/board/add}'|" type="button">
                     <i class="bi-cart-fill me-1"></i>
                     Sell Item
                 </button>
@@ -102,24 +102,24 @@
                 <div>
                     <label for="itemName">상품명</label>
                     <input type="text" id="itemName" name="itemName" class="form-control"
-                           value="상품A" th:value="${board.getItem().getItemName()}" readonly>
+                           value="상품A" th:value="${board.getTitle()}" readonly>
                 </div>
                 <div>
                     <label for="price">가격</label>
                     <input type="text" id="price" name="price" class="form-control"
-                           value="10000" th:value="${board.getItem().getPrice()}" readonly>
+                           value="10000" th:value="${board.getPrice()}" readonly>
                 </div>
                 <div>
                     <label for="itemInformation">제품 설명</label>
                     <input type="text" id="itemInformation" name="itemInformation" class="form-control"
-                           value="10" th:value="${board.getItem().getItemInformation()}" readonly>
+                           value="10" th:value="${board.getItemInformation()}" readonly>
                 </div>
                 <br>
                 <div>
                     <div class="col">
                         <button class="w-100 btn btn-primary btn-lg"
                                 onclick="location.href='editForm.html'"
-                                th:onclick="|location.href='@{/chanMarket/item/{itemId}/edit(itemId=${board.item.id})}'|"
+                                th:onclick="|location.href='@{/chanMarket/board/{boardId}/edit(boardId=${board.id})}'|"
                                 th:if="${(session.loginMember != null && session.loginMember == board.member.email)}"
                                 type="button">상품 수정
                         </button>
@@ -128,7 +128,7 @@
                     <div class="col">
                         <button class="w-100 btn btn-secondary btn-lg"
                                 onclick="location.href='itemBasket.html'"
-                                th:onclick="|location.href='@{/chanMarket/basket/{itemId}/add(itemId=${board.item.id})}'|"
+                                th:onclick="|location.href='@{/chanMarket/basket/{boardId}/add(boardId=${board.id})}'|"
                                 th:if="${(session.loginMember != null && session.loginMember != board.member.email)}"
                                 type="button">찜하기
                         </button>

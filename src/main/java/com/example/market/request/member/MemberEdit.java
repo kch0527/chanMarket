@@ -1,6 +1,6 @@
 package com.example.market.request.member;
 
-import com.example.market.entity.Role;
+import com.example.market.entity.member.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
