@@ -64,4 +64,8 @@ public class BoardServiceImpl implements BoardService {
         board.edit(boardEditor);
     }
 
+    public Page<Board> boardSearchList(String keyword, Pageable pageable){
+        return boardRepository.findByTitleContaining(keyword, pageable);
+    }
+
 }

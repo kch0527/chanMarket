@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -78,7 +78,12 @@
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
             <h1 class="display-4 fw-bolder">ChanMarket</h1>
-            <p class="lead fw-normal text-white-50 mb-0">With this shop hompeage template</p>
+            <p class="lead fw-normal text-white-50 mb-0">With this chanMarket</p>
+            </br>
+            <form th:action="@{'/chanMarket/board'}" method="get">
+                <input type="text" name="keyword">
+                <button type="submit">search</button>
+            </form>
         </div>
     </div>
 </header>
@@ -128,7 +133,7 @@
 
                     <li th:classappend="${boards.first} ? 'disabled'" class="page-item">
                         <a class="page-link"
-                           th:href="${boards.first} ? '#' : @{/chanMarket/board(page=${#numbers.formatDecimal((pageNumber + 1) - 1, 0, -1)})}"
+                           th:href="${boards.first} ? '#' : @{/chanMarket/board(page=${#numbers.formatDecimal((pageNumber + 1) - 1, 0, -1)}, keyword=${param.keyword})}"
                            aria-label="Previous">
                             <span aria-hidden="true">&lt;</span>
                         </a>
@@ -137,13 +142,13 @@
                     <ul class="pagination ">
                         <li th:each="page: ${#numbers.sequence(startPage, endPage)}"
                             th:classappend="${page == pageNumber + 1} ? 'active'" class="page-item">
-                            <a th:text="${page}" class="page-link" th:href="@{/chanMarket/board(page=${page})}"></a>
+                            <a th:text="${page}" class="page-link" th:href="@{/chanMarket/board(page=${page}, keyword=${param.keyword})}"></a>
                         </li>
                     </ul>
 
                     <li th:classappend="${boards.last} ? 'disabled'" class="page-item">
                         <a class="page-link"
-                           th:href="${boards.last} ? '#' : @{/chanMarket/board(page=${#numbers.formatDecimal((pageNumber + 1) + 1, 0, -1)})}"
+                           th:href="${boards.last} ? '#' : @{/chanMarket/board(page=${#numbers.formatDecimal((pageNumber + 1) + 1, 0, -1)}, keyword=${param.keyword})}"
                            aria-label="Next">
                             <span aria-hidden="true">&gt;</span>
                         </a>
