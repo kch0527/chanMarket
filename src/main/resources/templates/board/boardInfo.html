@@ -158,10 +158,10 @@
 
             <div class="container px-4 px-lg-5 mt-5" style="float: right">
                 <label>댓글(로그인한 사용자만 입력가능)</label>
-                <form th:action="@{'/chanMarket/board/' + ${board.id}}" th:method="post">
+                <form th:action="@{'/chanMarket/board/' + ${board.id}}" th:method="post" id="commentPost">
                     <textarea id="text" name="text" cols="40" rows="5"></textarea>
                     <br>
-                    <input type="submit" th:if="${session.loginMember != null}" value="작성">
+                    <input type="submit" th:if="${session.loginMember != null}" id="commentCreate" value="작성">
                     <input type="reset" th:if="${session.loginMember != null}" value="취소">
                 </form>
                 <br>
@@ -244,6 +244,7 @@
 <script type="text/javascript" src="/js/boardDel.js"></script>
 <script type="text/javascript" src="/js/comment.js"></script>
 <script type="text/javascript" src="/js/chatRoomCreate.js"></script>
+<script type="text/javascript" src="/js/commentValid.js"></script>
 </body>
 </html>
 

@@ -62,7 +62,7 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <form th:action="@{'/chanMarket/board/add'}" th:method="post">
+            <form th:action="@{'/chanMarket/board/add'}" th:method="post" id="create_Form">
 
                 <div>
                     <label for="member">등록하는 이메일</label>
@@ -101,7 +101,7 @@
                 <br>
 
                     <div class="col">
-                        <button class="w-100 btn btn-secondary btn-lg" type="submit">상품 등록</button>
+                        <button class="w-100 btn btn-secondary btn-lg" type="submit" id="register">상품 등록</button>
                     <br>
                         <button class="w-100 btn btn-secondary btn-lg"
                                 th:onclick="|location.href='@{/chanMarket/board}'|"
@@ -118,8 +118,9 @@
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
-<script src="/js/scripts.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/valid.js"></script>
 </body>
 </html>
 
