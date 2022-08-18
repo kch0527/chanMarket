@@ -34,6 +34,9 @@ public class Board {
     @Column(length = 20000)
     private String category;
 
+    private String filename;
+    private String filepath;
+
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
@@ -46,13 +49,15 @@ public class Board {
     }
 
     @Builder
-    public Board(Member member, Long countView, String title, String price, String itemInformation, String category) {
+    public Board(Member member, Long countView, String title, String price, String itemInformation, String category, String filename, String filepath) {
         this.member = member;
         this.countView = countView;
         this.title = title;
         this.price = price;
         this.itemInformation = itemInformation;
         this.category = category;
+        this.filename = filename;
+        this.filepath = filepath;
     }
 
     public BoardEditor.BoardEditorBuilder toEditor(){

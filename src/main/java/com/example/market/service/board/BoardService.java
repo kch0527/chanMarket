@@ -6,9 +6,10 @@ import com.example.market.request.board.BoardCreate;
 import com.example.market.request.board.BoardEdit;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface BoardService {
-    Board createBoard(BoardCreate boardCreate, Member member);
+    Board createBoard(BoardCreate boardCreate, Member member, MultipartFile file) throws Exception;
     Board findBoard(Long id);
     void deleteBoard(Long id);
     Page<Board> boardList(Pageable pageable);

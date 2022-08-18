@@ -11,8 +11,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +23,13 @@ public class BoardServiceImpl implements BoardService {
 
     private final JpaBoardRepository boardRepository;
     @Override
-    public Board createBoard(BoardCreate boardCreate, Member member) {
+    public Board createBoard(BoardCreate boardCreate, Member member, MultipartFile file) throws Exception{
+        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files"; //저장할 경로 지정
+        UUID uuid = UUID.randomUUID();
+        String fileName = uuid + "_" + file.getOriginalFilename();
+        File saveFile = new File(projectPath, fileName);
+        file.transferTo(saveFile);
+
                 Board board = Board.builder()
                         .member(member)
                         .title(boardCreate.getTitle())
@@ -28,6 +37,8 @@ public class BoardServiceImpl implements BoardService {
                         .itemInformation(boardCreate.getItemInformation())
                         .category(boardCreate.getCategory())
                         .countView(0L)
+                        .filename(fileName)
+                        .filepath("/files/" + fileName)
                         .build();
         boardRepository.save(board);
         return board;

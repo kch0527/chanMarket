@@ -62,7 +62,7 @@
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <form th:action="@{'/chanMarket/board/add'}" th:method="post" id="create_Form">
+            <form th:action="@{'/chanMarket/board/add'}" th:method="post" id="create_Form" enctype="multipart/form-data">
 
                 <div>
                     <label for="member">등록하는 이메일</label>
@@ -96,6 +96,11 @@
                     <textarea type="text" id="itemInformation" name="itemInformation" class="form-control"
                            maxlength="255" style="vertical-align:top; width: 270px; height: 100px;"
                               placeholder="설명을 입력하세요"></textarea>
+                </div>
+                </br>
+                <div>
+                    <label>이미지</label>
+                    <input type="file" name="file">
                 </div>
 
                 <br>

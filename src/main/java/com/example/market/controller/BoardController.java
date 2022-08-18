@@ -16,6 +16,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -65,9 +66,9 @@ public class BoardController {
     }
 
     @PostMapping("/add")
-    public String createBoard(@Valid BoardCreate boardCreate, HttpSession session){
+    public String createBoard(@Valid BoardCreate boardCreate, HttpSession session, MultipartFile file){
         try {
-            Board createBoard = boardService.createBoard(boardCreate, memberService.findByEmail((String) session.getAttribute("loginMember")));
+            Board createBoard = boardService.createBoard(boardCreate, memberService.findByEmail((String) session.getAttribute("loginMember")), file);
             return "redirect:/chanMarket/board/" + createBoard.getId();
         }catch (Exception e){
             return "error/error";
