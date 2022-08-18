@@ -83,11 +83,14 @@
     </div>
 </header>
 <!-- Section-->
+<div>
+    <img class="card-img-top" th:src="@{${board.filepath}}" alt="NotImage" style="margin-left: 700px; height: 400px; width: 500px;"/>
+</div>
 
 <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <form th:action="@{'/chanMarket/baord/{boardId}(boardId=${board.id})'}" th:method="get">
+            <form th:action="@{'/chanMarket/baord/{boardId}(boardId=${board.id})'}" th:method="get" style="margin-left: 200px;">
                 <div>
                     조회수 :
                     <td th:text="${board.countView}" readonly></td>
