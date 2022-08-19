@@ -1,6 +1,7 @@
 package com.example.market.controller;
 
 import com.example.market.entity.ChatRoom;
+import com.example.market.entity.member.Member;
 import com.example.market.service.board.BoardService;
 import com.example.market.service.chatRoom.ChatRoomService;
 import com.example.market.service.member.MemberService;
@@ -11,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.Iterator;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,11 +26,18 @@ public class ChatController {
     private final MessageService messageService;
 
     @PostMapping("/{boardId}/ChatCreate")
-    public void createChatRoom(@PathVariable Long boardId, ChatRoom chatRoom, HttpSession session) {
-        chatRoomService.createChatRoom(
-                chatRoom,
-                boardService.findBoard(boardId),
-                memberService.findByEmail((String) session.getAttribute("loginMember")));
+    public String createChatRoom(@PathVariable Long boardId, ChatRoom chatRoom, HttpSession session) {
+        Member loginMember = memberService.findByEmail((String) session.getAttribute("loginMember"));
+
+        List<ChatRoom> myRoom = chatRoomService.findMyRoom(loginMember.getId());
+        Iterator<ChatRoom> chatRoomIterator = myRoom.listIterator();
+        while (chatRoomIterator.hasNext()){
+            if(chatRoomIterator.next().getBoard().getId() == boardId){
+                return "error/error";
+            }
+        }
+        chatRoomService.createChatRoom(chatRoom, boardService.findBoard(boardId), loginMember);
+        return "chat/chatRoom";
     }
 
     @GetMapping("/{memberId}/ChatList")

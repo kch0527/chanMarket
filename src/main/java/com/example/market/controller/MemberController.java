@@ -1,6 +1,7 @@
 package com.example.market.controller;
 
 
+import com.example.market.entity.member.Member;
 import com.example.market.request.member.MemberCreate;
 import com.example.market.request.member.MemberEdit;
 
@@ -9,10 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -65,6 +63,14 @@ public class MemberController {
         memberService.editMember(memberEdit);
         return "redirect:/chanMarket/myInfo";
     }
+
+    @DeleteMapping("myInfo")
+    public void deleteMember(HttpSession session){
+        Member member = memberService.findByEmail((String) session.getAttribute("loginMember"));
+        memberService.deleteMember(member);
+        session.invalidate();
+    }
+
 
 
 }

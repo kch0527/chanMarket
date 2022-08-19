@@ -75,7 +75,7 @@
                         <tbody>
                         <tr th:each="myChat : ${myChatRooms}">
                             <td><a href="chatRoom.html" th:href="@{/chanMarket/board/{boardId}
-                                (boardId=${myChat.board.id})}" th:text="${myChat.board.item.itemName}"></a></td>
+                                (boardId=${myChat.board.id})}" th:text="${myChat.board.title}"></a></td>
 
                             <td th:if="${session.loginMember.equals(myChat.owner.email)}"
                                 th:text="${myChat.member.email}">

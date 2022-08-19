@@ -61,6 +61,9 @@ public class BoardController {
 
     @GetMapping("/add")
     public String addForm(HttpSession session, Model model){
+        if (session.getAttribute("loginMember") == null){
+            return "member/login";
+        }
         model.addAttribute("myInfo", memberService.findByEmail((String) session.getAttribute("loginMember")));
         return "board/addForm";
     }

@@ -3,6 +3,7 @@ package com.example.market.entity.member;
 import com.example.market.entity.*;
 import com.example.market.entity.basket.Basket;
 import com.example.market.entity.board.Board;
+import com.example.market.entity.comment.Comment;
 import lombok.*;
 
 import javax.persistence.*;
@@ -60,6 +61,9 @@ public class Member{
 
     @OneToOne(mappedBy = "member", cascade=CascadeType.REMOVE)
     private Basket basket;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Comment> commentList = new ArrayList<>();
 
     public Member update(String name) {
         this.name = name;

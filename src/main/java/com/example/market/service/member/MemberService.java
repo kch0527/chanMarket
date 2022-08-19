@@ -13,4 +13,6 @@ public interface MemberService {
     void editMember(MemberEdit updateParam);
 
     Member findMemberById(Long id);
+
+    void deleteMember(Member member);
 }

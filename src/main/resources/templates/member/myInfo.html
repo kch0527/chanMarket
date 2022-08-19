@@ -89,9 +89,11 @@
                                 <button th:onclick="|location.href='@{/chanMarket/basket/{basketId}(basketId=${myInfo.basket.id})}'|" type="button">찜목록 보기</button>
                                 <button th:onclick="|location.href='@{/chanMarket/chat/{memberId}/ChatList(memberId=${myInfo.id})}'|" type="button">채팅방 보기</button>
                                 <button th:onclick="|location.href='@{/chanMarket/board}'|" type="button">뒤로가기</button>
-                        </div>
 
-                        <!--
+                                <a href="javascript:void(0);" class="w-100 btn btn-primary btn-lg"
+                                   th:onclick="'deleteMember()'">탈퇴</a>
+
+                        </div>
                         <table class ="tb_col">
                             내 물품
                             <thead>
@@ -101,11 +103,10 @@
                             </thead>
                             <tbody>
                             <tr th:each="board : ${myInfo.getBoardList()}">
-                                <td><a th:href="@{|/chanMarket/board/${board.id}|}" th:text="${board.getItem().getItemName()}"></a></td>
+                                <td><a th:href="@{|/chanMarket/board/${board.id}|}" th:text="${board.title}"></a></td>
                             </tr>
                             </tbody>
                         </table>
-                        -->
                     </form>
                 </div>
             </div>
@@ -117,6 +118,7 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="/js/scripts.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/deleteMember.js"></script>
     </body>
 </html>

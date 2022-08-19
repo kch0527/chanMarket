@@ -32,7 +32,7 @@ public class BasketController {
     public String boardPutBasket(@PathVariable Long boardId, Model model, HttpSession session) {
         if (boardService.findBoard(boardId).getMember() != memberService.findByEmail((String) session.getAttribute("loginMember"))) {
             model.addAttribute("member", memberService.findByEmail((String) session.getAttribute("loginMember")));
-            model.addAttribute("item", boardService.findBoard(boardId));
+            model.addAttribute("board", boardService.findBoard(boardId));
             return "basket/addForm";
         }
         else return "basket/error";

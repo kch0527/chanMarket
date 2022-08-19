@@ -23,7 +23,7 @@ public class Board {
     @Column(name = "board_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id")
     private Member member;
 

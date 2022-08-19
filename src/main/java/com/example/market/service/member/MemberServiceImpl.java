@@ -2,6 +2,7 @@ package com.example.market.service.member;
 
 import com.example.market.entity.member.Member;
 import com.example.market.entity.member.MemberEditor;
+import com.example.market.exception.MemberNotFound;
 import com.example.market.repository.JpaMemberRepository;
 import com.example.market.request.member.MemberCreate;
 import com.example.market.request.member.MemberEdit;
@@ -67,6 +68,11 @@ public class MemberServiceImpl implements MemberService {
 
     public Member findMemberById(Long id){
         return jpaMemberRepository.getById(id);
+    }
+
+    @Override
+    public void deleteMember(Member member) {
+        jpaMemberRepository.delete(jpaMemberRepository.findById(member.getId()).orElseThrow(MemberNotFound::new));
     }
 
 

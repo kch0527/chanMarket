@@ -24,7 +24,10 @@ public class BoardServiceImpl implements BoardService {
     private final JpaBoardRepository boardRepository;
     @Override
     public Board createBoard(BoardCreate boardCreate, Member member, MultipartFile file) throws Exception{
-        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files"; //저장할 경로 지정
+        File imageFile = new File("C:\\Users\\chan\\images");
+        imageFile.mkdir();
+
+        String projectPath = System.getProperty("user.home") + "\\images"; //저장할 경로 지정
         UUID uuid = UUID.randomUUID();
         String fileName = uuid + "_" + file.getOriginalFilename();
         File saveFile = new File(projectPath, fileName);
@@ -38,7 +41,7 @@ public class BoardServiceImpl implements BoardService {
                         .category(boardCreate.getCategory())
                         .countView(0L)
                         .filename(fileName)
-                        .filepath("/files/" + fileName)
+                        .filepath("C:\\Users\\chan\\images\\" + fileName)
                         .build();
         boardRepository.save(board);
         return board;
@@ -57,8 +60,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Transactional
     public void updateView(Long boardId, Board board){
-        Board updateBoard = boardRepository.findById(boardId).orElseThrow(()->
-                new IllegalStateException("존재하지 않는 Board"));
+        Board updateBoard = boardRepository.findById(boardId).orElseThrow(BoardNotFound::new);
         updateBoard.updateView(board.getCountView());
     }
 
