@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-public class imageController {
+public class ImageController {
     private final BoardService boardService;
 
     @GetMapping(value="/image/{boardId}", produces= MediaType.IMAGE_PNG_VALUE)

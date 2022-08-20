@@ -27,6 +27,7 @@ public class OAuthAttributes {
         this.tel = "01011111111";
     }
 
+    //OAuth2User에서 반환하는 사용자 정보는 Map이기 때문에 값 하나하나를 변환해야 함.
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
 
         return ofGoogle(userNameAttributeName, attributes);
@@ -42,6 +43,7 @@ public class OAuthAttributes {
                 .build();
     }
 
+    //구글유저는 pw : googlePw, tel : 01011111111 을 넣어줌
     public Member toEntity() {
         return Member.builder()
                 .name(name)

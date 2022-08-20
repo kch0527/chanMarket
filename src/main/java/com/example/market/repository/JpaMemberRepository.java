@@ -13,6 +13,8 @@ public interface JpaMemberRepository extends JpaRepository<Member, Long> {
     Member findMember(@Param("email") String email, @Param("pw") String pw);
 
     @Query("select m from Member m where m.email = :email")
-    Member findByEmail(@Param("email") String email);
+    Member sessionFindMember(@Param("email") String email);
+
+    Optional<Member> findByEmail(String email);
 
 }

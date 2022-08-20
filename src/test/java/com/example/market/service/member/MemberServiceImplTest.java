@@ -12,10 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.transaction.Transactional;
 
@@ -69,7 +66,7 @@ class MemberServiceImplTest {
                 .build();
         memberService.join(memberCreate);
 
-        Member member = jpaMemberRepository.findByEmail("jhgu12@naver.com");
+        Member member = jpaMemberRepository.sessionFindMember("jhgu12@naver.com");
 
         Assertions.assertNotNull(member);
         assertEquals("jhgu12@naver.com", member.getEmail());
@@ -98,7 +95,7 @@ class MemberServiceImplTest {
 
         memberService.editMember(memberEdit);
 
-        Member member = jpaMemberRepository.findByEmail(memberCreate.getEmail());
+        Member member = jpaMemberRepository.sessionFindMember(memberCreate.getEmail());
         Member updateMember =jpaMemberRepository.findById(member.getId()).orElseThrow(()-> new RuntimeException("없는 멤버 id: " + member.getId()));
         assertEquals("jhgu12@naver.com", updateMember.getEmail());
         assertEquals("찬회", updateMember.getName());

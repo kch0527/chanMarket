@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     public void validateDuplicateMember(Member member){
-        Member findMember = jpaMemberRepository.findByEmail(member.getEmail());
+        Member findMember = jpaMemberRepository.sessionFindMember(member.getEmail());
         if (findMember != null){
             throw new IllegalStateException("이미 존재하는 회원");
         }
@@ -49,13 +49,13 @@ public class MemberServiceImpl implements MemberService {
     }
 
     public Member findByEmail(String email){
-        Member member = jpaMemberRepository.findByEmail(email);
+        Member member = jpaMemberRepository.sessionFindMember(email);
         return member;
     }
 
 
     public void editMember(MemberEdit updateParam){
-        Member findMember = jpaMemberRepository.findByEmail(updateParam.getEmail());
+        Member findMember = jpaMemberRepository.sessionFindMember(updateParam.getEmail());
         MemberEditor.MemberEditorBuilder memberEditorBuilder = findMember.toEditor();
         MemberEditor memberEditor = memberEditorBuilder
                 .email(updateParam.getEmail())

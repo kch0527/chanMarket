@@ -47,7 +47,7 @@ public class BoardServiceImpl implements BoardService {
         return board;
     }
     public Board findBoard(Long id){
-        return boardRepository.getById(id);
+        return boardRepository.findById(id).orElseThrow(BoardNotFound::new);
     }
 
     public void deleteBoard(Long id){
