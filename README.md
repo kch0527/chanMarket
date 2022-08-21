@@ -2,6 +2,11 @@
 WebSocket, security, oauth는 기능 구현을 위해 다른 코드를 참고한 것이며 아직 공부가 부족해 설명에서 제외하였습니다.
 </br>
 
+HTTP 요청 처리는 MVC 모델을 기본으로 Repository와 request를 겸한 아키텍쳐입니다.
+이미지 업로드는 Multipart form data를 사용해 처리하였습니다.
+
+
+
 개발 언어
 ---------
 - Java 11
